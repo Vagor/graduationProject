@@ -14,10 +14,11 @@ Vue.use(MintUI)
 Vue.use(Vuex)
 Vue.config.productionTip = false
 
-// // 一个全局变量，用于全局的存储全局信息和便捷工具
-// window._const = {
-//   count: 1,
-// }
+// 一个全局变量，用于全局的存储全局信息和便捷工具
+window._const = {
+  count: 1,
+  teacherId: '58c73c5879534a10c243fa11',
+}
 
 
 // Axios
