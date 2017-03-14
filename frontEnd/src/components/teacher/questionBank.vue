@@ -15,7 +15,7 @@
   </div>
   <mt-tab-container v-model="active" swipeable>
     <mt-tab-container-item id="tab-container1">
-      <mt-cell v-for="item in tabContent1" v-bind:title="item.title" class="left">{{item.disc}}</mt-cell>
+      <mt-cell v-for="item in tabContent1" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
     <mt-tab-container-item id="tab-container2">
       <mt-cell v-for="n in 5" title="tab-container 2" class="left"></mt-cell>
