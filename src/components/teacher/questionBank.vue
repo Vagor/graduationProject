@@ -15,7 +15,7 @@
   </div>
   <mt-tab-container v-model="active" swipeable>
     <mt-tab-container-item id="tab-container1">
-      <mt-cell v-for="item in tabContent1" v-bind:title="item.title" class="left">{{item.disc}}</mt-cell>
+      <mt-cell v-for="item in tabContent1" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
     <mt-tab-container-item id="tab-container2">
       <mt-cell v-for="n in 5" title="tab-container 2" class="left"></mt-cell>
@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted: function() {
-    this.$http.post('/getChoiceQuestionList',{id:123}).then((res) => {
+    this.$http.post('/getChoiceQuestionList',{id:'58c73c5879534a10c243fa11'}).then((res) => {
       this.tabContent1 = res.data.choiceQuestionList
     })
   }
