@@ -24,7 +24,7 @@ window._const = {
 
 // Axios
 Vue.prototype.$http = axios
-axios.defaults.baseURL = 'http://192.168.0.119:3000/'; // 设置服务端地址
+axios.defaults.baseURL = 'http://localhost:3000/'; // 设置服务端地址
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 

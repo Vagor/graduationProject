@@ -12,8 +12,8 @@
   <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="stem" :value="this.stem"></mt-field>
   <mt-cell class="left" title="添加填空处" label="点击此处可以在题干中增加一个填空处（至多4空）" is-link @click.native="addBlank"></mt-cell>
   <label class="block-title">正确答案</label>
-  <mt-field v-for="n in blankCounter" class="left" label="正确答案" placeholder="请输入正确答案" v-model="correctAnswer"></mt-field>
-  <label class="block-title">其他信息</label>
+  <mt-field v-for="n in blankCounter" class="left" label="正确答案" placeholder="请输入正确答案" v-model="$scope['correctAnswer'+n]"></mt-field>
+  <label class="block-title gap">其他信息</label>
   <mt-field class="left" label="题目所属章节" placeholder="请输入章节数" type="number" v-model="chapter" :value="this.chapter"></mt-field>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
 </div>
@@ -24,7 +24,10 @@ export default {
   name: 'createFITBQuestion',
   data() {
     return {
-      correctAnswer:[],
+      correctAnswer1:'',
+      correctAnswer2:'',
+      correctAnswer3:'',
+      correctAnswer4:'',
       title: '创建填空题',
       stem:'',
       blankCounter: 0,
