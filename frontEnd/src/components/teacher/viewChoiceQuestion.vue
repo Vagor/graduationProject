@@ -44,7 +44,6 @@ export default {
               if (res.data.success == 1) {
                 this.$toast({
                   message: '操作成功',
-                  iconClass: 'icon icon-success',
                   duration: 1000,
                 });
                 setTimeout(() => {
@@ -123,8 +122,9 @@ export default {
       let _this = this;
       this.$messagebox.confirm('确定修改?').then(action => {
         _this.$http.post('/updateChoiceQuestion', {
-          type: 0, // type=0 ===>新建；type=1 ===>更新；
+          type: 1, // type=0 ===>新建；type=1 ===>更新；
           choiceQuestion: {
+            questionId: _this.$route.params.questionId,
             stem: _this.stem, //题干
             options: [_this.choiceA, _this.choiceB, _this.choiceC, _this.choiceD], //选项
             answerOption: _this.answerOption, //正确选项
@@ -133,9 +133,11 @@ export default {
             teacherId: window._const.teacherId, //出题人
           }
         })
-        // .then(action => {
-        //   _this.$toast('修改成功')
-        // })
+        _this.$toast({
+          message: '操作成功',
+          duration: 1000,
+        });
+        _this.$router.push('/questionBank')
       })
     }
   },

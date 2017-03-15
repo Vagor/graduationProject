@@ -27,12 +27,29 @@ export default {
   },
   methods: {
     confirmCreation() {
+      let _this = this;
       this.$messagebox.confirm('确定出题?').then(action => {
-        console.log(action);
-        this.$router.push('/questionBank')
-      }, action => {
-        console.log(action);
-      });
+        console.log(action); // confirm
+        _this.$http.post('/updateChoiceQuestion', {
+          type: 0, // type=0 ===>新建；type=1 ===>更新；
+          choiceQuestion: {
+            stem: _this.stem, //题干
+            options: [_this.choiceA, _this.choiceB, _this.choiceC, _this.choiceD], //选项
+            answerOption: _this.answerOption, //正确选项
+            courseId: window._const.courseId, //所属课程
+            chapter: _this.chapter, //所属章节
+            teacherId: window._const.teacherId, //出题人
+          }
+        }).then((res) => {
+          if (res.data.success == 1) {
+            _this.$toast({
+              message: '操作成功',
+              duration: 1000,
+            })
+            _this.$router.push('/questionBank')
+          }
+        })
+      })
     },
     updateSAQQuestionContent() {
       this.$store.commit('newSAQQuestionContent', {stem:this.stem})

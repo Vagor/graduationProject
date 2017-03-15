@@ -71,13 +71,14 @@ export default {
           }
         }).then((res) => {
           if (res.data.success == 1) {
-            // _this.$tosat('题目新建成功')
+            _this.$toast({
+              message: '操作成功',
+              duration: 1000,
+            })
             _this.$router.push('/questionBank')
           }
         })
-      }, action => {
-        console.log(action); // failed
-      });
+      })
     },
     updateChoiceQuestionContent() {
       let questionContent = {

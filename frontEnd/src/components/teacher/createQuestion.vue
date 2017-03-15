@@ -71,7 +71,10 @@ export default {
 
         }
       } else {
-        this.$toast('请检查选项');
+        this.$toast({
+          message: '操作成功',
+          duration: 1000,
+        });
       }
     }
   }
