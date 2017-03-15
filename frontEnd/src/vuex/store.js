@@ -5,7 +5,7 @@ Vue.use(Vuex)
 // 需要维护的状态
 const state = {
   // 选择题
-  s_choiceQuestionContent: '',
+  s_choiceStem: '',
   s_choiceA: '',
   s_choiceB: '',
   s_choiceC: '',

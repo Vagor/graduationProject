@@ -9,7 +9,7 @@
     </router-link>
   </mt-header>
   <label class="block-title">题目内容</label>
-  <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="choiceQuestionContent" :value="this.choiceQuestionContent"></mt-field>
+  <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="stem" :value="this.stem"></mt-field>
   <mt-field class="left" label="选项A" placeholder="请输入选项" v-model="choiceA" :value="this.choiceA"></mt-field>
   <mt-field class="left" label="选项B" placeholder="请输入选项" v-model="choiceB" :value="this.choiceB"></mt-field>
   <mt-field class="left" label="选项C" placeholder="请输入选项" v-model="choiceC" :value="this.choiceC"></mt-field>
@@ -29,7 +29,7 @@ export default {
     return {
       choice: '',
       chapter: '',
-      choiceQuestionContent: '',
+      stem: '',
       title: '创建选择题',
       choiceA: '',
       choiceB: '',
@@ -37,30 +37,42 @@ export default {
       choiceD: '',
       choiceOptions: [{
           label: '选项A',
-          value: '1',
+          value: '0',
         },
         {
           label: '选项B',
-          value: '2'
+          value: '1'
         },
         {
           label: '选项C',
-          value: '3'
+          value: '2'
         },
         {
           label: '选项D',
-          value: '4'
+          value: '3'
         }
       ],
     }
   },
   methods: {
     confirmCreation() {
+      let _this = this;
       this.$messagebox.confirm('确定出题?').then(action => {
-        console.log(action);
-        this.$router.push('/questionBank')
+        console.log(action); // confirm
+        _this.$http.post('/newChoiceQuestion', {
+          stem:_this.stem,//题干
+      		option: [_this.choiceA,_this.choiceB,_this.choiceC,_this.choiceD], //选项
+      		answerOption: _this.choiceOptions.value, //正确选项
+      		courseId: window._const.courseId,  //所属课程
+      		chapter: _this.chapter,    //所属章节
+      		teacherId: window._const.teacherId,  //出题人
+        }).then((res) => {
+          if (res.data.success == 1) {
+            _this.$router.push('/questionBank')
+          }
+        })
       }, action => {
-        console.log(action);
+        console.log(action); // failed
       });
     },
     updateChoiceQuestion() {
@@ -69,14 +81,14 @@ export default {
       this.updateChoiceQuestionChpater();
     },
     updateChoiceQuestionContent() {
-      this.$store.commit('newChoiceQuestionContent', this.choiceQuestionContent)
+      this.$store.commit('newChoiceQuestionContent', this.stem)
     },
     updateChoiceQuestionChoice() {
       let choice = {
-        choiceA : this.choiceA,
-        choiceB : this.choiceB,
-        choiceC : this.choiceC,
-        choiceD : this.choiceD,
+        choiceA: this.choiceA,
+        choiceB: this.choiceB,
+        choiceC: this.choiceC,
+        choiceD: this.choiceD,
       }
       this.$store.commit('newChoiceQuestionChoice', choice)
     },
@@ -85,7 +97,7 @@ export default {
     },
   },
   mounted: function() {
-    this.choiceQuestionContent = this.$store.state.s_choiceQuestionContent
+    this.stem = this.$store.state.s_choiceStem
     this.choiceA = this.$store.state.s_choiceA
     this.choiceB = this.$store.state.s_choiceB
     this.choiceC = this.$store.state.s_choiceC
@@ -97,4 +109,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>

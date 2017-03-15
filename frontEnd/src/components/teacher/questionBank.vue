@@ -34,7 +34,8 @@ export default {
     return {
       title: '题库',
       active: 'tab-container1',
-      tabContent1: '',
+      tabContent1: [],
+      // tabContent1: [{questionId:'',stem:'',chapter:''}],
     }
   },
   methods: {
@@ -58,7 +59,11 @@ export default {
   },
   mounted: function() {
     this.$http.post('/getChoiceQuestionList',{id:window._const.teacherId}).then((res) => {
-      this.tabContent1 = res.data.choiceQuestionList
+      var temp;
+      for (var i = 0;i < res.data.choiceQuestionList.length;i++) {
+        temp = {questionId:res.data.choiceQuestionList[i]._id,stem:res.data.choiceQuestionList[i].stem,chapter:'第'+res.data.choiceQuestionList[i].chapter+'章'}
+        this.tabContent1.push(temp)
+      }
     })
   }
 }
