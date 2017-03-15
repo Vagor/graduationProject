@@ -8,7 +8,7 @@
       <mt-button>返回修改</mt-button>
     </router-link>
   </mt-header>
-  <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="SAQQuestionContent"></mt-field>
+  <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
   <mt-field class="left gap" label="回答" type="textarea" rows="4" placeholder="请输入答案"></mt-field>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
 </div>
@@ -33,8 +33,8 @@ export default {
     }
   },
   computed: {
-    SAQQuestionContent () {
-      return this.$store.state.s_SAQQuestionContent
+    stem () {
+      return this.$store.state.s_SAQQuestionContent.stem
     }
   }
 }

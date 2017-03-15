@@ -15,7 +15,7 @@
   </div>
   <mt-tab-container v-model="active" swipeable>
     <mt-tab-container-item id="tab-container1">
-      <mt-cell v-for="item in tabContent1" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
+        <mt-cell  v-for="item in tabContent1" is-link :to="{ name: 'choiceQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
     <mt-tab-container-item id="tab-container2">
       <mt-cell v-for="n in 5" title="tab-container 2" class="left"></mt-cell>
@@ -35,7 +35,6 @@ export default {
       title: '题库',
       active: 'tab-container1',
       tabContent1: [],
-      // tabContent1: [{questionId:'',stem:'',chapter:''}],
     }
   },
   methods: {
@@ -58,10 +57,16 @@ export default {
     }
   },
   mounted: function() {
-    this.$http.post('/getChoiceQuestionList',{id:window._const.teacherId}).then((res) => {
+    this.$http.post('/getChoiceQuestionList', {
+      id: window._const.teacherId
+    }).then((res) => {
       var temp;
-      for (var i = 0;i < res.data.choiceQuestionList.length;i++) {
-        temp = {questionId:res.data.choiceQuestionList[i]._id,stem:res.data.choiceQuestionList[i].stem,chapter:'第'+res.data.choiceQuestionList[i].chapter+'章'}
+      for (var i = 0; i < res.data.choiceQuestionList.length; i++) {
+        temp = {
+          questionId: res.data.choiceQuestionList[i]._id,
+          stem: res.data.choiceQuestionList[i].stem,
+          chapter: '第' + res.data.choiceQuestionList[i].chapter + '章'
+        }
         this.tabContent1.push(temp)
       }
     })

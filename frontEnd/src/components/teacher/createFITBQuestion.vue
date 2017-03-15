@@ -9,10 +9,10 @@
     </router-link>
   </mt-header>
   <label class="block-title">题目内容</label>
-  <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="FITBQuestionContent" :value="this.FITBQuestionContent"></mt-field>
+  <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="stem" :value="this.stem"></mt-field>
   <mt-cell class="left" title="添加填空处" label="点击此处可以在题干中增加一个填空处（至多4空）" is-link @click.native="addBlank"></mt-cell>
   <label class="block-title">正确答案</label>
-  <mt-field v-for="n in FITBQuestionBlankCounter" class="left" label="正确答案" placeholder="请输入正确答案"></mt-field>
+  <mt-field v-for="n in blankCounter" class="left" label="正确答案" placeholder="请输入正确答案"></mt-field>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
 </div>
 </template>
@@ -23,8 +23,8 @@ export default {
   data() {
     return {
       title: '创建填空题',
-      FITBQuestionContent:'',
-      FITBQuestionBlankCounter: 0,
+      stem:'',
+      blankCounter: 0,
     }
   },
   methods: {
@@ -37,19 +37,19 @@ export default {
       });
     },
     addBlank() {
-      if (this.FITBQuestionBlankCounter < 4) {
-        this.FITBQuestionBlankCounter++;
+      if (this.blankCounter < 4) {
+        this.blankCounter++;
 
-        this.FITBQuestionContent += '________';
+        this.stem += '________';
       }
     },
     updateFITBQuestionContent() {
-      this.$store.commit('newFITBQuestionContent', {FITBQuestionContent:this.FITBQuestionContent,FITBQuestionBlankCounter:this.FITBQuestionBlankCounter})
+      this.$store.commit('newFITBQuestionContent', {stem:this.stem,blankCounter:this.blankCounter})
     }
   },
   mounted: function() {
-    this.FITBQuestionContent = this.$store.state.s_FITBQuestionContent
-    this.FITBQuestionBlankCounter =  this.$store.state.s_FITBQuestionBlankCounter
+    this.stem = this.$store.state.s_FITBQuestionContent.stem
+    this.blankCounter =  this.$store.state.s_FITBQuestionContent.blankCounter
   }
 }
 </script>

@@ -56,6 +56,9 @@ body,
 .gap {
   margin-top: 1rem;
 }
+.little-gap {
+  margin-top: 0.5rem;
+}
 .bottomBtn {
   position: fixed;
   bottom: 0px;

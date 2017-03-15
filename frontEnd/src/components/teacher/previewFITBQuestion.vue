@@ -8,7 +8,7 @@
       <mt-button>返回修改</mt-button>
     </router-link>
   </mt-header>
-  <mt-field class="left" label="问题" type="textarea" rows="4" readonly :value="FITBQuestionContent"></mt-field>
+  <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
   <div class="gap"></div>
   <mt-field v-for="n in blankCounter" class="left" label="正确答案" placeholder="请输入答案"></mt-field>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
@@ -35,12 +35,12 @@ export default {
     }
   }  ,
   computed: {
-      FITBQuestionContent () {
-        return this.$store.state.s_FITBQuestionContent
+      stem () {
+        return this.$store.state.s_FITBQuestionContent.stem
       }
     },
     mounted: function() {
-      this.blankCounter = this.$store.state.s_FITBQuestionBlankCounter
+      this.blankCounter = this.$store.state.s_FITBQuestionContent.blankCounter
     }
 }
 </script>

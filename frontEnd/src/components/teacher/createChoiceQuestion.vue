@@ -5,7 +5,7 @@
       <mt-button icon="back">返回</mt-button>
     </router-link>
     <router-link to="/previewChoiceQuestion" slot="right">
-      <mt-button @click.native="updateChoiceQuestion()">预览</mt-button>
+      <mt-button @click.native="updateChoiceQuestionContent()">预览</mt-button>
     </router-link>
   </mt-header>
   <label class="block-title">题目内容</label>
@@ -14,7 +14,7 @@
   <mt-field class="left" label="选项B" placeholder="请输入选项" v-model="choiceB" :value="this.choiceB"></mt-field>
   <mt-field class="left" label="选项C" placeholder="请输入选项" v-model="choiceC" :value="this.choiceC"></mt-field>
   <mt-field class="left" label="选项D" placeholder="请输入选项" v-model="choiceD" :value="this.choiceD"></mt-field>
-  <mt-radio class="left" title="正确选项" v-model="choice" :options="choiceOptions" align="right">
+  <mt-radio class="left" title="正确选项" v-model="answerOption" :options="choiceOptions" align="right">
   </mt-radio>
   <label class="block-title">其他信息</label>
   <mt-field class="left" label="题目所属章节" placeholder="请输入章节数" type="number" v-model="chapter" :value="this.chapter"></mt-field>
@@ -27,7 +27,7 @@ export default {
   name: 'createChoiceQuestion',
   data() {
     return {
-      choice: '',
+      answerOption: '', // 0==>A;.....3==>D
       chapter: '',
       stem: '',
       title: '创建选择题',
@@ -59,15 +59,19 @@ export default {
       let _this = this;
       this.$messagebox.confirm('确定出题?').then(action => {
         console.log(action); // confirm
-        _this.$http.post('/newChoiceQuestion', {
-          stem:_this.stem,//题干
-      		option: [_this.choiceA,_this.choiceB,_this.choiceC,_this.choiceD], //选项
-      		answerOption: _this.choiceOptions.value, //正确选项
-      		courseId: window._const.courseId,  //所属课程
-      		chapter: _this.chapter,    //所属章节
-      		teacherId: window._const.teacherId,  //出题人
+        _this.$http.post('/updateChoiceQuestion', {
+          type: 0, // type=0 ===>新建；type=1 ===>更新；
+          choiceQuestion: {
+            stem: _this.stem, //题干
+            options: [_this.choiceA, _this.choiceB, _this.choiceC, _this.choiceD], //选项
+            answerOption: _this.answerOption, //正确选项
+            courseId: window._const.courseId, //所属课程
+            chapter: _this.chapter, //所属章节
+            teacherId: window._const.teacherId, //出题人
+          }
         }).then((res) => {
           if (res.data.success == 1) {
+            // _this.$tosat('题目新建成功')
             _this.$router.push('/questionBank')
           }
         })
@@ -75,34 +79,27 @@ export default {
         console.log(action); // failed
       });
     },
-    updateChoiceQuestion() {
-      this.updateChoiceQuestionContent();
-      this.updateChoiceQuestionChoice();
-      this.updateChoiceQuestionChpater();
-    },
     updateChoiceQuestionContent() {
-      this.$store.commit('newChoiceQuestionContent', this.stem)
-    },
-    updateChoiceQuestionChoice() {
-      let choice = {
+      let questionContent = {
+        stem: this.stem,
         choiceA: this.choiceA,
         choiceB: this.choiceB,
         choiceC: this.choiceC,
         choiceD: this.choiceD,
+        chapter: this.chapter,
+        answerOption: this.answerOption,
       }
-      this.$store.commit('newChoiceQuestionChoice', choice)
-    },
-    updateChoiceQuestionChpater() {
-      this.$store.commit('newChoiceQuestionChapter', this.chapter)
+      this.$store.commit('newChoiceQuestionContent', questionContent)
     },
   },
   mounted: function() {
-    this.stem = this.$store.state.s_choiceStem
-    this.choiceA = this.$store.state.s_choiceA
-    this.choiceB = this.$store.state.s_choiceB
-    this.choiceC = this.$store.state.s_choiceC
-    this.choiceD = this.$store.state.s_choiceD
-    this.chapter = this.$store.state.s_choiceQuestionChapter
+    this.stem = this.$store.state.s_choiceQuestionContent.stem
+    this.choiceA = this.$store.state.s_choiceQuestionContent.choiceA
+    this.choiceB = this.$store.state.s_choiceQuestionContent.choiceB
+    this.choiceC = this.$store.state.s_choiceQuestionContent.choiceC
+    this.choiceD = this.$store.state.s_choiceQuestionContent.choiceD
+    this.chapter = this.$store.state.s_choiceQuestionContent.chapter
+    this.answerOption = this.$store.state.s_choiceQuestionContent.answerOption
   }
 }
 </script>

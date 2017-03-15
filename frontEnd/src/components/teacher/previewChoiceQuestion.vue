@@ -8,7 +8,7 @@
       <mt-button>返回修改</mt-button>
     </router-link>
   </mt-header>
-  <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="chocieQuestionContent"></mt-field>
+  <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
   <mt-radio class="left" title="选项" v-model="choice" :options="choiceOptions">
   </mt-radio>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
@@ -21,20 +21,21 @@ export default {
   data() {
     return {
       title: '创建选择题',
+      choice:'',
       choiceOptions: [{
-          label: 'A.'+ this.$store.state.s_choiceA,
+          label: 'A.'+ this.$store.state.s_choiceQuestionContent.choiceA,
           value: '1',
         },
         {
-          label: 'B.'+ this.$store.state.s_choiceB,
+          label: 'B.'+ this.$store.state.s_choiceQuestionContent.choiceB,
           value: '2'
         },
         {
-          label: 'C.'+ this.$store.state.s_choiceC,
+          label: 'C.'+ this.$store.state.s_choiceQuestionContent.choiceC,
           value: '3'
         },
         {
-          label: 'D.'+ this.$store.state.s_choiceD,
+          label: 'D.'+ this.$store.state.s_choiceQuestionContent.choiceD,
           value: '4'
         }
       ],
@@ -50,8 +51,8 @@ export default {
       });
     }
   },  computed: {
-      chocieQuestionContent () {
-        return this.$store.state.s_choiceQuestionContent
+      stem () {
+        return this.$store.state.s_choiceQuestionContent.stem
       }
     }
 }

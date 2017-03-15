@@ -40,6 +40,10 @@ export default new Router({
     }, {
       path: '/previewSAQQuestion',
       component: require('../components/teacher/previewSAQQuestion.vue')
-    }
+    },{
+      path: '/choiceQuestion/:questionId',
+      name: 'choiceQuestion',
+      component: require('../components/teacher/viewChoiceQuestion.vue')
+    },
   ]
 })
