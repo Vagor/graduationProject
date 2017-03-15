@@ -4,22 +4,22 @@ var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 //同一母卷做卷集合信息表
 var AnswerPaperCollectionSchema = new Schema({
-  
+
   //所属班级id(若有所属班级)
   classId:{
    type: ObjectId,
   },
-  
+
   //所属课堂id
   lessonId:{
    type: ObjectId,
   },
-   
+
    //母卷id
-  motherPaperIdGroup:{
+  motherPaperId:{
    type: ObjectId,
   },
-  
+
   //做卷id组
   answerPaperIdGroup:[{
    type: ObjectId,
@@ -44,7 +44,7 @@ var AnswerPaperCollectionSchema = new Schema({
     type:Boolean,
   },
 
-  
+
   meta: {
     createAt: {
       type: Date,
