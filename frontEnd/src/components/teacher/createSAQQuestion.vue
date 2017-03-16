@@ -5,13 +5,13 @@
       <mt-button icon="back">返回</mt-button>
     </router-link>
     <router-link to="/previewSAQQuestion" slot="right">
-      <mt-button @click.native="updateSAQQuestionContent">预览</mt-button>
+      <mt-button @click.native="updateSAQQuestionContent()">预览</mt-button>
     </router-link>
   </mt-header>
   <label class="block-title">题目内容</label>
   <mt-field class="left" label="题干" placeholder="请输入题干" type="textarea" rows="4" v-model="stem" :value="this.stem"></mt-field>
   <label class="block-title">正确答案</label>
-  <mt-field class="left" label="正确答案" placeholder="请输入答案" type="textarea" rows="4"></mt-field>
+  <mt-field class="left" label="正确答案" placeholder="请输入答案" type="textarea" rows="4" v-model="answer"></mt-field>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
 </div>
 </template>
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       title: '创建问答题',
-      stem: ''
+      stem: '',
+      answer:'',
     }
   },
   methods: {
@@ -34,8 +35,7 @@ export default {
           type: 0, // type=0 ===>新建；type=1 ===>更新；
           choiceQuestion: {
             stem: _this.stem, //题干
-            options: [_this.choiceA, _this.choiceB, _this.choiceC, _this.choiceD], //选项
-            answerOption: _this.answerOption, //正确选项
+            answer: _this.answer,
             courseId: window._const.courseId, //所属课程
             chapter: _this.chapter, //所属章节
             teacherId: window._const.teacherId, //出题人

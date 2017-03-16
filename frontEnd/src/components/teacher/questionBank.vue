@@ -58,7 +58,7 @@ export default {
   },
   mounted: function() {
     this.$http.post('/getChoiceQuestionList', {
-      id: window._const.teacherId
+      teacherId: window._const.teacherId
     }).then((res) => {
       var temp;
       for (var i = 0; i < res.data.choiceQuestionList.length; i++) {
