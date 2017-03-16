@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'createChoiceQuestion',
+  name: 'viewChoiceQuestion',
   data() {
     return {
       sheetActions: [{
