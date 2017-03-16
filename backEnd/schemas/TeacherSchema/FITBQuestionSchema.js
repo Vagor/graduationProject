@@ -10,9 +10,10 @@ var FITBQuestionSchema = new Schema({
   blankCounter: Number,
 
   //正确答案组
-  answerOptions: [{
-    type: String,
-  }],
+  answerOption1:String,
+  answerOption2:String,
+  answerOption3:String,
+  answerOption4:String,
 
   //是否共享
   share: {

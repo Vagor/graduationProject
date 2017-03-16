@@ -19,7 +19,12 @@ const state = {
   // 填空题
   s_FITBQuestionContent:{
     stem : '',
-    blankCounter: 0
+    blankCounter: 0,
+    chapter:'',
+    answerOption1: '',
+    answerOption2: '',
+    answerOption3: '',
+    answerOption4: '',
   },
 
   // 简答题

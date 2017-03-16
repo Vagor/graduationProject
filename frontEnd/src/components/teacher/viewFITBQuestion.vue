@@ -9,7 +9,10 @@
   </mt-header>
   <label class="block-title">题目内容</label>
   <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="stem" :value="this.stem" :readonly="!isEditMode"></mt-field>
-  <mt-field v-for="n in blankCounter" class="left" label="正确答案" placeholder="请输入正确答案" :readonly="!isEditMode"></mt-field>
+  <mt-field class="left" label="正确答案1" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption1"></mt-field>
+  <mt-field class="left" label="正确答案2" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption2"></mt-field>
+  <mt-field class="left" label="正确答案3" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption3"></mt-field>
+  <mt-field class="left" label="正确答案4" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption4"></mt-field>
   </mt-radio>
   <label class="block-title">其他信息</label>
   <mt-field class="left" label="题目所属章节" placeholder="请输入章节数" type="number" v-model="chapter" :value="this.chapter" :readonly="!isEditMode"></mt-field>
@@ -59,7 +62,10 @@ export default {
       chapter: '',
       stem: '',
       blankCounter: '',
-      answerOptions:'',
+      answerOption1:'',
+      answerOption2:'',
+      answerOption3:'',
+      answerOption4:'',
       title: '查看题目',
     }
   },
@@ -100,7 +106,10 @@ export default {
           FITBQuestion: {
             questionId: _this.$route.params.questionId,
             stem: _this.stem, //题干
-            answerOption: _this.answerOption, //正确项
+            answerOption1: _this.answerOption1, //正确项
+            answerOption2: _this.answerOption2, //正确项
+            answerOption3: _this.answerOption3, //正确项
+            answerOption4: _this.answerOption4, //正确项
             courseId: window._const.courseId, //所属课程
             chapter: _this.chapter, //所属章节
             teacherId: window._const.teacherId, //出题人
@@ -123,7 +132,10 @@ export default {
       this.stem = res.data.stem
       this.blankCounter = res.data.blankCounter
       this.chapter = res.data.chapter
-      this.answerOptions = res.data.answerOptions
+      this.answerOption1 = res.data.answerOption1
+      this.answerOption2 = res.data.answerOption2
+      this.answerOption3 = res.data.answerOption3
+      this.answerOption4 = res.data.answerOption4
     })
   },
 }
