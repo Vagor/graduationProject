@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-
+mongoose.Promise = require('bluebird')
 var ChoiceQuestionModel = require('../../models/ChoiceQuestionModel')
 
 module.exports = {

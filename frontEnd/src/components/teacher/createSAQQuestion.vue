@@ -12,6 +12,8 @@
   <mt-field class="left" label="题干" placeholder="请输入题干" type="textarea" rows="4" v-model="stem" :value="this.stem"></mt-field>
   <label class="block-title">正确答案</label>
   <mt-field class="left" label="正确答案" placeholder="请输入答案" type="textarea" rows="4" v-model="answer"></mt-field>
+    <label class="block-title">其他信息</label>
+  <mt-field class="left" label="题目所属章节" placeholder="请输入章节数" type="number" v-model="chapter" :value="this.chapter"></mt-field>
   <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
 </div>
 </template>
@@ -24,6 +26,7 @@ export default {
       title: '创建问答题',
       stem: '',
       answer:'',
+      chapter:'',
     }
   },
   methods: {
@@ -31,9 +34,9 @@ export default {
       let _this = this;
       this.$messagebox.confirm('确定出题?').then(action => {
         console.log(action); // confirm
-        _this.$http.post('/updateChoiceQuestion', {
+        _this.$http.post('/updateSAQQuestion', {
           type: 0, // type=0 ===>新建；type=1 ===>更新；
-          choiceQuestion: {
+          SAQQuestion: {
             stem: _this.stem, //题干
             answer: _this.answer,
             courseId: window._const.courseId, //所属课程
@@ -52,11 +55,13 @@ export default {
       })
     },
     updateSAQQuestionContent() {
-      this.$store.commit('newSAQQuestionContent', {stem:this.stem})
+      this.$store.commit('newSAQQuestionContent', {stem:this.stem,answer:this.answer,chapter:this.chapter})
     }
   },
   mounted: function() {
     this.stem = this.$store.state.s_SAQQuestionContent.stem
+    this.answer = this.$store.state.s_SAQQuestionContent.answer
+    this.chapter = this.$store.state.s_SAQQuestionContent.chapter
   }
 }
 </script>

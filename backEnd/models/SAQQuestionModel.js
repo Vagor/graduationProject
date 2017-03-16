@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-var SAQoiceQuestionSchema = require('../schemas/TeacherSchema/SAQQuestionSchema')
-var SAQQuestionModel = mongoose.model('choicequestion', SAQQuestionSchema)
+var SAQQuestionSchema = require('../schemas/TeacherSchema/SAQQuestionSchema')
+var SAQQuestionModel = mongoose.model('SAQQuestion', SAQQuestionSchema)
 
 module.exports = SAQQuestionModel

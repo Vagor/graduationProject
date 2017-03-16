@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 // 路由
 var questionRoute = require('./routes/questionRoute.js');
 // 配置文件
+var config = require('./config.js');
+
 
 var port = process.env.PORT || 3000;
 
@@ -30,5 +32,5 @@ app.use('/',questionRoute)
 
 
 app.listen(port, function() {
-    console.log("listening port ");
+    console.log("listening"+port);
 });

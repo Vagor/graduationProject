@@ -14,13 +14,11 @@ export default new Router({
     }, {
       path: '/nothing',
       component: require('../components/nothing.vue')
-    },{
+    }, {
       path: '/questionBank',
-      name: 'questionBank',
       component: QuestionBank
     }, {
       path: '/createQuestion',
-      name: 'createQuestion',
       component: CreateQuestion
     }, {
       path: '/createChoiceQuestion',
@@ -31,7 +29,7 @@ export default new Router({
     }, {
       path: '/createSAQQuestion',
       component: require('../components/teacher/createSAQQuestion.vue')
-    },{
+    }, {
       path: '/previewChoiceQuestion',
       component: require('../components/teacher/previewChoiceQuestion.vue')
     }, {
@@ -40,10 +38,18 @@ export default new Router({
     }, {
       path: '/previewSAQQuestion',
       component: require('../components/teacher/previewSAQQuestion.vue')
-    },{
+    }, {
       path: '/viewChoiceQuestion/:questionId',
-      name: 'choiceQuestion',
+      name: 'viewChoiceQuestion',
       component: require('../components/teacher/viewChoiceQuestion.vue')
+    }, {
+      path: '/viewFITBQuestion/:questionId',
+      name: 'viewFITBQuestion',
+      component: require('../components/teacher/viewFITBQuestion.vue')
+    }, {
+      path: '/viewSAQQuestion/:questionId',
+      name: 'viewSAQQuestion',
+      component: require('../components/teacher/viewSAQQuestion.vue')
     },
   ]
 })

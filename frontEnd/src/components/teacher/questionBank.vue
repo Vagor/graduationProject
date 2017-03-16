@@ -13,15 +13,15 @@
     <mt-button type="default" size="small" @click.native="changeTab(2)" swipeable>填空题</mt-button>
     <mt-button type="default" size="small" @click.native="changeTab(3)" swipeable>问答题</mt-button>
   </div>
-  <mt-tab-container v-model="active" swipeable>
-    <mt-tab-container-item id="tab-container1">
-        <mt-cell  v-for="item in tabContent1" is-link :to="{ name: 'choiceQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
+  <mt-tab-container v-model="activeTab" swipeable>
+    <mt-tab-container-item id="choiceTab">
+        <mt-cell  v-for="item in choiceTabContent" is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
-    <mt-tab-container-item id="tab-container2">
-      <mt-cell v-for="n in 5" title="tab-container 2" class="left"></mt-cell>
+    <mt-tab-container-item id="FITBTab">
+      <mt-cell  v-for="item in FITBTabContent" is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
-    <mt-tab-container-item id="tab-container3">
-      <mt-cell v-for="n in 7" title="tab-container 3" class="left"></mt-cell>
+    <mt-tab-container-item id="SAQTab">
+      <mt-cell  v-for="item in SAQTabContent" is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
   </mt-tab-container>
 </div>
@@ -33,30 +33,32 @@ export default {
   data() {
     return {
       title: '题库',
-      active: 'tab-container1',
-      tabContent1: [],
+      activeTab: 'choiceTab',
+      choiceTabContent: [],
+      FITBTabContent: [],
+      SAQTabContent: [],
     }
   },
   methods: {
     changeTab(type) {
       switch (type) {
         case 1:
-          this.active = 'tab-container1'
+          this.activeTab = 'choiceTab'
           break;
         case 2:
-          this.active = 'tab-container2'
+          this.activeTab = 'FITBTab'
           break;
         case 3:
-          this.active = 'tab-container3'
+          this.activeTab = 'SAQTab'
           break;
         default:
-          this.active = 'tab-container1'
+          this.activeTab = 'choiceTab'
           break;
-
       }
     }
   },
   mounted: function() {
+    // 初始化选择题列表
     this.$http.post('/getChoiceQuestionList', {
       teacherId: window._const.teacherId
     }).then((res) => {
@@ -67,7 +69,21 @@ export default {
           stem: res.data.choiceQuestionList[i].stem,
           chapter: '第' + res.data.choiceQuestionList[i].chapter + '章'
         }
-        this.tabContent1.push(temp)
+        this.choiceTabContent.push(temp)
+      }
+    })
+    // 初始化问答题列表
+    this.$http.post('/getSAQQuestionList', {
+      teacherId: window._const.teacherId
+    }).then((res) => {
+      var temp;
+      for (var i = 0; i < res.data.SAQQuestionList.length; i++) {
+        temp = {
+          questionId: res.data.SAQQuestionList[i]._id,
+          stem: res.data.SAQQuestionList[i].stem,
+          chapter: '第' + res.data.SAQQuestionList[i].chapter + '章'
+        }
+        this.SAQTabContent.push(temp)
       }
     })
   }

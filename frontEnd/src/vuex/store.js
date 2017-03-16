@@ -24,7 +24,9 @@ const state = {
 
   // 简答题
   s_SAQQuestionContent:{
-    stem : ''
+    stem : '',
+    answer : '',
+    chapter:'',
   }
 
 };
