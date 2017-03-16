@@ -86,6 +86,20 @@ export default {
         this.SAQTabContent.push(temp)
       }
     })
+    // 初始化填空题列表
+    this.$http.post('/getFITBQuestionList', {
+      teacherId: window._const.teacherId
+    }).then((res) => {
+      var temp;
+      for (var i = 0; i < res.data.FITBQuestionList.length; i++) {
+        temp = {
+          questionId: res.data.FITBQuestionList[i]._id,
+          stem: res.data.FITBQuestionList[i].stem,
+          chapter: '第' + res.data.FITBQuestionList[i].chapter + '章'
+        }
+        this.FITBTabContent.push(temp)
+      }
+    })
   }
 }
 </script>
