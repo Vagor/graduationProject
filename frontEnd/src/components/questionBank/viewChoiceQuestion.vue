@@ -1,6 +1,6 @@
 <template>
 <div>
-  <mt-header :title="title">
+  <mt-header  :title="title">
     <router-link to="" slot="left">
       <mt-button icon="back" @click.native="goBackPage()">返回</mt-button>
       <mt-button v-show="isEditMode" @click.native="exitEditMode()">取消修改</mt-button>

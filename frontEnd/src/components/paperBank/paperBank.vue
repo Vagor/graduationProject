@@ -1,27 +1,28 @@
 <template>
 <div>
-  <mt-header :title="title">
+  <mt-header  :title="title">
     <router-link to="/" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
-    <router-link to="createQuestion" slot="right">
+    <router-link to="/createPaper" slot="right">
       <mt-button>出题</mt-button>
     </router-link>
   </mt-header>
-  <div class="changeTabBtnGroup">
-    <mt-button type="default" size="small" @click.native="changeTab(1)" swipeable>选择题</mt-button>
-    <mt-button type="default" size="small" @click.native="changeTab(2)" swipeable>填空题</mt-button>
-    <mt-button type="default" size="small" @click.native="changeTab(3)" swipeable>问答题</mt-button>
-  </div>
-  <mt-tab-container v-model="activeTab" swipeable>
-    <mt-tab-container-item id="choiceTab">
-        <mt-cell  v-for="item in choiceTabContent" is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
+
+  <mt-navbar v-model="activeTab">
+    <mt-tab-item id="courseId_1">微积分</mt-tab-item>
+    <mt-tab-item id="courseId_2">数据结构</mt-tab-item>
+    <mt-tab-item id="courseId_3">电路理论</mt-tab-item>
+  </mt-navbar>
+  <mt-tab-container v-model="activeTab" swipeable class="little-gap">
+    <mt-tab-container-item id="courseId_1">
+      <mt-cell  v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
-    <mt-tab-container-item id="FITBTab">
-      <mt-cell  v-for="item in FITBTabContent" is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
+    <mt-tab-container-item id="courseId_2">
+      <mt-cell  v-for="item in FITBTabContent " is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
-    <mt-tab-container-item id="SAQTab">
-      <mt-cell  v-for="item in SAQTabContent" is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem" class="left">{{item.chapter}}</mt-cell>
+    <mt-tab-container-item id="courseId_3">
+      <mt-cell  v-for="item in SAQTabContent " is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left wrap-content">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
   </mt-tab-container>
 </div>
@@ -32,30 +33,19 @@ export default {
   name: 'questionBank',
   data() {
     return {
-      title: '题库',
-      activeTab: 'choiceTab',
+      title: '试卷库',
+      activeTab: 'courseId_1',
       choiceTabContent: [],
       FITBTabContent: [],
       SAQTabContent: [],
     }
   },
   methods: {
-    changeTab(type) {
-      switch (type) {
-        case 1:
-          this.activeTab = 'choiceTab'
-          break;
-        case 2:
-          this.activeTab = 'FITBTab'
-          break;
-        case 3:
-          this.activeTab = 'SAQTab'
-          break;
-        default:
-          this.activeTab = 'choiceTab'
-          break;
+  },  
+  filters: {
+    characterLimit: (value) => {
+        return value
       }
-    }
   },
   mounted: function() {
     // 初始化选择题列表
@@ -110,5 +100,10 @@ export default {
   padding: 10px;
   background-color: #eee;
   text-align: left;
+}
+.wrap-content {
+word-break:break-all;
+  　　overflow: hidden;
+　　text-overflow: ellipsis;
 }
 </style>

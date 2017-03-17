@@ -1,6 +1,6 @@
 <template>
 <div>
-  <mt-header :title="title">
+  <mt-header  :title="title">
     <router-link to="" slot="left">
       <mt-button icon="back" @click.native="goBackPage()">返回</mt-button>
       <mt-button v-show="isEditMode" @click.native="exitEditMode()">取消修改</mt-button>
@@ -9,11 +9,14 @@
   </mt-header>
   <label class="block-title">题目内容</label>
   <mt-field class="left" label="题干" placeholder="请输入题干……" type="textarea" rows="4" v-model="stem" :value="this.stem" :readonly="!isEditMode"></mt-field>
-  <label class="block-title">正确答案</label>
-  <mt-field class="left" label="正确答案" placeholder="请输入答案" type="textarea" rows="4" v-model="answer" :readonly="!isEditMode"></mt-field>
+  <mt-field class="left" label="正确答案1" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption1"></mt-field>
+  <mt-field class="left" label="正确答案2" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption2"></mt-field>
+  <mt-field class="left" label="正确答案3" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption3"></mt-field>
+  <mt-field class="left" label="正确答案4" placeholder="请输入正确答案" :readonly="!isEditMode" v-model="answerOption4"></mt-field>
+  </mt-radio>
   <label class="block-title">其他信息</label>
   <mt-field class="left" label="题目所属章节" placeholder="请输入章节数" type="number" v-model="chapter" :value="this.chapter" :readonly="!isEditMode"></mt-field>
-  <mt-button v-show="isEditMode" type="primary" size="large" class="bottomBtn" @click.native="updateSAQQuestion()">确认修改</mt-button>
+  <mt-button v-show="isEditMode" type="primary" size="large" class="bottomBtn" @click.native="updateFITBQuestion()">确认修改</mt-button>
   <mt-actionsheet :actions="sheetActions" v-model="sheetVisible">
   </mt-actionsheet>
 </div>
@@ -21,7 +24,7 @@
 
 <script>
 export default {
-  name: 'viewSAQQuestion',
+  name: 'createFITBQuestion',
   data() {
     return {
       sheetActions: [{
@@ -33,7 +36,7 @@ export default {
         name: '删除',
         method: () => {
           this.$messagebox.confirm('确定执行此操作?').then(action => {
-            this.$http.post('/deleteSAQQuestion', {
+            this.$http.post('/deleteFITBQuestion', {
               questionId: this.$route.params.questionId
             }).then((res) => {
               if (res.data.success == 1) {
@@ -56,10 +59,33 @@ export default {
       }, ],
       sheetVisible: false,
       isEditMode: false,
-      answer:'',
       chapter: '',
       stem: '',
+      blankCounter: '',
+      answerOption1:'',
+      answerOption2:'',
+      answerOption3:'',
+      answerOption4:'',
       title: '查看题目',
+    }
+  },
+  filters: {
+    num2option: (value) => {
+      switch (value) {
+        case 0:
+          return "选项A"
+          break;
+        case 1:
+          return "选项B"
+          break;
+        case 2:
+          return "选项C"
+          break;
+        case 3:
+          return "选项D"
+          break;
+        default:
+      }
     }
   },
   methods: {
@@ -72,15 +98,18 @@ export default {
     showActionSheet() {
       this.sheetVisible = 1
     },
-    updateSAQQuestion() {
+    updateFITBQuestion() {
       let _this = this;
       this.$messagebox.confirm('确定修改?').then(action => {
-        _this.$http.post('/updateSAQQuestion', {
+        _this.$http.post('/updateFITBQuestion', {
           type: 1, // type=0 ===>新建；type=1 ===>更新；
-          SAQQuestion: {
+          FITBQuestion: {
             questionId: _this.$route.params.questionId,
             stem: _this.stem, //题干
-            answer: _this.answer, //正确选项
+            answerOption1: _this.answerOption1, //正确项
+            answerOption2: _this.answerOption2, //正确项
+            answerOption3: _this.answerOption3, //正确项
+            answerOption4: _this.answerOption4, //正确项
             courseId: window._const.courseId, //所属课程
             chapter: _this.chapter, //所属章节
             teacherId: window._const.teacherId, //出题人
@@ -97,12 +126,16 @@ export default {
   mounted: function() {
     // console.log(_this.$route.params.questionId);
     let _this = this;
-    this.$http.post('/getSAQQuestionContent', {
+    this.$http.post('/getFITBQuestionContent', {
       questionId: _this.$route.params.questionId
     }).then((res) => {
       this.stem = res.data.stem
-      this.answer = res.data.answer
+      this.blankCounter = res.data.blankCounter
       this.chapter = res.data.chapter
+      this.answerOption1 = res.data.answerOption1
+      this.answerOption2 = res.data.answerOption2
+      this.answerOption3 = res.data.answerOption3
+      this.answerOption4 = res.data.answerOption4
     })
   },
 }

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <mt-header :title="title">
+  <mt-header  :title="title">
     <router-link to="/createSAQQuestion" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
