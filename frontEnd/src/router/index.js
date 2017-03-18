@@ -17,10 +17,6 @@ export default new Router({
     }, 
     // 题库    
     {
-      path: '/chooseCourse',
-      name: 'chooseCourse',
-      component: require('../components/questionBank/chooseCourse.vue')
-    },{
       path: '/questionBank',
       name: 'questionBank',
       component: require('../components/questionBank/questionBank.vue')
@@ -57,16 +53,28 @@ export default new Router({
       path: '/viewSAQQuestion/:questionId',
       name: 'viewSAQQuestion',
       component: require('../components/questionBank/viewSAQQuestion.vue')
-    },
+    },{
+      path: '/chooseCourse4question',
+      name: 'chooseCourse4question',
+      component: require('../components/questionBank/chooseCourse4question.vue')
+    },  
     // 卷库
     {
       path: '/paperBank',
       name: 'paperBank',
       component: require('../components/paperBank/paperBank.vue')
     },{
+      path: '/chooseCourse4paper',
+      name: 'chooseCourse4paper',
+      component: require('../components/paperBank/chooseCourse4paper.vue')
+    },{
       path: '/createPaper',
       name: 'createPaper',
       component: require('../components/paperBank/createPaper.vue')
-    },     
+    },{
+      path: '/createPaper_paperInfo',
+      name: 'createPaper_paperInfo',
+      component: require('../components/paperBank/createPaper_paperInfo.vue')
+    },            
   ]
 })

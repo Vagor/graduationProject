@@ -5,6 +5,8 @@
             <mt-button icon="back">返回</mt-button>
         </router-link>
     </mt-header>
+        <label class="block-title">请选组课程</label>
+
     <mt-cell title="微积分" value="" is-link class="left" :to="{name:'questionBank'}"></mt-cell>
     <mt-cell title="数据结构" value="" is-link class="left" :to="{name:'questionBank'}"></mt-cell>
     <mt-cell title="电路理论" value="" is-link class="left" :to="{name:'questionBank'}"></mt-cell>

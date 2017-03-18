@@ -4,8 +4,8 @@
     <router-link to="/" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
-    <router-link to="/createPaper" slot="right">
-      <mt-button>出题</mt-button>
+    <router-link to="chooseCourse4paper" slot="right">
+      <mt-button>组卷</mt-button>
     </router-link>
   </mt-header>
 

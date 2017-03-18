@@ -1,7 +1,7 @@
 <template>
 <div>
-  <mt-header  :title="title">
-    <router-link to="/chooseCourse" slot="left">
+  <mt-header :title="title">
+    <router-link to="/chooseCourse4question" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
     <router-link to="createQuestion" slot="right">
@@ -15,15 +15,17 @@
   </mt-navbar>
   <mt-tab-container v-model="activeTab" swipeable class="little-gap">
     <mt-tab-container-item id="choiceTab">
-      <mt-cell  v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
+      <mt-cell v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
     <mt-tab-container-item id="FITBTab">
-      <mt-cell  v-for="item in FITBTabContent " is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
+      <mt-cell v-for="item in FITBTabContent " is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
     <mt-tab-container-item id="SAQTab">
-      <mt-cell  v-for="item in SAQTabContent " is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left wrap-content">{{item.chapter}}</mt-cell>
+      <mt-cell v-for="item in SAQTabContent " is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left wrap-content">{{item.chapter}}</mt-cell>
     </mt-tab-container-item>
   </mt-tab-container>
+
+  <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">已选题目<mt-badge type="error">30</mt-badge></mt-button>
 </div>
 </template>
 
@@ -56,11 +58,11 @@ export default {
           break;
       }
     }
-  },  
+  },
   filters: {
     characterLimit: (value) => {
-        return value
-      }
+      return value
+    }
   },
   mounted: function() {
     // 初始化选择题列表
@@ -116,9 +118,10 @@ export default {
   background-color: #eee;
   text-align: left;
 }
+
 .wrap-content {
-word-break:break-all;
-  　　overflow: hidden;
-　　text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
