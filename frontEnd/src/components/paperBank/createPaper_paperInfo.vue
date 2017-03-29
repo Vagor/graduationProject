@@ -4,9 +4,6 @@
     <router-link to="/chooseCourse4paper" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
-    <router-link to="/nothing" slot="right">
-      <mt-button>新增课程</mt-button>
-    </router-link>
   </mt-header>
   <label class="block-title">试卷基本信息</label>
   <mt-field class="left" label="标题" placeholder="请输入试卷标题"></mt-field>
@@ -35,7 +32,7 @@ export default {
   methods: {
     confirm() {
       this.$messagebox.confirm("是否确认操作").then(action => {
-        this.$router.push('/questionBank') // 带上课程信息
+        this.$router.push('/questionBank4createPaper') // 带上课程信息
       });
     }
   }

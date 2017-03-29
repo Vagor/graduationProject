@@ -1,7 +1,7 @@
 <template>
 <div>
   <mt-header :title="title">
-    <router-link to="/chooseCourse4question" slot="left">
+    <router-link to="/createPaper_paperInfo" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
     <router-link to="createQuestion" slot="right">
@@ -15,31 +15,53 @@
   </mt-navbar>
   <mt-tab-container v-model="activeTab" swipeable class="little-gap">
     <mt-tab-container-item id="choiceTab">
-      <mt-cell v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
+      <mt-checklist class="left" title="" v-model="choiceQuestionSelected" :options="choiceOptions" align="right">
+      </mt-checklist>
     </mt-tab-container-item>
     <mt-tab-container-item id="FITBTab">
-      <mt-cell v-for="item in FITBTabContent " is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
+      <mt-checklist class="left" title="" v-model="FITBQuestionSelected" :options="FITBOptions" align="right">
+      </mt-checklist>
     </mt-tab-container-item>
     <mt-tab-container-item id="SAQTab">
-      <mt-cell v-for="item in SAQTabContent " is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left wrap-content">{{item.chapter}}</mt-cell>
+      <mt-checklist class="left" title="" v-model="SAQQuestionSelected" :options="SAQOptions" align="right">
+      </mt-checklist>
     </mt-tab-container-item>
+
   </mt-tab-container>
+
+  <mt-button type="primary" size="large" class="bottomBtn" @click.native="updateSelectedQuestion">已选题目
+    <mt-badge type="error">30</mt-badge>
+  </mt-button>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'questionBank',
+  name: 'questionBank4createPaper',
   data() {
     return {
       title: '题库',
       activeTab: 'choiceTab',
-      choiceTabContent: [],
-      FITBTabContent: [],
-      SAQTabContent: [],
+      choiceQuestionSelected: [],
+      FITBQuestionSelected: [],
+      SAQQuestionSelected: [],
+      choiceOptions: [],
+      FITBOptions: [],
+      SAQOptions: [],
     }
   },
   methods: {
+    updateSelectedQuestion() {
+      this.$store.commit('updateSelectedQuestion', {
+        choiceQuestionSelected: this.choiceQuestionSelected,
+        FITBQuestionSelected: this.FITBQuestionSelected,
+        SAQQuestionSelected: this.SAQQuestionSelected,
+      })
+      this.go2page('questionBank4selectedQuestion')
+    },
+    go2page(page) {
+      this.$router.push(page)
+    },
     changeTab(type) {
       switch (type) {
         case 1:
@@ -74,7 +96,10 @@ export default {
           stem: res.data.choiceQuestionList[i].stem,
           chapter: '第' + res.data.choiceQuestionList[i].chapter + '章'
         }
-        this.choiceTabContent.push(temp)
+        this.choiceOptions.push({
+          label: '[' + temp.chapter + ']' + temp.stem,
+          value: temp.questionId
+        })
       }
     })
     // 初始化问答题列表
@@ -88,7 +113,10 @@ export default {
           stem: res.data.SAQQuestionList[i].stem,
           chapter: '第' + res.data.SAQQuestionList[i].chapter + '章'
         }
-        this.SAQTabContent.push(temp)
+        this.SAQOptions.push({
+          label: '[' + temp.chapter + ']' + temp.stem,
+          value: temp.questionId
+        })
       }
     })
     // 初始化填空题列表
@@ -102,7 +130,11 @@ export default {
           stem: res.data.FITBQuestionList[i].stem,
           chapter: '第' + res.data.FITBQuestionList[i].chapter + '章'
         }
-        this.FITBTabContent.push(temp)
+        // this.FITBTabContent.push(temp)
+        this.FITBOptions.push({
+          label: '[' + temp.chapter + ']' + temp.stem,
+          value: temp.questionId
+        })
       }
     })
   }

@@ -1,7 +1,7 @@
 <template>
 <div>
   <mt-header :title="title">
-    <router-link to="/chooseCourse4question" slot="left">
+    <router-link to="/questionBank4createPaper" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
     <router-link to="createQuestion" slot="right">
@@ -13,9 +13,15 @@
     <mt-tab-item id="FITBTab">填空题</mt-tab-item>
     <mt-tab-item id="SAQTab">问答题</mt-tab-item>
   </mt-navbar>
-  <mt-tab-container v-model="activeTab" swipeable class="little-gap">
+  <mt-tab-container v-model="activeTab" class="little-gap">
     <mt-tab-container-item id="choiceTab">
-      <mt-cell v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
+      <mt-cell-swipe v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left " :right="[
+    {
+      content: 'Delete',
+      style: { background: 'red', color: '#fff' },
+      handler: () => this.$messagebox('delete')
+    }
+  ]">{{item.chapter}}</mt-cell-swipe>
     </mt-tab-container-item>
     <mt-tab-container-item id="FITBTab">
       <mt-cell v-for="item in FITBTabContent " is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
@@ -29,7 +35,7 @@
 
 <script>
 export default {
-  name: 'questionBank',
+  name: 'questionBank4selectedQuestion',
   data() {
     return {
       title: '题库',
