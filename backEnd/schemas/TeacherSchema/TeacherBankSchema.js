@@ -8,12 +8,6 @@ var TeacherBankSchema = new Schema({
   //老师姓名
   teacherName: String,
 
- //老师id
-  teacherId:{
-  	type: ObjectId,
-    ref: 'teacher',
-  },
-  
   //选择题母题组
   choiceQuestionGroup: [{
     type: ObjectId,
