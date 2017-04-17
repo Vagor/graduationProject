@@ -5,6 +5,19 @@ var ObjectId = Schema.Types.ObjectId
 
 //母卷信息表
 var MotherPaperSchema = new Schema({
+
+  //所属课程
+  courseId:{
+  	type: ObjectId,
+  	ref: 'course',//ref:关联的model
+  },
+   
+   //出题人
+  teacherId:{
+  	type: ObjectId,
+    ref: 'teacher',
+  },
+
   //标题
   name: String,
 
