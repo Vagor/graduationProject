@@ -70,5 +70,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  
 </style>
 
