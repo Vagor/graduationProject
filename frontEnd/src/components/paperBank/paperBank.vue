@@ -10,17 +10,11 @@
     </mt-header>
   
     <mt-navbar v-model="activeTab">
-      <mt-tab-item v-for="(item, index) in tabInfo" :id="'courseId_'+index">{{item.courseName}}</mt-tab-item>
+      <mt-tab-item v-for="(item, index) in courseList" :id="'course_'+index">{{item.courseName}}</mt-tab-item>
     </mt-navbar>
-    <mt-tab-container v-model="activeTab" swipeable class="little-gap" v-for="(tab, index) in tabInfo">
-      <mt-tab-container-item :id="'courseId_'+index">
-        <mt-cell v-for="item in choiceTabContent " is-link :to="{ name: 'viewChoiceQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
-      </mt-tab-container-item>
-      <mt-tab-container-item :id="'courseId_'+index">
-        <mt-cell v-for="item in FITBTabContent " is-link :to="{ name: 'viewFITBQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">{{item.chapter}}</mt-cell>
-      </mt-tab-container-item>
-      <mt-tab-container-item :id="'courseId_'+index">
-        <mt-cell v-for="item in SAQTabContent " is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left wrap-content">{{item.chapter}}</mt-cell>
+    <mt-tab-container v-model="activeTab" swipeable class="little-gap">
+      <mt-tab-container-item :id="'course_'+index"  v-for="(paperList,index) in paperLists">
+        <mt-cell v-for="item in paperList.paperList" is-link :to="{ name: 'viewPaperInfo', params: { questionId: item.paperId }}" v-bind:title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -32,12 +26,55 @@
     data() {
       return {
         title: '试卷库',
-        activeTab: 'courseId_0', //当前tab
-        tabInfo: [
-        ],
-        choiceTabContent: [],
-        FITBTabContent: [],
-        SAQTabContent: [],
+        activeTab: 'course_0', //当前tab
+        courseList: [{
+          courseName: "微积分",
+          courseId: 123
+        }, {
+          courseName: "数据结构",
+          courseId: 123
+        }, {
+          courseName: "大学语文",
+          courseId: 123
+        }, {
+          courseName: "电路理论",
+          courseId: 123
+        }, ],
+        paperLists: [{
+            paperList: [{
+              paperTitle: '1',
+              paperDesc: '1',
+              timeLimit: 26,
+              paperId: '1'
+            }]
+          }, {
+            paperList: [{
+              paperTitle: '2',
+              paperDesc: '2',
+              timeLimit: 26,
+              paperId: '2'
+            },{
+              paperTitle: '2',
+              paperDesc: '2',
+              timeLimit: 26,
+              paperId: '2'
+            }]
+          }, {
+            paperList: [{
+              paperTitle: '3',
+              paperDesc: '3',
+              timeLimit: 26,
+              paperId: '3'
+            }]
+          }, {
+            paperList: [{
+              paperTitle: '4',
+              paperDesc: '4',
+              timeLimit: 26,
+              paperId: '4'
+            }]
+          },
+        ]
       }
     },
     methods: {},
@@ -48,10 +85,11 @@
     },
     mounted: function() {
       // 初始化tab信息
-      this.$http.post('/getCListByTId', {
+      this.$http.post('/initPaperBank', {
         teacherId: window._const.teacherId
       }).then((res) => {
-        this.tabInfo = res.data.courseList
+        this.courseList = res.data.courseList
+        this.paperLists = res.data.paperLists
       })
     }
   }
@@ -70,7 +108,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  
 </style>
 
