@@ -87,6 +87,10 @@ export default new Router({
       path: '/viewPaperInfo',
       name: 'viewPaperInfo',
       component: require('../components/paperBank/viewPaperInfo.vue')
+    },{
+      path: '/viewPaper',
+      name: 'viewPaper',
+      component: require('../components/paperBank/viewPaper.vue')
     },
   ]
 })
