@@ -83,14 +83,24 @@ export default new Router({
       path: '/questionBank4selectedQuestion',
       name: 'questionBank4selectedQuestion',
       component: require('../components/paperBank/questionBank4selectedQuestion.vue')
-    },{
+    }, {
       path: '/viewPaperInfo',
       name: 'viewPaperInfo',
       component: require('../components/paperBank/viewPaperInfo.vue')
-    },{
+    }, {
       path: '/viewPaper',
       name: 'viewPaper',
       component: require('../components/paperBank/viewPaper.vue')
+    },
+
+
+    // 学生
+    {
+      path: '/student',
+      component: require('../components/student/home/home.vue'),
+    },{
+      path: '/student/myClass',
+      component: require('../components/student/myClass/myClass.vue'),
     },
   ]
 })
