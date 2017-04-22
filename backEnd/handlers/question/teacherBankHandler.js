@@ -52,7 +52,6 @@ module.exports = {
         var teacherId = req.body.teacherId
         var courseList = []
         var paperLists = []
-        var sendFlag = 0
         //获取老师所教授的课程ID和name
         TeacherCourseModel
             .find({ 'teacherId': teacherId }, ["_id", "courseId"])
@@ -84,13 +83,10 @@ module.exports = {
                             }
                             console.log('paperList:' + paperList)
                             paperLists.push(paperList)
-                            sendFlag = 1
+                            if (index + 1 == courseList.length) {
+                                res.send(paperLists)
+                            }
                         })
-                }
-
-                if (sendFlag) {
-                    res.send(paperLists)
-                    console.log('paperLists:' + paperLists)
                 }
             })
 
