@@ -5,11 +5,11 @@
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
-    <mt-radio title="请选择课程" v-model="courseId" :options="courseOptions" class="left">
+    <mt-radio title="请选择课程" v-model="courseChosed" :options="courseOptions" class="left">
     </mt-radio>
-    <mt-checklist title="请选组班级" v-model="lessonId" :options="lessonOptions" class="left">
-    </mt-checklist>
-    </mt-checklist>
+    <!--通过加上空字符，让数字变成字符串，如(''+index)-->
+    <mt-checklist title="请选组班级" v-model="lessonSelected[index]" :options="item" class="left" v-if="courseChosed === (''+index)" v-for="(item,index) in lessonOptions"></mt-checklist>
+    <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">去选择试卷</mt-button>
   </div>
 </template>
 
@@ -20,28 +20,73 @@
         title: '发布试卷',
         courseOptions: [{
             label: '微积分',
-            value: '值F',
+            value: '0'
           },
           {
             label: '数据结构',
-            value: '值A'
+            value: '1'
           },
           {
             label: '电路理论',
-            value: '值B'
+            value: '2'
           }
         ],
-        lessonOptions: [{
-            label: '通信1305、通信1306',
-            value: '值F',
-          },
-          {
-            label: '通信1303、通信1304',
-            value: '选中禁用的值',
-          },
+        lessonOptions: [
+          [{
+              label: '通信1305、通信1306',
+              value: '通信1305、通信1306',
+            },
+            {
+              label: '通信1303、通信1304',
+              value: '通信1303、通信1304',
+            },
+          ],
+          [{
+              label: '电信1305、电信1306',
+              value: '值F',
+            },
+            {
+              label: '通信1303、通信1304',
+              value: '选中禁用的值',
+            },
+          ],
+          [{
+              label: '卓越1305、提高1306',
+              value: '值F',
+            },
+            {
+              label: '电中英1303、电中英1304',
+              value: '选中禁用的值',
+            },
+          ]
         ],
-        courseId: '',
-        lessonId: [],
+        courseChosed: '0',
+        lessonSelected: [
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      }
+    },
+    mounted: function() {
+      // // 初始化tab信息
+      // this.$http.post('/initPaperBank', {
+      //   teacherId: window._const.teacherId
+      // }).then((res) => {
+      // this.courseOptions = res.data.courseOptions
+      // this.lessonOptions = res.data.lessonOptions
+      // })
+    },
+    methods: {
+      confirm() {
+        this.$messagebox.confirm('确定为\n'+this.lessonSelected[this.courseChosed].toString()+'\n出卷?').then(action => {
+          console.log(action);
+          this.$router.push('/paperBank4publish')
+        }, action => {
+          console.log(action);
+        });
       }
     },
   }
