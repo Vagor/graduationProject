@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link to="/" slot="left">
+      <router-link to="/publish/chooseBasicInfo" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <router-link to="chooseCourse4paper" slot="right">
@@ -13,8 +13,9 @@
       <mt-tab-item v-for="(item, index) in courseList" :id="'course_'+index">{{item.courseName}}</mt-tab-item>
     </mt-navbar>
     <mt-tab-container v-model="activeTab" swipeable class="little-gap">
-      <mt-tab-container-item :id="'course_'+index"  v-for="(paperList,index) in paperLists">
-        <mt-cell v-for="item in paperList.paperList" is-link :to="{ name: 'viewPaperInfo', params: { questionId: item.paperId }}" v-bind:title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
+      <mt-tab-container-item :id="'course_'+index" v-for="(paperList,index) in paperLists">
+        <mt-cell v-for="item in paperList.paperList" is-link :to="{ name: 'paperInfo4publish', params: { questionId: item.paperId }}" v-bind:title="item.paperTitle" class="left">
+        </mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -41,40 +42,39 @@
           courseId: 123
         }, ],
         paperLists: [{
-            paperList: [{
-              paperTitle: '1',
-              paperDesc: '1',
-              timeLimit: 26,
-              paperId: '1'
-            }]
+          paperList: [{
+            paperTitle: '1',
+            paperDesc: '1',
+            timeLimit: 26,
+            paperId: '1'
+          }]
+        }, {
+          paperList: [{
+            paperTitle: '2',
+            paperDesc: '2',
+            timeLimit: 26,
+            paperId: '2'
           }, {
-            paperList: [{
-              paperTitle: '2',
-              paperDesc: '2',
-              timeLimit: 26,
-              paperId: '2'
-            },{
-              paperTitle: '2',
-              paperDesc: '2',
-              timeLimit: 26,
-              paperId: '2'
-            }]
-          }, {
-            paperList: [{
-              paperTitle: '3',
-              paperDesc: '3',
-              timeLimit: 26,
-              paperId: '3'
-            }]
-          }, {
-            paperList: [{
-              paperTitle: '4',
-              paperDesc: '4',
-              timeLimit: 26,
-              paperId: '4'
-            }]
-          },
-        ]
+            paperTitle: '2',
+            paperDesc: '2',
+            timeLimit: 26,
+            paperId: '2'
+          }]
+        }, {
+          paperList: [{
+            paperTitle: '3',
+            paperDesc: '3',
+            timeLimit: 26,
+            paperId: '3'
+          }]
+        }, {
+          paperList: [{
+            paperTitle: '4',
+            paperDesc: '4',
+            timeLimit: 26,
+            paperId: '4'
+          }]
+        }, ]
       }
     },
     methods: {},

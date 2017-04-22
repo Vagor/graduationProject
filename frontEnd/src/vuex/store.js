@@ -39,6 +39,14 @@ const state = {
     FITBQuestionSelected:[],
     SAQQuestionSelected:[],
   },
+
+
+  // 选中的题目
+  s_publishInfo: {
+    courseId:'13123',
+    lessonId:['123','3124'],
+  },
+
 };
 
 const mutations = {

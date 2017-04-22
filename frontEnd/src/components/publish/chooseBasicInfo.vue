@@ -9,6 +9,9 @@
     </mt-radio>
     <!--通过加上空字符，让数字变成字符串，如(''+index)-->
     <mt-checklist title="请选组班级" v-model="lessonSelected[index]" :options="item" class="left" v-if="courseChosed === (''+index)" v-for="(item,index) in lessonOptions"></mt-checklist>
+    <mt-cell title="标题文字" is-link class="left" to="//github.com">
+      <mt-button v-on:click.prevent="add()" size="small">添加</mt-button>
+    </mt-cell>
     <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">去选择试卷</mt-button>
   </div>
 </template>
@@ -72,7 +75,7 @@
     },
     mounted: function() {
       // // 初始化tab信息
-      // this.$http.post('/initPaperBank', {
+      // this.$http.post('/initPublishBasicInfo', {
       //   teacherId: window._const.teacherId
       // }).then((res) => {
       // this.courseOptions = res.data.courseOptions
@@ -81,12 +84,15 @@
     },
     methods: {
       confirm() {
-        this.$messagebox.confirm('确定为\n'+this.lessonSelected[this.courseChosed].toString()+'\n出卷?').then(action => {
+        this.$messagebox.confirm('确定为\n' + this.lessonSelected[this.courseChosed].toString() + '\n出卷?').then(action => {
           console.log(action);
-          this.$router.push('/paperBank4publish')
+          this.$router.push('/publish/paperBank4publish')
         }, action => {
           console.log(action);
         });
+      },
+      add() {
+        console.log('add')
       }
     },
   }

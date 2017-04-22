@@ -98,6 +98,14 @@ export default new Router({
       path: '/publish/chooseBasicInfo',
       name: 'chooseBasicInfo',
       component: require('../components/publish/chooseBasicInfo.vue')
+    },{
+      path: '/publish/paperBank4publish',
+      name: 'chooseBasicInfo',
+      component: require('../components/publish/paperBank4publish.vue')
+    },{
+      path: '/publish/paperInfo4publish',
+      name: 'paperInfo4publish',
+      component: require('../components/publish/paperInfo4publish.vue')
     },
 
 
