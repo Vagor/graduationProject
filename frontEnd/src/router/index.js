@@ -93,6 +93,13 @@ export default new Router({
       component: require('../components/paperBank/viewPaper.vue')
     },
 
+    // 发布
+    {
+      path: '/publish/chooseBasicInfo',
+      name: 'chooseBasicInfo',
+      component: require('../components/publish/chooseBasicInfo.vue')
+    },
+
 
     // 学生
     {
