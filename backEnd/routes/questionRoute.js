@@ -4,6 +4,7 @@ var choiceQuestionHandler = require('../handlers/question/choiceQuestionHandler.
 var SAQQuestionHandler = require('../handlers/question/SAQQuestionHandler.js');
 var FITBQuestionHandler = require('../handlers/question/FITBQuestionHandler.js');
 var teacherBankHandler = require('../handlers/question/teacherBankHandler.js');
+var motherPaperHandler = require('../handlers/question/motherPaperHandler.js');
 
 
 // 选择题
@@ -32,6 +33,11 @@ questionRoute.post('/getPaperListByCIdAndTId', teacherBankHandler.getPaperList);
 
 //通过课程的ID和老师的Id获取老师所教授这门课程的所有题目
 questionRoute.post('/getAllQListByCIdAndTId', teacherBankHandler.getAllQList);
+
+//通过老师的ID获取老师所教授的课程和所教授这门课程的所有所有试卷
+questionRoute.post('/initPaperBank', teacherBankHandler.initPaperBank);
+//组卷保存基本信息
+//questionRoute.post('/createPaper', motherPaperHandler.createPaper);
 
 
 

@@ -3,16 +3,16 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 //同一母卷做卷集合信息表
-var TeacherLessonSchema = new Schema({
+var TeacherCourseSchema = new Schema({
 //教师id
 teacherId: {
     type: ObjectId,
-    ref: 'teacher'
+     ref: 'teacher'
 },
 //课堂id
-lessonId: {
+courseId: {
     type: ObjectId,
-    ref: 'lesson'//var LessonModel = mongoose.model('lesson', LessonSchema)中'lesson'
+    ref: 'course'//var CourseModel = mongoose.model('course', CourseSchema)中'course'
 },
 //额外属性
 attr: {
@@ -30,4 +30,5 @@ meta: {
   }
 })
 
-module.exports = TeacherLessonSchema
+var TeacherCourseModel = mongoose.model('teachercourse', TeacherCourseSchema)
+module.exports = TeacherCourseModel

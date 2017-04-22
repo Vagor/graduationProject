@@ -6,23 +6,11 @@ var ObjectId = Schema.Types.ObjectId
 //母卷信息表
 var MotherPaperSchema = new Schema({
 
-  //所属课程
-  courseId:{
-  	type: ObjectId,
-  	ref: 'course',//ref:关联的model
-  },
-   
-   //出题人
-  teacherId:{
-  	type: ObjectId,
-    ref: 'teacher',
-  },
-
   //标题
-  name: String,
+  paperTitle: String,
 
   //简介
-  introduction: String,
+  paperDesc: String,
 
   //限时：
   timeLimit: Number,
@@ -39,17 +27,6 @@ var MotherPaperSchema = new Schema({
   //题数：
   questioNum: Number,
 
-  //题目组：
-  questionIdGroup: [{
-  	type: ObjectId,
-  	ref: 'ShortAQModel',
-  }],
- 
-  //分值组：
-   scoreGroup: [{
-   	type: Number,
-   }],
-  
   meta: {
     createAt: {
       type: Date,
@@ -87,4 +64,5 @@ MotherPaperSchema.statics = {
   }
 }
 
-module.exports = MotherPaperSchema
+var MotherPaperModel = mongoose.model('motherpaper', MotherPaperSchema)
+module.exports = MotherPaperModel
