@@ -112,10 +112,20 @@ export default new Router({
     // 学生
     {
       path: '/student',
+      name: 's_home',
       component: require('../components/student/home/home.vue'),
     },{
       path: '/student/myClass',
+      name: 's_myClass',
       component: require('../components/student/myClass/myClass.vue'),
+    },{
+      path: '/student/myPaper',
+      name: 's_myPaper',
+      component: require('../components/student/myPaper/myPaper.vue'),
+    },{
+      path: '/student/myPaperList',
+      name: 's_myPaperList',
+      component: require('../components/student/myPaper/myPaperList.vue'),
     },
   ]
 })
