@@ -57,6 +57,8 @@ module.exports = {
         var teacherId = req.body.teacherId
         var courseList = []
         var paperLists = []
+
+        // 新建一个promise
         //获取老师所教授的课程ID和name
         TeacherCourseModel
             .find({ 'teacherId': teacherId }, ["_id", "courseId"])
