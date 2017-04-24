@@ -74,4 +74,5 @@ LessonSchema.statics = {
   }
 }
 
-module.exports = LessonSchema
+var LessonModel = mongoose.model('lesson', LessonSchema)
+module.exports = LessonModel

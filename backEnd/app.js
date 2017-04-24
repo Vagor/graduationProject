@@ -5,6 +5,7 @@ var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
 // 路由
 var questionRoute = require('./routes/questionRoute.js');
+var paperRoute = require('./routes/paperRoute.js');
 // 配置文件
 var config = require('./config.js');
 
@@ -29,7 +30,7 @@ var dbUrl = 'mongodb://' + config.db_host + ':' + config.db_port + '/' + config.
 mongoose.connect(dbUrl)
 
 app.use('/',questionRoute)
-
+app.use('/',paperRoute)
 
 app.listen(port, function() {
     console.log("listening"+port);

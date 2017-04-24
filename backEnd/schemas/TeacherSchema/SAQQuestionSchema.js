@@ -64,4 +64,7 @@ SAQQuestionSchema.statics = {
     }
 }
 
-module.exports = SAQQuestionSchema
+var SAQQuestionModel = mongoose.model('SAQQuestion', SAQQuestionSchema)
+
+module.exports = SAQQuestionModel
+

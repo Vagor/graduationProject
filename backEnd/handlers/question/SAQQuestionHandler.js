@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
-var SAQQuestionModel = require('../../models/SAQQuestionModel')
+var SAQQuestionModel = require('../../schemas/TeacherSchema/SAQQuestionSchema')
 
 module.exports = {
     // 获取某老师所拥有的选择题简略信息

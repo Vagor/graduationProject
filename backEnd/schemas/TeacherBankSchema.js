@@ -81,4 +81,5 @@ TeacherBankSchema.statics = {
   }
 }
 
-module.exports = TeacherBankSchema
+var TeacherBankModel = mongoose.model('teacherbank', TeacherBankSchema)
+module.exports = TeacherBankModel

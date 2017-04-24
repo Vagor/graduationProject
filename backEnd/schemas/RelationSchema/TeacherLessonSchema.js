@@ -30,4 +30,5 @@ meta: {
   }
 })
 
-module.exports = TeacherLessonSchema
+var TeacherLessonModel = mongoose.model('teacherlesson', TeacherLessonSchema)
+module.exports = TeacherLessonModel

@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
-var ChoiceQuestionModel = require('../../models/ChoiceQuestionModel')
+var ChoiceQuestionModel = require('../../schemas/TeacherSchema/ChoiceQuestionSchema')
+
 
 module.exports = {
     // 获取某老师所拥有的选择题简略信息

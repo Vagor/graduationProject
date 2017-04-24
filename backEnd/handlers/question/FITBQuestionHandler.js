@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
-var FITBQuestionModel = require('../../models/FITBQuestionModel')
+var FITBQuestionModel = require('../../schemas/TeacherSchema/FITBQuestionSchema')
 
 module.exports = {
     // 获取某老师所拥有的选择题简略信息

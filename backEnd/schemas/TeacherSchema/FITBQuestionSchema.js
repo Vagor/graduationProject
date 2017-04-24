@@ -77,4 +77,6 @@ FITBQuestionSchema.statics = {
   }
 }
 
-module.exports = FITBQuestionSchema
+var FITBQuestionModel = mongoose.model('FITBQuestion', FITBQuestionSchema)
+
+module.exports = FITBQuestionModel

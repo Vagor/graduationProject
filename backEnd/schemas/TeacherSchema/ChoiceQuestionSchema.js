@@ -78,4 +78,5 @@ ChoiceQuestionSchema.statics = {
   }
 }
 
-module.exports = ChoiceQuestionSchema
+var ChoiceQuestionModel = mongoose.model('choiceQuestion', ChoiceQuestionSchema)
+module.exports = ChoiceQuestionModel
