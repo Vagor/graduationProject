@@ -66,6 +66,7 @@ module.exports = {
             )
             .sort({ 'meta.updateAt': -1 })
             .exec(function (err, data) {
+<<<<<<< HEAD
                 var promise = new Promise(function (resolve, reject) {
                     // 数据格式化
                     for (var i = 0; i < data.length; i++) {
@@ -107,6 +108,89 @@ module.exports = {
 
                 })
             })
+=======
+                // 数据格式化
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+                    courseList[i] = {}
+                    courseList[i].courseName = data[i].courseId.courseName
+                    courseList[i].courseId = data[i].courseId._id
+                }
+                //通过courseId获取课程下面的所有试卷
+                
+                // for in 方法
+                for (index in courseList) {
+                    MotherPaperModel
+                        .find({ 'teacherId': teacherId, 'courseId': courseList[index].courseId }, ["paperId"])
+                        .populate(
+                        'paperId',
+                        'paperTitle paperDesc timeLimit _id'
+                        )
+                        .sort({ 'meta.updateAt': -1 })
+                        .exec(function (err, paperData) {
+                            var paperList = []
+                            for (paperIndex in paperData) {
+                                paperList.push(paperData[paperIndex].paperId)
+                            }
+                            paperLists.push(paperList)
+                            console.log(paperList)
+                        })
+                }
+
+                // // promise 方式
+                // let promise = new Promise(function (resolve, reject) {
+                //     console.log('promise')
+
+                //     for (index in courseList) {
+                //         MotherPaperModel
+                //             .find({ 'teacherId': teacherId, 'courseId': courseList[index].courseId }, ["paperId"])
+                //             .populate(
+                //             'paperId',
+                //             'paperTitle paperDesc timeLimit _id'
+                //             )
+                //             .sort({ 'meta.updateAt': -1 })
+                //             .exec(function (err, paperData) {
+                //                 var paperList = []
+                //                 for (paperIndex in paperData) {
+                //                     paperList.push(paperData[paperIndex].paperId)
+                //                     console.log(paperList)
+                //                 }
+                //                 paperLists.push(paperList)
+                //                 console.log(paperLists)
+
+                //             })
+                //     }
+                //     resolve()
+                // })
+                // promise.then(function () {
+                //     console.log('send')
+
+                //     res.send(paperLists)
+                // })
+
+
+                // // forEach的遍历方式
+                // courseList.forEach(function(c) {
+                //     MotherPaperModel
+                //         .find({ 'teacherId': teacherId, 'courseId': c.courseId }, ["paperId"])
+                //         .populate(
+                //         'paperId',
+                //         'paperTitle paperDesc timeLimit _id'
+                //         )
+                //         .sort({ 'meta.updateAt': -1 })
+                //         .exec(function (err, paperData) {
+                //             var paperList = []
+                //             for (paperIndex in paperData) {
+                //                 paperList.push(paperData[paperIndex].paperId)
+                //             }
+                //             paperLists.push(paperList)
+                //             console.log(paperList)
+                //         })
+                // })
+                // console.log('send')
+            })
+
+>>>>>>> origin/master
     },
     //通过课程的ID和老师的Id获取老师所教授这门课程的所有题目
     getAllQList: function (req, res) {
