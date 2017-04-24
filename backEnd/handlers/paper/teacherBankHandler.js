@@ -96,18 +96,18 @@ module.exports = {
                                     .then(function () {
                                         if ((index + 1) == courseList.length) {
                                             console.log('paperLists:' + paperLists)
-                                             res.send({ paperLists })
+                                            res.send({ paperLists })
                                         }
-                                    })        
-                            
+                                    })
+
 
                             })
 
-                }
-                
+                    }
+
+                })
             })
-           })
-            },
+    },
     //通过课程的ID和老师的Id获取老师所教授这门课程的所有题目
     getAllQList: function (req, res) {
         var AllQList = []
