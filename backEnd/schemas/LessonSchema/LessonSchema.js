@@ -5,7 +5,7 @@ var ObjectId = Schema.Types.ObjectId
 var LessonSchema = new Schema({
   
   //课堂名
-  name:{
+  lessonName:{
     type: String,
   },
   
@@ -14,10 +14,16 @@ var LessonSchema = new Schema({
      type: Number,
   },
   
-  //课堂老师id
-  teacherId:{
-   type: ObjectId,
-  },
+ //老师id
+teacherId:{
+    type: ObjectId,
+    ref: 'teacher'
+},
+//课程id
+courseId: {
+    type: ObjectId,
+    ref: 'course'//var CourseModel = mongoose.model('course', CourseSchema)中'course'
+},
    
   //课堂学生数
   lessonStudentNumber: Number,

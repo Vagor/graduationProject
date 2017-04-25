@@ -13,6 +13,11 @@ var CourseSchema = new Schema({
   teacherId:{
    type: ObjectId,
   },
+  //所属课程
+  courseId:{
+  	type: ObjectId,
+  	ref: 'course',//ref:关联的model
+  },
    
   meta: {
     createAt: {

@@ -2,7 +2,7 @@ var express = require('express');
 var paperRoute = express.Router();
 var teacherBankHandler = require('../handlers/paper/teacherBankHandler.js');
 var motherPaperHandler = require('../handlers/paper/motherPaperHandler.js');
-
+var releasePaperHandler = require('../handlers/paper/releasePaperHandler.js');
 
 //查看题库
 paperRoute.post('/getCListByTId', teacherBankHandler.getCList);
@@ -17,6 +17,9 @@ paperRoute.post('/getCQLByPId', motherPaperHandler.getCQList);
 paperRoute.post('/getFQLByPId', motherPaperHandler.getFQList);
 paperRoute.post('/getSQLByPId', motherPaperHandler.getSQList);
 
+//组卷发布
+paperRoute.post('/getLessonLByTIdAndCId', releasePaperHandler.getLessonList);
+paperRoute.post('/releasePaper', releasePaperHandler.releasePaper);
 
 
 module.exports = paperRoute;

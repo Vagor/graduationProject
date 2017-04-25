@@ -2,7 +2,7 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
-//同一母卷做卷集合信息表
+//老师课堂关系表
 var TeacherLessonSchema = new Schema({
 //教师id
 teacherId: {
