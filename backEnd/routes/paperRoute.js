@@ -12,7 +12,6 @@ paperRoute.post('/getAllQListByCIdAndTId', teacherBankHandler.getAllQList);
 
 //组卷保存基本信息
 paperRoute.post('/createPaper', motherPaperHandler.createPaper);
-paperRoute.post('/pullQuestionsToPaper', motherPaperHandler.pullQuestions);
 paperRoute.post('/getCQLByPId', motherPaperHandler.getCQList);
 paperRoute.post('/getFQLByPId', motherPaperHandler.getFQList);
 paperRoute.post('/getSQLByPId', motherPaperHandler.getSQList);
