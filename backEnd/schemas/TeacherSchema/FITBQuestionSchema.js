@@ -10,19 +10,16 @@ var FITBQuestionSchema = new Schema({
   blankCounter: Number,
 
   //正确答案组
-  answerOption1:String,
-  answerOption2:String,
-  answerOption3:String,
-  answerOption4:String,
+  answerOptions:
+  [{
+    type: String,
+  }],
 
   //是否共享
   share: {
     type: Boolean,
     default: 1,
   },
-
-  //课程名称
-  courseName: String,
 
   //所属课程
   courseId: {
