@@ -21,7 +21,7 @@ var AnswerQuestionCollectionSchema = new Schema({
   },
    
    //母题id
-  motherQuestionIdGroup:{
+  questionIdGroup:{
    type: ObjectId,
   },
 
@@ -37,6 +37,12 @@ var AnswerQuestionCollectionSchema = new Schema({
 
   //正确人数
   passNumber:Number,
+
+  //是否已批改 (0:正在收卷，1：完成收卷待批改，2：完成批改)
+  checkOrNot:{
+    type:Number,
+    default: 0//默认是0
+  },
   
   meta: {
     createAt: {

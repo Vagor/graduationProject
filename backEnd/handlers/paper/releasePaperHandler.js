@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
 var MotherPaperModel = require('../../schemas/TeacherSchema/MotherPaperSchema')
 var LessonModel = require('../../schemas/LessonSchema/LessonSchema')
-var PaperLessonModel = require('../../schemas/RelationSchema/paperLessonSchema')
+//var PaperLessonModel = require('../../schemas/RelationSchema/paperLessonSchema')
 module.exports = {
     //通过老师id和courseId获取课堂列表
     getLessonList: function (req, res) {
@@ -15,6 +15,7 @@ module.exports = {
             }).sort({ 'meta.updateAt': -1 })
     },
     //通过lessonId和paperIds将试卷发布到选中的课堂
+    //待修改PaperLessonModel可不要，建立的AnswerPaperCollectionSchema可代替
     releasePaper: function (req, res) {
         //var lessonIds = req.body.lessonIds
         var lessonIds = ['58c73c5879534a10c243fa11','58f9dd5b57f99a18d870e3cc']

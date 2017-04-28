@@ -16,7 +16,7 @@ var AnswerPaperCollectionSchema = new Schema({
   },
 
    //母卷id
-  motherPaperId:{
+  paperId:{
    type: ObjectId,
   },
 
@@ -34,14 +34,15 @@ var AnswerPaperCollectionSchema = new Schema({
   studentNumber: Number,
 
   //已答卷数
-  AnswerPaperNumber: Number,
+  answerPaperNumber: Number,
 
   //合格人数
   passNumber:Number,
 
-  //是否已批改
+  //是否已批改 (0:正在收卷，1：完成收卷待批改，2：完成批改)
   checkOrNot:{
-    type:Boolean,
+    type:Number,
+    default: 0//默认是0
   },
 
 

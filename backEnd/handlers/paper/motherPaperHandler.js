@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
 var MotherPaperModel = require('../../schemas/TeacherSchema/MotherPaperSchema')
-var CoursePaperModel = require('../../schemas/RelationSchema/CoursePaperSchema')
 var PaperChoiceQModel = require('../../schemas/RelationSchema/PaperChoiceQSchema')
 var PaperFQModel = require('../../schemas/RelationSchema/PaperFQSchema')
 var PaperSQModel = require('../../schemas/RelationSchema/PaperSQSchema')
@@ -18,22 +17,7 @@ module.exports = {
             }
             else {
                 console.log("ok")
-                //paper基本信息保留成功，保存paper和teacher与course关系表
-                var coursePaperEnTity = new CoursePaperModel({
-                    "teacherId": req.body.teacherId,
-                    "courseId": req.body.courseId,
-                    "paperId": paper._id
-                })
-                coursePaperEnTity.save(function (err, coursePaper) {
-                    if (err) {
-                        console.log(err)
-                        res.json({ "success": 0 })
-                    }
-                    else {
-                        console.log("ok")
-                        res.json({ "success": 1 })
-                    }
-                })
+                res.json({ "success": 1 })
             }
         })
     },

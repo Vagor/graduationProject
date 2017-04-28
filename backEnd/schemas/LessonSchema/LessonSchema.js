@@ -26,7 +26,7 @@ courseId: {
 },
    
   //课堂学生数
-  lessonStudentNumber: Number,
+StudentNumber: Number,
   
   //班级id组
   classIdGroup:[{

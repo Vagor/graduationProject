@@ -16,6 +16,10 @@ sQId:{
 //额外属性
 attr: {
 //TODO
+questionScore: {
+    type: Number,
+    default: 3//默认是3分
+  },
 },
 meta: {
     createAt: {

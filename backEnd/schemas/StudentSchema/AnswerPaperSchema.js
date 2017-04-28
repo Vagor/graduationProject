@@ -5,7 +5,7 @@ var ObjectId = Schema.Types.ObjectId
 var AnswerPaperSchema = new Schema({
   
   //母卷id
-  motherPaperId:{
+  paperId:{
     type: ObjectId,
   },
   
@@ -29,9 +29,10 @@ var AnswerPaperSchema = new Schema({
    type: ObjectId,
   }],
   
-  //是否已批改
+ //是否已批改 (1：完成收卷待批改，2：完成批改)
   checkOrNot:{
-    type:Boolean,
+    type:Number,
+    default: 1//默认是1
   },
   
   //满分分值

@@ -5,7 +5,7 @@ var ObjectId = Schema.Types.ObjectId
 var AnswerQuestionSchema = new Schema({
   
   //母题id
-  motherQuestionId:{
+  questionId:{
     type: ObjectId,
   },
   
@@ -39,9 +39,10 @@ var AnswerQuestionSchema = new Schema({
     type: Boolean,　
   },
   
-  //是否已批改
+  //是否已批改 (1：完成收卷待批改，2：完成批改)
   checkOrNot:{
-    type:Boolean,
+    type:Number,
+    default: 1//默认是1
   },
   
   //满分分值
