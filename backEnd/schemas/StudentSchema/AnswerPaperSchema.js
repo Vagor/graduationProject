@@ -24,10 +24,6 @@ var AnswerPaperSchema = new Schema({
    type: ObjectId,
   },
   
-  //做题id组
-  answerQuestionIdGroup:[{
-   type: ObjectId,
-  }],
   
  //是否已批改 (1：完成收卷待批改，2：完成批改)
   checkOrNot:{

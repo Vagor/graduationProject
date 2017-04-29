@@ -44,7 +44,7 @@ module.exports = {
                 res.send({ paperList })
             })
     },
-    //通过老师的ID获取老师所教授的课程和所教授这门课程的所有所有试卷
+    //通过老师的ID获取老师所教授的课程和第一门课程的所有所有试卷
     initPaperBank: function (req, res) {
         var teacherId = req.body.teacherId
         //var courseId = req.body.courseId
@@ -65,8 +65,8 @@ module.exports = {
                         courseList[i] = {}
                         courseList[i].courseName = data[i].courseId.courseName
                         courseList[i].courseId = data[i].courseId._id
-                        paperLists.push(getPaperList(courseList[i].courseId))
                     }
+                  getPaperList(courseList[0].courseId)
                 })
         }
         var getPaperList = function (courseId) {//获取老师所教授这门课程的所有所有试卷
@@ -74,21 +74,11 @@ module.exports = {
                 ["paperTitle", "paperDesc", "timeLimit", " _id", "share"])
                 .sort({ 'meta.updateAt': -1 })
                 .exec(function (err, paperList) {
-                    return paperList
+                    res.send({courseList,paperList})
                 })
         }
-
-new Promise(function(resolve, reject) {
-            co(function*() {
-              var Lists = yield getCList()
-            console.log({ courseList, paperLists })  
-            }).catch((err) => {
-                reject(err);
-            })
-        })
+        getCList()
     },
-
-
 
 
     //     initPaperBank: function (req, res) {

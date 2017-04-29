@@ -19,7 +19,7 @@ paperRoute.post('/getSQLByPId', motherPaperHandler.getSQList);
 
 //组卷发布
 paperRoute.post('/getLessonLByTIdAndCId', releasePaperHandler.getLessonList);
-//paperRoute.post('/releasePaper', releasePaperHandler.releasePaper);
+paperRoute.post('/releasePaper', releasePaperHandler.releasePaper);
 
 
 module.exports = paperRoute;
