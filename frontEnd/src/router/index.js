@@ -98,11 +98,11 @@ export default new Router({
       path: '/publish/chooseBasicInfo',
       name: 'chooseBasicInfo',
       component: require('../components/publish/chooseBasicInfo.vue')
-    },{
+    }, {
       path: '/publish/paperBank4publish',
-      name: 'chooseBasicInfo',
+      name: 'paperBank4publish',
       component: require('../components/publish/paperBank4publish.vue')
-    },{
+    }, {
       path: '/publish/paperInfo4publish',
       name: 'paperInfo4publish',
       component: require('../components/publish/paperInfo4publish.vue')
@@ -114,18 +114,48 @@ export default new Router({
       path: '/student',
       name: 's_home',
       component: require('../components/student/home/home.vue'),
-    },{
+    }, {
       path: '/student/myClass',
       name: 's_myClass',
       component: require('../components/student/myClass/myClass.vue'),
-    },{
+    }, {
       path: '/student/myPaper',
       name: 's_myPaper',
       component: require('../components/student/myPaper/myPaper.vue'),
-    },{
+    }, {
       path: '/student/myPaperList',
       name: 's_myPaperList',
       component: require('../components/student/myPaper/myPaperList.vue'),
-    },
+    }, {
+      path: '/student/paperWaitingPage',
+      name: 's_paperWaitingPage',
+      component: require('../components/student/myPaper/paperWaitingPage.vue'),
+    }, {
+      // 简答
+      path: '/student/paperCompletion',
+      name: 's_paperCompletion',
+      component: require('../components/student/myPaper/paperCompletion.vue'),
+    }, {
+      path: '/student/doQuestion',
+      component: require('../components/student/myPaper/doQuestion.vue'),
+      children: [
+        {
+          // 选择      
+          path: 'doCQ',
+          name: 's_doCQ',
+          component: require('../components/student/myPaper/doCQ.vue'),
+        }, {
+          // 填空      
+          path: 'doFQ',
+          name: 's_doFQ',
+          component: require('../components/student/myPaper/doFQ.vue'),
+        }, {
+          // 简答
+          path: 'doSQ',
+          name: 's_doSQ',
+          component: require('../components/student/myPaper/doSQ.vue'),
+        },
+      ]
+    }
   ]
 })
