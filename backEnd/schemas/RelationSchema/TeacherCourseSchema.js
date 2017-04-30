@@ -2,14 +2,14 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
-//同一母卷做卷集合信息表
+//课程教师关系表
 var TeacherCourseSchema = new Schema({
 //教师id
 teacherId: {
     type: ObjectId,
      ref: 'teacher'
 },
-//课堂id
+//课程id
 courseId: {
     type: ObjectId,
     ref: 'course'//var CourseModel = mongoose.model('course', CourseSchema)中'course'

@@ -28,20 +28,6 @@ courseId: {
   //课堂学生数
 studentNumber: Number,
   
-  //班级id组
-  classIdGroup:[{
-   type: ObjectId,
-  }],
-  
-  //母卷id组
-  motherPaperIdGroup:[{
-   type: ObjectId,
-  }],
-
-  //做卷集id组
-  answerPaperCollectionIdGroup:[{
-   type: ObjectId,
-  }],
   
   meta: {
     createAt: {

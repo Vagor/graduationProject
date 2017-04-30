@@ -2,7 +2,6 @@ var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
 var MotherPaperModel = require('../../schemas/TeacherSchema/MotherPaperSchema')
 var LessonModel = require('../../schemas/LessonSchema/LessonSchema')
-//var PaperLessonModel = require('../../schemas/RelationSchema/paperLessonSchema')
 var AnswerPaperCollectionModel = require('../../schemas/LessonSchema/AnswerPaperCollectionSchema')
 var ChoiceQuestionCollectionModel = require('../../schemas/LessonSchema/AnswerChoiceQCollectionSchema')
 var FillQuestionCollectionModel = require('../../schemas/LessonSchema/AnswerFillQCollectionSchema')

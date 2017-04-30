@@ -5,7 +5,7 @@ var ObjectId = Schema.Types.ObjectId
 var ClassSchema = new Schema({
   
   //班级名
-  name:{
+  className:{
     type: String,
   },
   
@@ -24,24 +24,9 @@ var ClassSchema = new Schema({
    type: ObjectId,
   },
   
-  //全体班级成员id组
-  studentIdGroup:[{
-   type: ObjectId,
-  }],
-
   //班级学生数
   studentNumber: Number,
 
-  //母卷id组
-  motherPaperIdGroup:[{
-   type: ObjectId,
-  }],
-
-  //做卷集id组
-  answerPaperCollectionIdGroup:[{
-   type: ObjectId,
-  }],
-  
   meta: {
     createAt: {
       type: Date,
@@ -79,4 +64,5 @@ ClassSchema.statics = {
   }
 }
 
-module.exports = ClassSchema
+var ClassModel = mongoose.model('class', ClassSchema)
+module.exports = ClassModel
