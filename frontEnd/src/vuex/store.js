@@ -33,6 +33,8 @@ const state = {
     chapter: ''
   },
 
+
+// 组卷
   // 选中的题目
   s_selectedQuestion: {
     choiceQuestionSelected:[],
@@ -40,14 +42,19 @@ const state = {
     SAQQuestionSelected:[],
     questionCount:0,
   },
+  s_basicPaperInfo: {
+    courseId:'',
+    paperTitle:'',
+    paperDesc:'',
+  },
 
 
-  // 选中的题目
+
+  // 发布试卷的基本信息
   s_publishInfo: {
     courseId:'13123',
     lessonId:['123','3124'],
   },
-
 };
 
 const mutations = {
@@ -69,6 +76,10 @@ const mutations = {
   // 更新已选题库
   updateSelectedQuestion(state, payload) {
     state.s_selectedQuestion = payload
+  },
+  // 更新组卷的基本信息
+  updateBasicPaperInfo(state, payload) {
+    state.s_basicPaperInfo = payload
   },
 
 }

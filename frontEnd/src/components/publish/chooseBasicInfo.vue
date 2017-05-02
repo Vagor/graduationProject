@@ -9,9 +9,6 @@
     </mt-radio>
     <!--通过加上空字符，让数字变成字符串，如(''+index)-->
     <mt-checklist title="请选组班级" v-model="lessonSelected[index]" :options="item" class="left" v-if="courseChosed === (''+index)" v-for="(item,index) in lessonOptions"></mt-checklist>
-    <mt-cell title="标题文字" is-link class="left" to="//github.com">
-      <mt-button v-on:click.prevent="add()" size="small">添加</mt-button>
-    </mt-cell>
     <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">去选择试卷</mt-button>
   </div>
 </template>

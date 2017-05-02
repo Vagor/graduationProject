@@ -4,9 +4,9 @@
       <router-link to="/chooseCourse4question" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
-      <router-link to="createQuestion" slot="right">
+      <!--<router-link to="createQuestion" slot="right">
         <mt-button>出题</mt-button>
-      </router-link>
+      </router-link>-->
     </mt-header>
     <mt-navbar v-model="activeTab">
       <mt-tab-item id="choiceTab">选择题</mt-tab-item>
