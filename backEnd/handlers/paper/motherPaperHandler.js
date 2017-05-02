@@ -4,6 +4,9 @@ var MotherPaperModel = require('../../schemas/TeacherSchema/MotherPaperSchema')
 var PaperChoiceQModel = require('../../schemas/RelationSchema/PaperChoiceQSchema')
 var PaperFQModel = require('../../schemas/RelationSchema/PaperFQSchema')
 var PaperSQModel = require('../../schemas/RelationSchema/PaperSQSchema')
+var ChoiceQuestionModel = require('../../schemas/TeacherSchema/ChoiceQuestionSchema')
+var FITBQuestionModel = require('../../schemas/TeacherSchema/FITBQuestionSchema')
+var SAQQuestionModel = require('../../schemas/TeacherSchema/SAQQuestionSchema')
 
 module.exports = {
     //组卷保存基本信息
@@ -21,6 +24,42 @@ module.exports = {
             }
         })
     },
+    //通过选择题Id数组，获取一组题目信息
+    getCQListByQIdArr: function (req, res) {
+        var choiceQIds = req.body.choiceQIds
+        //  choiceQIds=["58c66fcb07f87ba944015a24","58c8f485c7129e2b9cfd086a"]
+        ChoiceQuestionModel.find({
+            '_id': choiceQIds
+        }, [
+                '_id', 'stem', 'chapter', "options", "answerOptions"
+            ], function (err, choiceQuestionList) {
+                res.send({ choiceQuestionList })
+            }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
+    },
+    //通过填空题Id数组，获取一组题目信息
+    getFQListByQIdArr: function (req, res) {
+        var fillQIds = req.body.fillQIds
+        // fillQIds=["58f2dffcbadd8c813c4deef0","58fe9c58b070a8194cee6023"]
+        FITBQuestionModel.find({
+            '_id': fillQIds
+        }, [
+                '_id', 'stem', 'chapter', "answerOptions"
+            ], function (err, fillQuestionList) {
+                res.send({ fillQuestionList })
+            }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
+    },
+    //通过简答题Id数组，获取一组题目信息
+    getSQListByQIdArr: function (req, res) {
+        var shortQIds = req.body.shortQIds
+        //  shortQIds=["58fea184b070a8194cee6025","58fea204b070a8194cee6026"]
+        SAQQuestionModel.find({
+            '_id': shortQIds
+        }, [
+                '_id', 'stem', 'chapter', "answer"
+            ], function (err, shortQuestionList) {
+                res.send({ shortQuestionList })
+            }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
+    },
     //通过paperId返回选择题信息
     getCQList: function (req, res) {
         var paperId = req.body.paperId
@@ -28,7 +67,7 @@ module.exports = {
             .find({ 'paperId': paperId }, ["_id", "choiceQId"])
             .populate(
             'choiceQId',//表id [path]
-            ' stem teacherId chapter options  courseId answerOption'//[select] 
+            ' stem teacherId chapter options  courseId answerOptions'//[select] 
             )
             .sort({ 'meta.updateAt': -1 })
             .exec(function (err, data) {
@@ -96,17 +135,17 @@ module.exports = {
             }
         })
         //建立选择题与组卷关系表并存入分值
-        //var choiceQList = req.body.choiceQList
-        var choiceQList = [
-            {
-                choiceQId: "58c8f39ec7129e2b9cfd0868",
-                questionScore: 56
-            },
-            {
-                choiceQId: "58c8f39ec7129e2b9cfd0868",
-                questionScore: 78
-            }
-        ]
+        var choiceQList = req.body.choiceQList
+        // var choiceQList = [
+        //     {
+        //         choiceQId: "58c8f39ec7129e2b9cfd0868",
+        //         questionScore: 56
+        //     },
+        //     {
+        //         choiceQId: "58c8f39ec7129e2b9cfd0868",
+        //         questionScore: 78
+        //     }
+        // ]
         for (Index in choiceQList) {
             var paperChoiceEntity = new PaperChoiceQModel({
                 paperId: paperId,
@@ -118,22 +157,22 @@ module.exports = {
                     console.log(err)
                 }
                 else {
-                    console.log("create paper choice ralation ok") 
+                    console.log("create paper choice ralation ok")
                 }
             })
         }
-      //建立填空题与组卷关系表并存入分值  
-      //var fQList= req.body.fQList
-        var fQList= [
-            {
-                fQId: "58c8f39ec7129e2b9cfd0868",
-                questionScore: 56
-            },
-            {
-                fQId: "58c8f39ec7129e2b9cfd0868",
-                questionScore: 78
-            }
-        ]
+        //建立填空题与组卷关系表并存入分值  
+        var fQList = req.body.fQList
+        // var fQList= [
+        //     {
+        //         fQId: "58c8f39ec7129e2b9cfd0868",
+        //         questionScore: 56
+        //     },
+        //     {
+        //         fQId: "58c8f39ec7129e2b9cfd0868",
+        //         questionScore: 78
+        //     }
+        // ]
         for (Index in fQList) {
             var PaperFQEntity = new PaperFQModel({
                 paperId: paperId,
@@ -145,22 +184,22 @@ module.exports = {
                     console.log(err)
                 }
                 else {
-                    console.log("create paper fillQuestion ralation ok") 
+                    console.log("create paper fillQuestion ralation ok")
                 }
             })
         }
         //建立简答题与组卷关系表并存入分值  
-      //var sQList= req.body.sQList
-        var sQList= [
-            {
-                sQId: "58c8f39ec7129e2b9cfd0868",
-                questionScore: 56
-            },
-            {
-                sQId: "58c8f39ec7129e2b9cfd0868",
-                questionScore: 78
-            }
-        ]
+        var sQList = req.body.sQList
+        // var sQList= [
+        //     {
+        //         sQId: "58c8f39ec7129e2b9cfd0868",
+        //         questionScore: 56
+        //     },
+        //     {
+        //         sQId: "58c8f39ec7129e2b9cfd0868",
+        //         questionScore: 78
+        //     }
+        // ]
         for (Index in sQList) {
             var PapersQEntity = new PaperSQModel({
                 paperId: paperId,
@@ -172,7 +211,7 @@ module.exports = {
                     console.log(err)
                 }
                 else {
-                    console.log("create paper SQuestion ralation ok") 
+                    console.log("create paper SQuestion ralation ok")
                 }
             })
         }

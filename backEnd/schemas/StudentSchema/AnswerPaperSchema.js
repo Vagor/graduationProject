@@ -3,7 +3,12 @@ var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 //已做试卷信息表
 var AnswerPaperSchema = new Schema({
-  
+ //已做试卷集合id
+ answerPaperCollectionId:ObjectId,
+  //试卷题目
+  paperTitle:{
+    type: String,
+  },
   //母卷id
   paperId:{
     type: ObjectId,
@@ -23,9 +28,13 @@ var AnswerPaperSchema = new Schema({
   lessonId:{
    type: ObjectId,
   },
+  //班级
+  classId: {
+    type: ObjectId,
+    ref: 'class',//ref:关联的model
+  },
   
-  
- //是否已批改 (1：完成收卷待批改，2：完成批改)
+ //是否已批改 (1：已做试卷待批改，2：已做试卷完成批改)
   checkOrNot:{
     type:Number,
     default: 1//默认是1
@@ -74,4 +83,6 @@ AnswerPaperSchema.statics = {
   }
 }
 
-module.exports = AnswerPaperSchema
+module.exports = Schema
+var AnswerPaperModel = mongoose.model('answerpaper', AnswerPaperSchema)
+module.exports = AnswerPaperModel

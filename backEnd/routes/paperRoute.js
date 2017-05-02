@@ -12,6 +12,13 @@ paperRoute.post('/initPaperBank', teacherBankHandler.initPaperBank);//通过老�
 
 //组卷保存基本信息
 paperRoute.post('/createPaper', motherPaperHandler.createPaper);
+//通过题Id数组，获取一组题目信息
+paperRoute.post('/getCQListByQIdArr', motherPaperHandler.getCQListByQIdArr);
+//通过填空题Id数组，获取一组题目信息
+paperRoute.post('/getFQListByQIdArr', motherPaperHandler.getFQListByQIdArr);
+//通过简答题Id数组，获取一组题目信息
+paperRoute.post('/getSQListByQIdArr', motherPaperHandler.getSQListByQIdArr);
+
 paperRoute.post('/pullQuestionsToPaper', motherPaperHandler.pullQuestions);
 paperRoute.post('/getCQLByPId', motherPaperHandler.getCQList);
 paperRoute.post('/getFQLByPId', motherPaperHandler.getFQList);

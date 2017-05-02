@@ -20,91 +20,94 @@ module.exports = {
     },
     //通过lessonId和paperIds将试卷发布到选中的课堂
     //待修改PaperLessonModel可不要，建立的AnswerPaperCollectionSchema可代替
-
     releasePaper: function (req, res) {
         //传入的数据
-        //var lessonList = req.body.lessonList
-        var lessonList = [{ "lessonId": '58c73c5879534a10c243fa11', "studentNumber": 28 },
-        { "lessonId": '58f9dd5b57f99a18d870e3cc', "studentNumber": 23 }]
+        var lessonList = req.body.lessonList
+        //测试数据
+        // var lessonList = [{ "lessonId": '58c73c5879534a10c243fa11', "studentNumber": 28 },
+        // { "lessonId": '58f9dd5b57f99a18d870e3cc', "studentNumber": 23 }]
         var paperId = req.body.paperId
         var TeacherId = req.body.teacherId
         var paperTitle = req.body.paperTitle
-        // var choiceQList = req.body.choiceQList
-        var choiceQList = [
-            {
-                "choiceQuestionId": '58c73c5879534a10c243fa11',
-                "stem": "sssss",
-                "answerOptions": [0, 2],
-                "questionScore": 5,
-                "chapter": 2,
-                "options": [
-                    "1answerOption",
-                    "2answerOption",
-                    "3answerOption",
-                    "4answerOption"
-                ]
-            },
-            {
-                "choiceQuestionId": '58c73c5879534a10c243fa11',
-                "stem": "ddddd",
-                "answerOptions": [0, 1],
-                "questionScore": 6,
-                "chapter": 7,
-                "options": [
-                    "7nswerOption",
-                    "7nswerOption",
-                    "7nswerOption",
-                    "7nswerOption"
-                ]
-            }
+        var totalScore = req.body.totalScore
+        var choiceQList = req.body.choiceQList
+        // var choiceQList = [
+        //     {
+        //         "choiceQuestionId": '58c73c5879534a10c243fa11',
+        //         "stem": "sssss",
+        //         "answerOptions": [0, 2],
+        //         "questionScore": 5,
+        //         "chapter": 2,
+        //         "options": [
+        //             "1answerOption",
+        //             "2answerOption",
+        //             "3answerOption",
+        //             "4answerOption"
+        //         ]
+        //     },
+        //     {
+        //         "choiceQuestionId": '58c73c5879534a10c243fa11',
+        //         "stem": "ddddd",
+        //         "answerOptions": [0, 1],
+        //         "questionScore": 6,
+        //         "chapter": 7,
+        //         "options": [
+        //             "7nswerOption",
+        //             "7nswerOption",
+        //             "7nswerOption",
+        //             "7nswerOption"
+        //         ]
+        //     }
 
-        ]
-        var fillQList = [
-            {
-                "fillQuestionId": '58c73c5879534a10c243fa11',
-                "stem": "sssss",
-                "questionScore": 5,
-                "chapter": 2,
-                "answerOptions": [
-                    "1answerOption",
-                    "2answerOption",
-                    "3answerOption",
-                    "4answerOption"
-                ]
-            },
-            {
-                "fillQuestionId": '58c73c5879534a10c243fa11',
-                "stem": "ddddd",
-                "questionScore": 6,
-                "chapter": 7,
-                "answerOptions": [
-                    "7nswerOption",
-                    "7nswerOption",
-                    "7nswerOption",
-                    "7nswerOption"
-                ]
-            }
+        // ]
+        var fillQList = req.body.fillQList
+        // var fillQList = [
+        //     {
+        //         "fillQuestionId": '58c73c5879534a10c243fa11',
+        //         "stem": "sssss",
+        //         "questionScore": 5,
+        //         "chapter": 2,
+        //         "answerOptions": [
+        //             "1answerOption",
+        //             "2answerOption",
+        //             "3answerOption",
+        //             "4answerOption"
+        //         ]
+        //     },
+        //     {
+        //         "fillQuestionId": '58c73c5879534a10c243fa11',
+        //         "stem": "ddddd",
+        //         "questionScore": 6,
+        //         "chapter": 7,
+        //         "answerOptions": [
+        //             "7nswerOption",
+        //             "7nswerOption",
+        //             "7nswerOption",
+        //             "7nswerOption"
+        //         ]
+        //     }
 
-        ]
-        var shortQList = [
-            {
-                "shortQuestionId": '58c73c5879534a10c243fa11',
-                "stem": "sssss",
-                "questionScore": 5,
-                "chapter": 2,
-                "answer":
-                "1answerOption",
-            },
-            {
-                "shortQuestionId": '58c73c5879534a10c243fa11',
-                "stem": "ddddd",
-                "questionScore": 6,
-                "chapter": 7,
-                "answer":
-                "7nswerOption",
-            }
+        // ]
+        var shortQList = req.body.shortQList
+        // var shortQList = [
+        //     {
+        //         "shortQuestionId": '58c73c5879534a10c243fa11',
+        //         "stem": "sssss",
+        //         "questionScore": 5,
+        //         "chapter": 2,
+        //         "answer":
+        //         "1answerOption",
+        //     },
+        //     {
+        //         "shortQuestionId": '58c73c5879534a10c243fa11',
+        //         "stem": "ddddd",
+        //         "questionScore": 6,
+        //         "chapter": 7,
+        //         "answer":
+        //         "7nswerOption",
+        //     }
 
-        ]
+        // ]
 
         //第一步建立起lesson的做卷集合表
         var createAnswerPaperC = function () {
@@ -114,7 +117,8 @@ module.exports = {
                     "studentNumber": lessonList[Index].studentNumber,
                     "paperId": paperId,
                     "TeacherId": TeacherId,
-                    "paperTitle": paperTitle
+                    "paperTitle": paperTitle,
+                    "totalScore": totalScore
                 })
                 AnswerPaperCollectionEnTity.save(function (err, answerpapercollection) {
                     if (err) {
@@ -126,7 +130,7 @@ module.exports = {
                         createAnswerChoiceQC(answerpapercollection)
                         createAnswerFillQC(answerpapercollection)
                         createAnswerShortQC(answerpapercollection)
-                        
+
                     }
                 })
             }
@@ -135,7 +139,7 @@ module.exports = {
         var createAnswerChoiceQC = function (answerpapercollection) {
             for (ChoiceIndex in choiceQList) {
                 choiceQList[ChoiceIndex].answerPaperCollectionId = answerpapercollection._id
-                choiceQList[ChoiceIndex].studentNumber = answerpapercollection.studentNumber                
+                choiceQList[ChoiceIndex].studentNumber = answerpapercollection.studentNumber
                 var ChoiceQuestionCEnTity = new ChoiceQuestionCollectionModel(choiceQList[ChoiceIndex])
                 ChoiceQuestionCEnTity.save(function (err, choicequestioncollection) {
                     if (err) {
@@ -152,7 +156,7 @@ module.exports = {
         var createAnswerFillQC = function (answerpapercollection) {
             for (fillIndex in fillQList) {
                 fillQList[fillIndex].answerPaperCollectionId = answerpapercollection._id
-                fillQList[fillIndex].studentNumber = answerpapercollection.studentNumber 
+                fillQList[fillIndex].studentNumber = answerpapercollection.studentNumber
                 var fillQuestionCEnTity = new FillQuestionCollectionModel(fillQList[fillIndex])
                 fillQuestionCEnTity.save(function (err, fillquestioncollection) {
                     if (err) {
@@ -167,8 +171,8 @@ module.exports = {
         }
         var createAnswerShortQC = function (answerpapercollection) {
             for (shortIndex in shortQList) {
-                 shortQList[shortIndex].answerPaperCollectionId = answerpapercollection._id
-                shortQList[shortIndex].studentNumber = answerpapercollection.studentNumber 
+                shortQList[shortIndex].answerPaperCollectionId = answerpapercollection._id
+                shortQList[shortIndex].studentNumber = answerpapercollection.studentNumber
                 var shortQuestionCEnTity = new ShortQuestionCollectionModel(shortQList[shortIndex])
                 shortQuestionCEnTity.save(function (err, shortquestioncollection) {
                     if (err) {

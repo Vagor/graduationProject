@@ -38,7 +38,7 @@ module.exports = {
         var teacherId = req.body.teacherId
         var courseId = req.body.courseId
         MotherPaperModel.find({ 'teacherId': teacherId, 'courseId': courseId },
-            ["paperTitle", "paperDesc", "timeLimit", " _id", "share"])
+            ["paperTitle","totalScore", "paperDesc", "timeLimit", " _id", "share"])
             .sort({ 'meta.updateAt': -1 })
             .exec(function (err, paperList) {
                 res.send({ paperList })

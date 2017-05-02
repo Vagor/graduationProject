@@ -25,6 +25,8 @@ var AnswerPaperCollectionSchema = new Schema({
   },
   //标题
   paperTitle: String,
+   //满分分值
+  totalScore: Number,
 
   //应答学生人数
   studentNumber: Number,
