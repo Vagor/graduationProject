@@ -1,6 +1,9 @@
 <template>
 <div id="app">
     <router-view></router-view>
+    <router-link to="/" slot="right">
+        <mt-button >home</mt-button>
+      </router-link>
 </div>
 </template>
 
@@ -21,7 +24,7 @@ export default {
       }, action => {
         console.log(action);
       });
-    }
+    },
   },
 }
 </script>
@@ -52,6 +55,9 @@ body,
 }
 .left {
   text-align: left;
+}
+.right {
+  text-align: right;
 }
 .gap {
   margin-top: 1rem;

@@ -13,7 +13,7 @@
         <mt-field class="left" label="试卷简介" placeholder="请输入试卷简单介绍" :value="this.paperDesc" type="textarea" rows="4"></mt-field>
         <label class="block-title gap">其他信息</label>
         <mt-cell class="left" title="时长" :value="rangeValue+'分钟 '"></mt-cell>
-        <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">确认出卷</mt-button>
+        <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">选择此卷</mt-button>
     </div>
 </template>
 

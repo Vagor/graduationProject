@@ -9,6 +9,10 @@ export default new Router({
     // 首页
     {
       path: '/',
+      component: require('../components/home.vue')
+    },{
+      path: '/teacherHomePage',
+      name: 'teacherHomePage',
       component: require('../components/teacherHomePage.vue')
     }, {
       path: '/nothing',
@@ -107,6 +111,19 @@ export default new Router({
       name: 'paperInfo4publish',
       component: require('../components/publish/paperInfo4publish.vue')
     },
+
+
+    // 管理班级
+    {
+      path: '/class/chooseClass',
+      name: 'chooseClass',
+      component: require('../components/class/chooseClass.vue')
+    },{
+      path: '/class/addClass',
+      name: 'addClass',
+      component: require('../components/class/addClass.vue')
+    },
+
 
 
     // 学生

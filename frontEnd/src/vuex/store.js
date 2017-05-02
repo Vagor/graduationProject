@@ -38,6 +38,7 @@ const state = {
     choiceQuestionSelected:[],
     FITBQuestionSelected:[],
     SAQQuestionSelected:[],
+    questionCount:0,
   },
 
 
