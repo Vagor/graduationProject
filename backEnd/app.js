@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var questionRoute = require('./routes/questionRoute.js');
 var paperRoute = require('./routes/paperRoute.js');
 var studentAnswerRoute = require('./routes/studentAnswerRoute.js');
-
+var teacherCheckPaperRoute = require('./routes/teacherCheckPaperRoute.js');
 // 配置文件
 var config = require('./config.js');
 
@@ -34,6 +34,8 @@ mongoose.connect(dbUrl)
 app.use('/',questionRoute)
 app.use('/',paperRoute)
 app.use('/',studentAnswerRoute)
+app.use('/',teacherCheckPaperRoute)
+
 app.listen(port, function() {
     console.log("listening"+port);
 });

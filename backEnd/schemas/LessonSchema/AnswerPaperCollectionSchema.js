@@ -37,6 +37,12 @@ var AnswerPaperCollectionSchema = new Schema({
   //合格人数
   passNumber: Number,
 
+  //合格率
+  passPercent:Number,
+
+   //平均分
+    averageScore: Number,
+
   //是否已批改 (0:正在收卷，1：完成收卷待批改，2：完成批改)
   checkOrNot: {
     type: Number,

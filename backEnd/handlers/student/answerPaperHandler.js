@@ -1,7 +1,5 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require('bluebird')
-// var MotherPaperModel = require('../../schemas/TeacherSchema/MotherPaperSchema')
-// var LessonModel = require('../../schemas/LessonSchema/LessonSchema')
 var StudentModel = require('../../schemas/UserSchema/StudentSchema')
 var LessonClassModel = require('../../schemas/RelationSchema/LessonClassSchema')
 var AnswerPaperModel = require('../../schemas/StudentSchema/AnswerPaperSchema')
@@ -215,50 +213,56 @@ module.exports = {
         var answerPaperCollectionId = req.body.answerPaperCollectionId
         var studentNumber = req.body.studentNumber
         var answerPaperNumber = req.body.answerPaperNumber
-        var conditions = {
-            _id: answerPaperId
-        }
-        var update = {
-            $set: { answerPaperCollectionId: answerPaperCollectionId }
-        }
-        var options = {
-            upsert: true
-        }
-        AnswerPaperModel.update(conditions, update, options, function (error) {
-            if (error) {
-                console.log(error)
-            } else {
-                console.log('update answerpaper ok!')
-                var checkOrNot = 0
-                //0:正在收卷
-                answerPaperNumber++
-                if (answerPaperNumber == studentNumber) {
-                    checkOrNot = 1
-                    //1：完成收卷待批改
-                }
-                var Aconditions = {
-                    _id: answerPaperCollectionId
-                }
-                var Aupdate = {
-                    $set: {
-                        answerPaperNumber: answerPaperNumber,
-                        checkOrNot: checkOrNot
-                    }
-                }
-                var Aoptions = {
-                    upsert: true
-                }
-                AnswerPaperCollectionModel.update(Aconditions, Aupdate, Aoptions, function (error) {
-                    if (error) {
-                        console.log(error)
-                    } else {
-                        console.log('update answerpapercollection ok!')
-                        res.send({success:1})
-                    }
-                })
-
-
+        var updateAnswerPaper = function () {
+            var conditions = {
+                _id: answerPaperId
             }
-        })
+            var update = {
+                $set: { answerPaperCollectionId: answerPaperCollectionId }
+            }
+            var options = {
+                upsert: true
+            }
+            AnswerPaperModel.update(conditions, update, options, function (error) {
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('update answerpaper ok!')
+
+                    updateAnswerPaperCollection()
+                }
+            })
+        }
+        var updateAnswerPaperCollection = function () {
+            var checkOrNot = 0
+            //0:正在收卷
+            answerPaperNumber++
+            if (answerPaperNumber == studentNumber) {
+                checkOrNot = 1
+                //1：完成收卷待批改
+            }
+            var Aconditions = {
+                _id: answerPaperCollectionId
+            }
+            var Aupdate = {
+                $set: {
+                    answerPaperNumber: answerPaperNumber,
+                    checkOrNot: checkOrNot
+                }
+            }
+            var Aoptions = {
+                upsert: true
+            }
+            AnswerPaperCollectionModel.update(Aconditions, Aupdate, Aoptions, function (error) {
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('update answerpapercollection ok!')
+                    res.send({ success: 1 })
+                }
+            })
+
+        }
+        updateAnswerPaper()
     },
 }
