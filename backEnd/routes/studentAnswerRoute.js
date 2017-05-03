@@ -12,5 +12,9 @@ studentAnswerRoute.post('/createAnswerPaper', answerPaperHandler.createAnswerPap
 studentAnswerRoute.post('/createAnswerChoiceQ', answerPaperHandler.createAnswerChoiceQ);
 //生成完成的填空题答题信息表
 studentAnswerRoute.post('/createAnswerFillQ', answerPaperHandler.createAnswerFillQ);
+//生成完成的简答题答题信息表
+studentAnswerRoute.post('/createAnswerShortQ', answerPaperHandler.createAnswerShortQ);
+//确认提交试卷
+studentAnswerRoute.post('/submitPaper', answerPaperHandler.submitPaper);
 
 module.exports = studentAnswerRoute;

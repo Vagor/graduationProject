@@ -31,7 +31,7 @@ var AnswerPaperCollectionSchema = new Schema({
   //应答学生人数
   studentNumber: Number,
 
-  //已答卷数
+  //上交已答卷数
   answerPaperNumber: Number,
 
   //合格人数

@@ -11,6 +11,10 @@ var AnswerShortQSchema = new Schema({
   shortQuestionId:{
     type: ObjectId,
   },
+  //已做题集合id
+  answerShortQCollectionId:{
+    type: ObjectId,
+  },
   
   //做题学生id
   studentId:{

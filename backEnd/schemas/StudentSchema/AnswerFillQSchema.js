@@ -11,7 +11,10 @@ var AnswerFillQSchema = new Schema({
   fillQuestionId:{
     type: ObjectId,
   },
-  
+  //已做题集合id
+  answerFillQCollectionId:{
+    type: ObjectId,
+  },
   //做题学生id
   studentId:{
      type: ObjectId,

@@ -8,6 +8,7 @@ var AnswerPaperModel = require('../../schemas/StudentSchema/AnswerPaperSchema')
 var AnswerPaperCollectionModel = require('../../schemas/LessonSchema/AnswerPaperCollectionSchema')
 var AnswerChoiceQModel = require('../../schemas/StudentSchema/AnswerChoiceQSchema')
 var AnswerFillQModel = require('../../schemas/StudentSchema/AnswerFillQSchema')
+var AnswerShortQModel = require('../../schemas/StudentSchema/AnswerShortQSchema')
 var AnswerChoiceQuestionCollectionModel = require('../../schemas/LessonSchema/AnswerChoiceQCollectionSchema')
 var AnswerFillQuestionCollectionModel = require('../../schemas/LessonSchema/AnswerFillQCollectionSchema')
 var AnswerShortQuestionCollectionModel = require('../../schemas/LessonSchema/AnswerShortQCollectionSchema')
@@ -87,7 +88,7 @@ module.exports = {
                     "checkOrNot": 0,
                     'lessonId': lessonId
                 }, [
-                    "_id", 'paperTitle', "totalScore", "paperId",
+                    "_id", 'paperTitle', "totalScore", "paperId", "studentNumber", "answerPaperNumber",
                 ], function (err, noCheckList) {
                     // console.log(noCheckList)
                     var NoAnswerPaperList = []
@@ -144,7 +145,7 @@ module.exports = {
             "answerPaperCollectionId": req.body.answerPaperCollectionId,
             "choiceQuestionId": req.body.choiceQuestionId
         }, ["_id"], function (err, List) {
-            console.log(List)
+            // console.log(List)
             var answerChoiceQList = req.body
             answerChoiceQList.answerChoiceQCollectionId = List[0]._id
             //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
@@ -164,11 +165,11 @@ module.exports = {
     },
     //生成完成的填空题答题信息表
     createAnswerFillQ: function (req, res) {
-       AnswerFillQuestionCollectionModel.find({
+        AnswerFillQuestionCollectionModel.find({
             "answerPaperCollectionId": req.body.answerPaperCollectionId,
             "fillQuestionId": req.body.fillQuestionId
         }, ["_id"], function (err, List) {
-            console.log(List)
+            // console.log(List)
             var answerFillQList = req.body
             answerFillQList.answerFillQCollectionId = List[0]._id
             //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
@@ -184,5 +185,80 @@ module.exports = {
             })
         }
         )
+    },
+    //生成完成的简答题答题信息表
+    createAnswerShortQ: function (req, res) {
+        AnswerShortQuestionCollectionModel.find({
+            "answerPaperCollectionId": req.body.answerPaperCollectionId,
+            "shortQuestionId": req.body.shortQuestionId
+        }, ["_id"], function (err, List) {
+            //  console.log(List)
+            var answerShortQList = req.body
+            answerShortQList.answerShortQCollectionId = List[0]._id
+            //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
+            var AnswerShortQEntity = new AnswerShortQModel(answerShortQList)
+            AnswerShortQEntity.save(function (err, answershortq) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("ok")
+                    // console.log(answerchoiceq)
+                    res.send({ success: 1 })
+                }
+            })
+        }
+        )
+    },
+    //确认提交试卷,关联学生答卷信息表和答卷集合表方便后续老师批改工作.
+    submitPaper: function (req, res) {
+        var answerPaperId = req.body.answerPaperId
+        var answerPaperCollectionId = req.body.answerPaperCollectionId
+        var studentNumber = req.body.studentNumber
+        var answerPaperNumber = req.body.answerPaperNumber
+        var conditions = {
+            _id: answerPaperId
+        }
+        var update = {
+            $set: { answerPaperCollectionId: answerPaperCollectionId }
+        }
+        var options = {
+            upsert: true
+        }
+        AnswerPaperModel.update(conditions, update, options, function (error) {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('update answerpaper ok!')
+                var checkOrNot = 0
+                //0:正在收卷
+                answerPaperNumber++
+                if (answerPaperNumber == studentNumber) {
+                    checkOrNot = 1
+                    //1：完成收卷待批改
+                }
+                var Aconditions = {
+                    _id: answerPaperCollectionId
+                }
+                var Aupdate = {
+                    $set: {
+                        answerPaperNumber: answerPaperNumber,
+                        checkOrNot: checkOrNot
+                    }
+                }
+                var Aoptions = {
+                    upsert: true
+                }
+                AnswerPaperCollectionModel.update(Aconditions, Aupdate, Aoptions, function (error) {
+                    if (error) {
+                        console.log(error)
+                    } else {
+                        console.log('update answerpapercollection ok!')
+                        res.send({success:1})
+                    }
+                })
+
+
+            }
+        })
     },
 }
