@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-            <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <router-link to="chooseCourse4paper" slot="right">
@@ -13,8 +13,8 @@
       <mt-tab-item v-for="(item, index) in courseList" :id="'course_'+index">{{item.courseName}}</mt-tab-item>
     </mt-navbar>
     <mt-tab-container v-model="activeTab" swipeable class="little-gap">
-      <mt-tab-container-item :id="'course_'+index"  v-for="(paperList,index) in paperLists">
-        <mt-cell v-for="item in paperList.paperList" is-link :to="{ name: 'viewPaperInfo', params: { questionId: item.paperId }}" v-bind:title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
+      <mt-tab-container-item :id="'course_'+index" v-for="(paperListWithId,index) in paperLists">
+        <mt-cell v-for="item in paperListWithId.paperList" is-link :to="{ name: 'viewPaperInfo', params: { questionId: item.paperId }}" :title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -27,54 +27,8 @@
       return {
         title: '试卷库',
         activeTab: 'course_0', //当前tab
-        courseList: [{
-          courseName: "微积分",
-          courseId: 123
-        }, {
-          courseName: "数据结构",
-          courseId: 123
-        }, {
-          courseName: "大学语文",
-          courseId: 123
-        }, {
-          courseName: "电路理论",
-          courseId: 123
-        }, ],
-        paperLists: [{
-            paperList: [{
-              paperTitle: '1',
-              paperDesc: '1',
-              timeLimit: 26,
-              paperId: '1'
-            }]
-          }, {
-            paperList: [{
-              paperTitle: '2',
-              paperDesc: '2',
-              timeLimit: 26,
-              paperId: '2'
-            },{
-              paperTitle: '2',
-              paperDesc: '2',
-              timeLimit: 26,
-              paperId: '2'
-            }]
-          }, {
-            paperList: [{
-              paperTitle: '3',
-              paperDesc: '3',
-              timeLimit: 26,
-              paperId: '3'
-            }]
-          }, {
-            paperList: [{
-              paperTitle: '4',
-              paperDesc: '4',
-              timeLimit: 26,
-              paperId: '4'
-            }]
-          },
-        ]
+        courseList: [],
+        paperLists: [],
       }
     },
     methods: {},
@@ -85,11 +39,25 @@
     },
     mounted: function() {
       // 初始化tab信息
+      let _this = this
       this.$http.post('/initPaperBank', {
         teacherId: window._const.teacherId
-      }).then((res) => {
-        this.courseList = res.data.courseList
-        this.paperLists = res.data.paperLists
+      }).then((res_CL) => {
+        this.courseList = res_CL.data.courseList
+        for (let key in res_CL.data.courseList) {
+          if (res_CL.data.courseList.hasOwnProperty(key)) {
+            this.$http.post('/getPaperListByCIdAndTId', {
+              teacherId: window._const.teacherId,
+              courseId: res_CL.data.courseList[key].courseId
+            }).then((res_PL) => {
+              console.log(key)
+              this.paperLists.push({
+                paperList: res_PL.data.paperList,
+                courseId: res_CL.data.courseList[key].courseId
+              })
+            })
+          }
+        }
       })
     }
   }
@@ -109,4 +77,3 @@
     text-overflow: ellipsis;
   }
 </style>
-
