@@ -11,7 +11,8 @@ module.exports = {
         AnswerPaperModel
             .find({ "studentId": studentId, "lessonId": lessonId, "paperId": paperId },
             ["getScore", "totalScore"],
-            function (err, answerPaper) {
+            function (err, data) {
+                var answerPaper = data[0]
                 res.send({ answerPaper })
             })
     },

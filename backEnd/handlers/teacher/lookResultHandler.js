@@ -22,4 +22,14 @@ module.exports = {
                 res.send({ checkPaperCollectionList })
             })
     },
+    //获取选中已批改试卷集合成绩
+    getCheckAnswerPaperCollectionScore: function (req, res){
+var  answerPaperCollectionId = req.body.answerPaperCollectionId
+AnswerPaperCollectionModel
+            .findOne({ "_id": answerPaperCollectionId  },
+            ["passNumber", "studentNumber","passPercent","averageScore"],
+            function (err, checkPaperCollectionList) {
+                res.send({ checkPaperCollectionList })
+            })
+    },
 }
