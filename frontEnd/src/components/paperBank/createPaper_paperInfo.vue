@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-            <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -9,6 +9,9 @@
     <mt-field class="left" label="标题" placeholder="请输入试卷标题" v-model="paperTitle"></mt-field>
     <mt-field class="left" label="试卷简介" placeholder="请输入试卷简单介绍" type="textarea" rows="4" v-model="paperDesc"></mt-field>
     <label class="block-title gap">其他信息</label>
+    <mt-cell class="left" title="是否共享试卷">
+      <mt-switch v-model="sharePaper"></mt-switch>
+    </mt-cell>
     <mt-cell class="left" title="限制时长">
       <mt-switch v-model="timeLimit"></mt-switch>
     </mt-cell>
@@ -29,6 +32,7 @@
         timeLimit: false,
         rangeValue: 0,
         title: '组卷',
+        sharePaper: 1,
       }
     },
     methods: {
@@ -40,6 +44,16 @@
           paperDesc: _this.paperDesc,
         })
         this.$messagebox.confirm("是否确认操作").then(action => {
+          _this.$http.post('/createPaper', {
+            teacherId: window._const.teacherId,             
+            courseId: _this.$route.params.courseId,
+            paperTitle: _this.paperTitle, 
+            paperDesc: _this.paperDesc, 
+            timeLimit: _this.rangeValue, 
+            share: _this.sharePaper, 
+          }).then((res)=>{
+            console.log(res.data)
+          })
           this.$router.push('/questionBank4createPaper') // 带上课程信息
         });
       }

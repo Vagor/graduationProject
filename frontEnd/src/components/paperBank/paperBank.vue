@@ -10,10 +10,10 @@
     </mt-header>
   
     <mt-navbar v-model="activeTab">
-      <mt-tab-item v-for="(item, index) in courseList" :id="'course_'+index">{{item.courseName}}</mt-tab-item>
+      <mt-tab-item v-for="(item, index) in courseList" :id="index">{{item.courseName}}</mt-tab-item>
     </mt-navbar>
     <mt-tab-container v-model="activeTab" swipeable class="little-gap">
-      <mt-tab-container-item :id="'course_'+index" v-for="(paperListWithId,index) in paperLists">
+      <mt-tab-container-item :id="index" v-for="(paperListWithId,index) in paperLists">
         <mt-cell v-for="item in paperListWithId.paperList" is-link :to="{ name: 'viewPaperInfo', params: { questionId: item.paperId }}" :title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
@@ -26,7 +26,7 @@
     data() {
       return {
         title: '试卷库',
-        activeTab: 'course_0', //当前tab
+        activeTab: 0, //当前tab
         courseList: [],
         paperLists: [],
       }
