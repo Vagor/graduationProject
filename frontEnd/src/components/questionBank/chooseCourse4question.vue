@@ -1,20 +1,33 @@
 <template>
   <div>
     <mt-header title="选择课程">
-        <router-link to="/" slot="left">
+            <router-link v-on:click.native="goBack()" to="" slot="left">
             <mt-button icon="back">返回</mt-button>
         </router-link>
     </mt-header>
         <label class="block-title">请选组课程</label>
-
-    <mt-cell title="微积分" value="" is-link class="left" :to="{name:'questionBank'}"></mt-cell>
-    <mt-cell title="数据结构" value="" is-link class="left" :to="{name:'questionBank'}"></mt-cell>
-    <mt-cell title="电路理论" value="" is-link class="left" :to="{name:'questionBank'}"></mt-cell>
+    <mt-cell v-for="item in courseList"  :to="{ name: 'questionBank', params: { courseId: item.courseId }} " :title="item.courseName" value="" is-link class="left"></mt-cell>
   </div>
 </template>
 
 <script>
-
+  export default {
+    name: 'chooseCourse4question',
+    data() {
+      return {
+        courseList: [],
+      }
+    },
+    methods: {},
+    mounted: function() {
+      // 初始化选择题列表
+      this.$http.post('/getCListByTId', {
+        teacherId: window._const.teacherId
+      }).then((res) => {
+        this.courseList = res.data.courseList
+      })
+    }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

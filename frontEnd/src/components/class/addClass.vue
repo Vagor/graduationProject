@@ -1,15 +1,15 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link to="/" slot="left">
+      <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <router-link to="/addClass" slot="right">
-        <mt-button >新建课程</mt-button>
+        <mt-button>新建课程</mt-button>
       </router-link>
     </mt-header>
-      <label class="block-title">选择现有课堂添加班级</label>
-          <label class="block-title right">请选组课程</label>
+    <label class="block-title">选择现有课堂添加班级</label>
+    <label class="block-title right">请选组课程</label>
     <mt-cell title="微积分" value="" is-link class="left" :to="{name:'createPaper_paperInfo'}"></mt-cell>
     <mt-cell title="数据结构" value="" is-link class="left" :to="{name:'createPaper_paperInfo'}"></mt-cell>
     <mt-cell title="电路理论" value="" is-link class="left" :to="{name:'createPaper_paperInfo'}"></mt-cell>

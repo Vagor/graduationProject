@@ -1,12 +1,12 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link to="/chooseCourse4question" slot="left">
+            <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <!--<router-link to="createQuestion" slot="right">
-        <mt-button>出题</mt-button>
-      </router-link>-->
+            <mt-button>出题</mt-button>
+          </router-link>-->
     </mt-header>
     <mt-navbar v-model="activeTab">
       <mt-tab-item id="choiceTab">选择题</mt-tab-item>
@@ -97,10 +97,7 @@
           SAQQuestionSelected: this.SAQQuestionSelected,
           questionCount: this.questionCount
         })
-        this.go2page('questionBank4selectedQuestion')
-      },
-      go2page(page) {
-        this.$router.push(page)
+        this.$router.push('/questionBank4selectedQuestion')
       },
       isInArray(item, arr) {
         for (var i in arr) {
@@ -119,7 +116,8 @@
     mounted: function() {
       // 初始化选择题列表
       this.$http.post('/getChoiceQuestionList', {
-        teacherId: window._const.teacherId
+        teacherId: window._const.teacherId,
+        courseId: this.$store.state.s_basicPaperInfo.courseId
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.choiceQuestionList.length; i++) {
@@ -133,7 +131,8 @@
       })
       // 初始化问答题列表
       this.$http.post('/getSAQQuestionList', {
-        teacherId: window._const.teacherId
+        teacherId: window._const.teacherId,
+        courseId: this.$store.state.s_basicPaperInfo.courseId
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.SAQQuestionList.length; i++) {
@@ -147,7 +146,8 @@
       })
       // 初始化填空题列表
       this.$http.post('/getFITBQuestionList', {
-        teacherId: window._const.teacherId
+        teacherId: window._const.teacherId,
+        courseId: this.$store.state.s_basicPaperInfo.courseId
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.FITBQuestionList.length; i++) {

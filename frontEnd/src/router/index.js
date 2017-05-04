@@ -21,7 +21,7 @@ export default new Router({
     },
     // 题库    
     {
-      path: '/questionBank',
+      path: '/questionBank/:courseId',
       name: 'questionBank',
       component: require('../components/questionBank/questionBank.vue')
     }, {
@@ -76,7 +76,7 @@ export default new Router({
       name: 'createPaper',
       component: require('../components/paperBank/createPaper.vue')
     }, {
-      path: '/createPaper_paperInfo',
+      path: '/createPaper_paperInfo/:courseId',
       name: 'createPaper_paperInfo',
       component: require('../components/paperBank/createPaper_paperInfo.vue')
     }, {

@@ -1,7 +1,7 @@
 <template>
 <div>
   <mt-header  :title="title">
-    <router-link to="/createChoiceQuestion" slot="left">
+            <router-link v-on:click.native="goBack()" to="" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
     <router-link to="/createChoiceQuestion" slot="right">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link to="/chooseCourse4paper" slot="left">
+            <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -35,7 +35,7 @@
       confirm() {
         let _this = this
         this.$store.commit('updateBasicPaperInfo', {
-          courseId: _this.$route.params.questionId,
+          courseId: _this.$route.params.courseId,
           paperTitle: _this.paperTitle,
           paperDesc: _this.paperDesc,
         })

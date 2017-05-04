@@ -4,6 +4,14 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 // 需要维护的状态
 const state = {
+  // 出题时的缓存信息
+  s_createQCache: {
+    courseId:'',
+  },
+
+
+
+
   // 选择题
   s_choiceQuestionContent: {
     stem: '',
@@ -34,30 +42,34 @@ const state = {
   },
 
 
-// 组卷
+  // 组卷
   // 选中的题目
   s_selectedQuestion: {
-    choiceQuestionSelected:[],
-    FITBQuestionSelected:[],
-    SAQQuestionSelected:[],
-    questionCount:0,
+    choiceQuestionSelected: [],
+    FITBQuestionSelected: [],
+    SAQQuestionSelected: [],
+    questionCount: 0,
   },
   s_basicPaperInfo: {
-    courseId:'',
-    paperTitle:'',
-    paperDesc:'',
+    courseId: '',
+    paperTitle: '',
+    paperDesc: '',
   },
 
 
 
   // 发布试卷的基本信息
   s_publishInfo: {
-    courseId:'13123',
-    lessonId:['123','3124'],
+    courseId: '13123',
+    lessonId: ['123', '3124'],
   },
 };
 
 const mutations = {
+  // 出题时的缓存信息
+  updatecreateQCache(state, payload) {
+    state.s_createQCache = payload
+  },
   // 选择题
   newChoiceQuestionContent(state, payload) {
     state.s_choiceQuestionContent = payload;
@@ -82,6 +94,7 @@ const mutations = {
     state.s_basicPaperInfo = payload
   },
 
+
 }
 
-export default new Vuex.Store({state, mutations});
+export default new Vuex.Store({ state, mutations });

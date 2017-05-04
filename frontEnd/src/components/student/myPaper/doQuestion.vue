@@ -4,12 +4,12 @@
             <router-link to="/student/paperCompletion" slot="left">
                 <mt-button>整体情况（1/10）</mt-button>
             </router-link>
-            <router-link to="" slot="right">
+            <router-link v-on:click.native="goBack()" to="" slot="right">
                 <mt-button>上一题</mt-button>
             </router-link>
         </mt-header>
         <router-view></router-view>
-        <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">下一题</mt-button>
+        <mt-button type="primary" size="large" class="bottomBtn" @click.native="goToLink()">下一题</mt-button>
     </div>
 </template>
 
