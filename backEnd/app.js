@@ -8,6 +8,8 @@ var questionRoute = require('./routes/questionRoute.js');
 var paperRoute = require('./routes/paperRoute.js');
 var studentAnswerRoute = require('./routes/studentAnswerRoute.js');
 var teacherCheckPaperRoute = require('./routes/teacherCheckPaperRoute.js');
+var studentLookResultRoute = require('./routes/studentLookResultRoute.js');
+var teacherLookResultRoute = require('./routes/teacherLookResultRoute.js');
 // 配置文件
 var config = require('./config.js');
 
@@ -35,6 +37,8 @@ app.use('/',questionRoute)
 app.use('/',paperRoute)
 app.use('/',studentAnswerRoute)
 app.use('/',teacherCheckPaperRoute)
+app.use('/',studentLookResultRoute)
+app.use('/',teacherLookResultRoute)
 
 app.listen(port, function() {
     console.log("listening"+port);

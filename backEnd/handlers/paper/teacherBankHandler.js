@@ -179,7 +179,7 @@ module.exports = {
     //     },
     //通过课程的ID和老师的Id获取老师所教授这门课程的所有题目
     getAllQList: function (req, res) {
-        var AllQList = []
+        var AllQList
         var FITBQuestionList = []
         var SAQQuestionList = []
         var teacherId = req.body.teacherId
@@ -203,8 +203,8 @@ module.exports = {
             .find({ 'teacherId': teacherId, "courseId": courseId },
             ["_id", 'stem', 'chapter'],
             function (err, choiceQuestionList) {
-                AllQList[0] = { FITBQuestionList, SAQQuestionList, choiceQuestionList }
-                res.send({ AllQList })
+                AllQList = { FITBQuestionList, SAQQuestionList, choiceQuestionList }
+                res.send( {AllQList} )
             }
             ).sort({ 'meta.updateAt': -1 }) //按更新时间排序
     },
