@@ -1,12 +1,6 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <router-link to="/teacherHomePage" slot="right">
-      <mt-button>teacherHomePage</mt-button>
-    </router-link>
-    <router-link to="/student" slot="right">
-      <mt-button>s_home</mt-button>
-    </router-link>
   </div>
 </template>
 

@@ -34,20 +34,19 @@
         this.$router.push('/viewPaper')
       },
     },
-    mounted: {
-      function() {
-        let _this = this;
-        this.$store.commit('updateViewPaperCache', {
-          paperId: _this.$route.params.paperId,
-        })
-        this.$http.post('/getPaperInfo', {
-          paperId: _this.$route.params.paperId
-        }).then((res) => {
-          this.paperTitle = res.data.paperTitle
-          this.paperDesc = res.data.paperDesc
-        })
-      }
+    mounted: function() {
+      let _this = this;
+      this.$store.commit('updateViewPaperCache', {
+        paperId: _this.$route.params.paperId,
+      })
+      this.$http.post('/getPaperInfo', {
+        paperId: _this.$route.params.paperId
+      }).then((res) => {
+        this.paperTitle = res.data.paperTitle
+        this.paperDesc = res.data.paperDesc
+      })
     }
+  
   }
 </script>
 

@@ -14,7 +14,7 @@
     </mt-navbar>
     <mt-tab-container v-model="activeTab" swipeable class="little-gap">
       <mt-tab-container-item :id="index" v-for="(paperListWithId,index) in paperLists">
-        <mt-cell v-for="item in paperListWithId.paperList" is-link :to="{ name: 'viewPaperInfo', params: { paperId: item.paperId }}" :title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
+        <mt-cell v-for="item in paperListWithId.paperList" is-link :to="{ name: 'viewPaperInfo', params: { paperId: item._id }}" :title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
