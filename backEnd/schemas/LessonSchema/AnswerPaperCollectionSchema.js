@@ -25,7 +25,7 @@ var AnswerPaperCollectionSchema = new Schema({
   },
   //标题
   paperTitle: String,
-   //满分分值
+  //满分分值
   totalScore: Number,
 
   //应答学生人数
@@ -38,10 +38,10 @@ var AnswerPaperCollectionSchema = new Schema({
   passNumber: Number,
 
   //合格率
-  passPercent:Number,
+  passPercent: Number,
 
-   //平均分
-    averageScore: Number,
+  //平均分
+  averageScore: Number,
 
   //是否已批改 (0:正在收卷，1：完成收卷待批改，2：完成批改)
   checkOrNot: {
