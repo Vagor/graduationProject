@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const state = {
   // 出题时的缓存信息
   s_createQCache: {
-    courseId:'',
+    courseId: '',
   },
 
 
@@ -41,7 +41,7 @@ const state = {
     chapter: ''
   },
 
-
+  // 卷库
   // 组卷
   // 选中的题目
   s_selectedQuestion: {
@@ -54,9 +54,15 @@ const state = {
     courseId: '',
     paperTitle: '',
     paperDesc: '',
+    paperId: '',
+    timeLimit: 0,
+    share: 1,
   },
 
-
+  // 查看试卷的缓存
+  s_viewPaperCache: {
+    paperId: '',
+  },
 
   // 发布试卷的基本信息
   s_publishInfo: {
@@ -89,12 +95,28 @@ const mutations = {
   updateSelectedQuestion(state, payload) {
     state.s_selectedQuestion = payload
   },
+  // 删除题目
+  delSelectedQuestion(state) {
+    if (state.s_selectedQuestion.questionCount > 0) {
+      state.s_selectedQuestion.questionCount--
+    }
+  },
+  // 增加题目
+  addQuestion2SelectedQuestion(state) {
+    state.s_selectedQuestion.questionCount++
+  },
+
+
+
   // 更新组卷的基本信息
   updateBasicPaperInfo(state, payload) {
     state.s_basicPaperInfo = payload
   },
 
-
+  // 查看试卷时候的缓存
+  updateViewPaperCache(state, payload) {
+    state.s_viewPaperCache = payload
+  },
 }
 
 export default new Vuex.Store({ state, mutations });

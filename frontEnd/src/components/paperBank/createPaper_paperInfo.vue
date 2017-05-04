@@ -38,23 +38,26 @@
     methods: {
       confirm() {
         let _this = this
-        this.$store.commit('updateBasicPaperInfo', {
-          courseId: _this.$route.params.courseId,
-          paperTitle: _this.paperTitle,
-          paperDesc: _this.paperDesc,
-        })
         this.$messagebox.confirm("是否确认操作").then(action => {
           _this.$http.post('/createPaper', {
-            teacherId: window._const.teacherId,             
+            teacherId: window._const.teacherId,
             courseId: _this.$route.params.courseId,
-            paperTitle: _this.paperTitle, 
-            paperDesc: _this.paperDesc, 
-            timeLimit: _this.rangeValue, 
-            share: _this.sharePaper, 
-          }).then((res)=>{
-            console.log(res.data)
+            paperTitle: _this.paperTitle,
+            paperDesc: _this.paperDesc,
+            timeLimit: _this.rangeValue,
+            share: _this.sharePaper,
+          }).then((res) => {
+            // 保存组卷缓存数据
+            this.$store.commit('updateBasicPaperInfo', {
+              courseId: _this.$route.params.courseId,
+              paperTitle: _this.paperTitle,
+              paperDesc: _this.paperDesc,
+              paperId: res.data.paperId,
+              timeLimit: _this.rangeValue,
+              share: _this.sharePaper,
+            })
           })
-          this.$router.push('/questionBank4createPaper') // 带上课程信息
+          this.$router.push('/questionBank4createPaper/'+_this.$route.params.courseId) // 带上课程信息
         });
       }
     }

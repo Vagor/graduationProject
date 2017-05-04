@@ -1,12 +1,12 @@
 <template>
   <div>
     <mt-header :title="title">
-            <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <!--<router-link to="createQuestion" slot="right">
-            <mt-button>出题</mt-button>
-          </router-link>-->
+                      <mt-button>出题</mt-button>
+                    </router-link>-->
     </mt-header>
     <mt-navbar v-model="activeTab">
       <mt-tab-item id="choiceTab">选择题</mt-tab-item>
@@ -46,7 +46,6 @@
         choiceTabContent: [],
         FITBTabContent: [],
         SAQTabContent: [],
-        questionCount: 0,
         choiceQuestionSelected: [],
         FITBQuestionSelected: [],
         SAQQuestionSelected: [],
@@ -86,8 +85,11 @@
               this.SAQQuestionSelected.push(questionId)
               break;
           }
-          this.$toast('添加成功')
-          this.questionCount++
+          this.$toast({
+            message: '添加成功',
+            duration: 1000,
+          });
+          this.$store.commit('addQuestion2SelectedQuestion')
         }
       },
       updateSelectedQuestion() {
@@ -115,55 +117,50 @@
     },
     mounted: function() {
       // 初始化选择题列表
-      this.$http.post('/getChoiceQuestionList', {
+      this.$http.post('/getAllQListByCIdAndTId', {
         teacherId: window._const.teacherId,
-        courseId: this.$store.state.s_basicPaperInfo.courseId
+        courseId: this.$route.params.courseId,
       }).then((res) => {
         var temp;
-        for (var i = 0; i < res.data.choiceQuestionList.length; i++) {
+        for (var i = 0; i < res.data.AllQList.choiceQuestionList.length; i++) {
           temp = {
-            questionId: res.data.choiceQuestionList[i]._id,
-            stem: res.data.choiceQuestionList[i].stem,
-            chapter: '第' + res.data.choiceQuestionList[i].chapter + '章'
+            questionId: res.data.AllQList.choiceQuestionList[i]._id,
+            stem: res.data.AllQList.choiceQuestionList[i].stem,
+            chapter: '第' + res.data.AllQList.choiceQuestionList[i].chapter + '章'
           }
           this.choiceTabContent.push(temp)
         }
-      })
-      // 初始化问答题列表
-      this.$http.post('/getSAQQuestionList', {
-        teacherId: window._const.teacherId,
-        courseId: this.$store.state.s_basicPaperInfo.courseId
-      }).then((res) => {
-        var temp;
-        for (var i = 0; i < res.data.SAQQuestionList.length; i++) {
+        for (var i = 0; i < res.data.AllQList.SAQQuestionList.length; i++) {
           temp = {
-            questionId: res.data.SAQQuestionList[i]._id,
-            stem: res.data.SAQQuestionList[i].stem,
-            chapter: '第' + res.data.SAQQuestionList[i].chapter + '章'
+            questionId: res.data.AllQList.SAQQuestionList[i]._id,
+            stem: res.data.AllQList.SAQQuestionList[i].stem,
+            chapter: '第' + res.data.AllQList.SAQQuestionList[i].chapter + '章'
           }
           this.SAQTabContent.push(temp)
         }
-      })
-      // 初始化填空题列表
-      this.$http.post('/getFITBQuestionList', {
-        teacherId: window._const.teacherId,
-        courseId: this.$store.state.s_basicPaperInfo.courseId
-      }).then((res) => {
-        var temp;
-        for (var i = 0; i < res.data.FITBQuestionList.length; i++) {
+        for (var i = 0; i < res.data.AllQList.FITBQuestionList.length; i++) {
           temp = {
-            questionId: res.data.FITBQuestionList[i]._id,
-            stem: res.data.FITBQuestionList[i].stem,
-            chapter: '第' + res.data.FITBQuestionList[i].chapter + '章'
+            questionId: res.data.AllQList.FITBQuestionList[i]._id,
+            stem: res.data.AllQList.FITBQuestionList[i].stem,
+            chapter: '第' + res.data.AllQList.FITBQuestionList[i].chapter + '章'
           }
           this.FITBTabContent.push(temp)
         }
       })
-      // 初始化已选题目
-      this.questionCount = this.$store.state.s_selectedQuestion.questionCount
-      this.choiceQuestionSelected = this.$store.state.s_selectedQuestion.choiceQuestionSelected
-      this.FITBQuestionSelected = this.$store.state.s_selectedQuestion.FITBQuestionSelected
-      this.SAQQuestionSelected = this.$store.state.s_selectedQuestion.SAQQuestionSelected
+    },
+    computed: {
+      questionCount: function() {
+        return this.$store.state.s_selectedQuestion.questionCount
+      },
+      choiceQuestionSelected: function() {
+        return this.$store.state.s_selectedQuestion.choiceQuestionSelected
+      },
+      FITBQuestionSelected: function() {
+        return this.$store.state.s_selectedQuestion.FITBQuestionSelected
+      },
+      SAQQuestionSelected: function() {
+        return this.$store.state.s_selectedQuestion.SAQQuestionSelected
+      },
     }
   }
 </script>

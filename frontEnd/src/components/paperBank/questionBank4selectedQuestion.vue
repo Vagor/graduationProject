@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-            <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -23,11 +23,14 @@
       </mt-tab-container-item>
       <mt-tab-container-item id="SAQTab">
         <mt-cell v-for="item in SAQTabContent " is-link :to="{ name: 'viewSAQQuestion', params: { questionId: item.questionId }}" v-bind:title="item.stem+'('+item.chapter+')' | characterLimit " class="left wrap-content">
-          <mt-button v-on:click.prevent="del(2,item.questionId,$event)" size="small">删除</mt-button>
+          <mt-button v-on:click.prevent="del(2,item.questionId,$event)" size="small">删除
+  
+          </mt-button>
         </mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
     <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirm()">确认出卷
+      <mt-badge type="error">{{questionCount}}</mt-badge>
     </mt-button>
   </div>
 </template>
@@ -48,6 +51,9 @@
       }
     },
     methods: {
+      refreshPage(sourcePage) {
+        this.$router.replace("/refresh4questionBank4selectedQuestion")
+      },
       changeTab(type) {
         switch (type) {
           case 1:
@@ -78,8 +84,12 @@
             this.removeByValue(this.$store.state.s_selectedQuestion.SAQQuestionSelected, questionId)
             break;
         }
-        this.$toast('删除成功')
-        this.questionCount++
+        this.$toast({
+          message: '删除成功',
+          duration: 1000,
+        });
+        this.$store.commit('delSelectedQuestion')
+        this.refreshPage('questionBank4selectedQuestion')
       },
       removeByValue(arr, val) {
         for (var i = 0; i < arr.length; i++) {
@@ -90,8 +100,52 @@
         }
       },
       confirm() {
-        this.$messagebox.confirm("是否确认操作").then(action => {
-          this.$router.push('/questionBank4selectedQuestion') // 带上课程信息
+        this.$messagebox.confirm("是否确认操作").then(action => {          
+          // 组装请求数据
+          let choiceQList = []
+          for (var index in this.choiceTabContent) {
+            if (this.choiceTabContent.hasOwnProperty(index)) {
+              choiceQList.push({
+                choiceQId: this.choiceTabContent[index],
+                questionScore: 0
+              })
+            }
+          }
+          let fQList = []
+          for (var index in this.FITBTabContent) {
+            if (this.FITBTabContent.hasOwnProperty(index)) {
+              fQList.push({
+                fQId: this.FITBTabContent[index],
+                questionScore: 0
+              })
+            }
+          }
+          let sQList = []
+          for (var index in this.SAQTabContent) {
+            if (this.SAQTabContent.hasOwnProperty(index)) {
+              sQList.push({
+                sQId: this.SAQTabContent[index],
+                questionScore: 0
+              })
+            }
+          }
+          this.$http.post('/pullQuestionsToPaper', {
+            paperId: this.$store.state.s_basicPaperInfo.paperId,
+            choiceQList: choiceQList,
+            fQList: fQList,
+            sQList: sQList,
+            totalScore: 0
+          }).then((res) => {
+            if (res.data.success == 1) {
+              this.$toast({
+                message: '删除成功',
+                duration: 1000,
+              })
+              setTimeout(() => {
+                this.$router.push('/paperBank')
+              }, 1000);
+            }
+          })
         });
       },
       isInArray(item, arr) {
@@ -110,8 +164,8 @@
     },
     mounted: function() {
       // 初始化选择题列表
-      this.$http.post('/getChoiceQuestionList', {
-        teacherId: window._const.teacherId
+      this.$http.post('/getCQListByQIdArr', {
+        choiceQIds: this.$store.state.s_selectedQuestion.choiceQuestionSelected
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.choiceQuestionList.length; i++) {
@@ -123,34 +177,48 @@
           this.choiceTabContent.push(temp)
         }
       })
-      // 初始化问答题列表
-      this.$http.post('/getSAQQuestionList', {
-        teacherId: window._const.teacherId
-      }).then((res) => {
-        var temp;
-        for (var i = 0; i < res.data.SAQQuestionList.length; i++) {
-          temp = {
-            questionId: res.data.SAQQuestionList[i]._id,
-            stem: res.data.SAQQuestionList[i].stem,
-            chapter: '第' + res.data.SAQQuestionList[i].chapter + '章'
-          }
-          this.SAQTabContent.push(temp)
-        }
-      })
       // 初始化填空题列表
-      this.$http.post('/getFITBQuestionList', {
-        teacherId: window._const.teacherId
+      this.$http.post('/getFQListByQIdArr', {
+        fillQIds: this.$store.state.s_selectedQuestion.FITBQuestionSelected
       }).then((res) => {
         var temp;
-        for (var i = 0; i < res.data.FITBQuestionList.length; i++) {
+        for (var i = 0; i < res.data.fillQuestionList.length; i++) {
           temp = {
-            questionId: res.data.FITBQuestionList[i]._id,
-            stem: res.data.FITBQuestionList[i].stem,
-            chapter: '第' + res.data.FITBQuestionList[i].chapter + '章'
+            questionId: res.data.fillQuestionList[i]._id,
+            stem: res.data.fillQuestionList[i].stem,
+            chapter: '第' + res.data.fillQuestionList[i].chapter + '章'
           }
           this.FITBTabContent.push(temp)
         }
       })
+      // 初始化问答题列表
+      this.$http.post('/getSQListByQIdArr', {
+        shortQIds: this.$store.state.s_selectedQuestion.SAQQuestionSelected
+      }).then((res) => {
+        var temp;
+        for (var i = 0; i < res.data.shortQuestionList.length; i++) {
+          temp = {
+            questionId: res.data.shortQuestionList[i]._id,
+            stem: res.data.shortQuestionList[i].stem,
+            chapter: '第' + res.data.shortQuestionList[i].chapter + '章'
+          }
+          this.SAQTabContent.push(temp)
+        }
+      })
+    },
+    computed: {
+      questionCount: function() {
+        return this.$store.state.s_selectedQuestion.questionCount
+      },
+      choiceQuestionSelected: function() {
+        return this.$store.state.s_selectedQuestion.choiceQuestionSelected
+      },
+      FITBQuestionSelected: function() {
+        return this.$store.state.s_selectedQuestion.FITBQuestionSelected
+      },
+      SAQQuestionSelected: function() {
+        return this.$store.state.s_selectedQuestion.SAQQuestionSelected
+      },
     }
   }
 </script>

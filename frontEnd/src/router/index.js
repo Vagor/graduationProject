@@ -6,6 +6,12 @@ Vue.use(Router)
 export default new Router({
   base: __dirname,
   routes: [
+    // 工具
+    {
+      path: '/refresh4questionBank4selectedQuestion',
+      name: 'refresh4questionBank4selectedQuestion',
+      component: require('../components/tools/refresh4questionBank4selectedQuestion.vue')
+    }, 
     // 首页
     {
       path: '/',
@@ -80,7 +86,7 @@ export default new Router({
       name: 'createPaper_paperInfo',
       component: require('../components/paperBank/createPaper_paperInfo.vue')
     }, {
-      path: '/questionBank4createPaper',
+      path: '/questionBank4createPaper/:courseId',
       name: 'questionBank4createPaper',
       component: require('../components/paperBank/questionBank4createPaper.vue')
     }, {
@@ -88,7 +94,7 @@ export default new Router({
       name: 'questionBank4selectedQuestion',
       component: require('../components/paperBank/questionBank4selectedQuestion.vue')
     }, {
-      path: '/viewPaperInfo',
+      path: '/viewPaperInfo/:paperId',
       name: 'viewPaperInfo',
       component: require('../components/paperBank/viewPaperInfo.vue')
     }, {
