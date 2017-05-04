@@ -22,14 +22,15 @@ module.exports = {
             }
             else {
                 console.log("ok")
-                res.json({ "success": 1 })
+                var paperId = paper._id
+                res.send({ paperId })
             }
         })
     },
     //通过选择题Id数组，获取一组题目信息
     getCQListByQIdArr: function (req, res) {
         var choiceQIds = req.body.choiceQIds
-        //  choiceQIds=["58c66fcb07f87ba944015a24","58c8f485c7129e2b9cfd086a"]
+         //choiceQIds=["58c66fcb07f87ba944015a24","58c8f485c7129e2b9cfd086a"]
         ChoiceQuestionModel.find({
             '_id': choiceQIds
         }, [
