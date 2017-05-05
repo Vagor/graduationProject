@@ -70,15 +70,25 @@
     },
     methods: {
       confirm() {
-        this.$store.commit('updatePublishCache', {
-          courseName: this.courseOptions[this.courseChosed].label,
-          courseId: this.courseOptions[this.courseChosed].courseId,
-          lessonId: this.lessonSelected[this.courseChosed],
-        })
         this.$messagebox.confirm('确定为所选班级出卷?').then(action => {
+          let lessonList = []
+          for (let key in this.lessonSelected[this.courseChosed]) {
+            if (this.lessonSelected[this.courseChosed].hasOwnProperty(key)) {
+              lessonList.push({
+                lessonId: this.lessonSelected[this.courseChosed][key],
+                studentNumber: this.lessonOptions[this.courseChosed][key].studentNumber
+              })
+            }
+          }
+          console.log(lessonList)
+          this.$store.commit('updatePublishCache', {
+            courseName: this.courseOptions[this.courseChosed].label,
+            courseId: this.courseOptions[this.courseChosed].courseId,
+            lessonId: this.lessonSelected[this.courseChosed],
+            lessonList:lessonList,
+          })
           this.$router.push('/publish/paperBank4publish')
-        }, action => {
-        });
+        }, action => {});
       },
     },
   }
