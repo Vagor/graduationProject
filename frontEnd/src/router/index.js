@@ -15,19 +15,19 @@ export default new Router({
       path: '/nothing',
       name: 'nothing',
       component: require('../components/nothing.vue')
-    },{
+    }, {
       path: '/',
       component: require('../components/home.vue')
     },
 
 
-// 老师
+    // 老师
     // 首页
     {
       path: '/teacherHomePage',
       name: 'teacherHomePage',
       component: require('../components/teacher/teacherHomePage.vue')
-    }, 
+    },
     // 题库    
     {
       path: '/questionBank/:courseId',
@@ -127,11 +127,11 @@ export default new Router({
       path: '/class/chooseClass',
       name: 'chooseClass',
       component: require('../components/teacher/class/chooseClass.vue')
-    },{
+    }, {
       path: '/class/addClass',
       name: 'addClass',
       component: require('../components/teacher/class/addClass.vue')
-    },{
+    }, {
       path: '/viewLesson/:lessonId',
       name: 'viewLesson',
       component: require('../components/teacher/class/viewLesson.vue'),
@@ -139,30 +139,35 @@ export default new Router({
       path: '/viewClass/:classId',
       name: 'viewClass',
       component: require('../components/teacher/class/viewClass.vue'),
-    }, 
+    },
 
     // 个人信息
     {
       path: '/myInfo',
       name: 'teacher_myInfo',
       component: require('../components/teacher/myInfo/myInfo.vue'),
-    }, 
+    },
 
 
 
 
 
 
-// 学生
+    // 学生
     {
       path: '/student',
       name: 's_home',
       component: require('../components/student/home/home.vue'),
-    }, {
-      path: '/student/myClass',
-      name: 's_myClass',
-      component: require('../components/student/myClass/myClass.vue'),
-    }, {
+    },
+    // 我的课堂
+    {
+      path: '/student/viewLesson',
+      name: 's_viewLesson',
+      component: require('../components/student/myClass/viewLesson.vue'),
+    },
+
+    // 我的试卷
+    {
       path: '/student/myPaper',
       name: 's_myPaper',
       component: require('../components/student/myPaper/myPaper.vue'),
@@ -201,12 +206,13 @@ export default new Router({
         },
       ]
     },
-    
+
     // 个人信息
     {
       path: '/student/myInfo',
       name: 'student_myInfo',
       component: require('../components/student/myInfo/myInfo.vue'),
-    }, 
+    },
+
   ]
 })
