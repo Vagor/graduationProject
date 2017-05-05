@@ -44,6 +44,15 @@ module.exports = {
                 res.send({ paperList })
             })
     },
+    //获取试卷信息
+    getPaperInfo: function (req, res){
+        var paperId = req.body.paperId
+        MotherPaperModel.findOne({ '_id': paperId },
+            ["paperTitle", "paperDesc", "timeLimit", "-_id", "share"])
+            .exec(function (err, paperList) {
+                res.send({ paperList })
+            })
+    },
     //通过老师的ID获取老师所教授的课程和第一门课程的所有所有试卷
     initPaperBank: function (req, res) {
         var teacherId = req.body.teacherId
