@@ -61,8 +61,8 @@ const state = {
     paperId: '',
   },
 
-  // 发布试卷的基本信息
-  s_publishInfo: {
+  // 发布时的缓存
+  s_publishCache: {
     courseId: '13123',
     lessonId: ['123', '3124'],
   },
@@ -113,6 +113,11 @@ const mutations = {
   // 查看试卷时候的缓存
   updateViewPaperCache(state, payload) {
     state.s_viewPaperCache = payload
+  },
+
+  // 发布时的缓存
+  updatePublishCache(state, payload) {
+    state.s_publishCache = payload
   },
 }
 

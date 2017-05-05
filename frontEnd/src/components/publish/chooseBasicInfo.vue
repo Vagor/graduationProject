@@ -71,6 +71,10 @@
     },
     methods: {
       confirm() {
+        this.$store.commit('updatePublishCache', {
+          courseId: this.courseOptions[this.courseChosed].courseId,
+          lessonId: this.lessonSelected[this.courseChosed],
+        })
         this.$messagebox.confirm('确定为所选班级出卷?').then(action => {
           console.log(action);
           this.$router.push('/publish/paperBank4publish')
