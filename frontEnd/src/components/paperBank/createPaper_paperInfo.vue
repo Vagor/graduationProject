@@ -39,25 +39,32 @@
       confirm() {
         let _this = this
         this.$messagebox.confirm("是否确认操作").then(action => {
-          _this.$http.post('/createPaper', {
-            teacherId: window._const.teacherId,
-            courseId: _this.$route.params.courseId,
-            paperTitle: _this.paperTitle,
-            paperDesc: _this.paperDesc,
-            timeLimit: _this.rangeValue,
-            share: _this.sharePaper,
-          }).then((res) => {
-            // 保存组卷缓存数据
-            this.$store.commit('updateBasicPaperInfo', {
+          if (_this.paperDesc && _this.paperDesc) {
+            _this.$http.post('/createPaper', {
+              teacherId: window._const.teacherId,
               courseId: _this.$route.params.courseId,
               paperTitle: _this.paperTitle,
               paperDesc: _this.paperDesc,
-              paperId: res.data.paperId,
               timeLimit: _this.rangeValue,
               share: _this.sharePaper,
+            }).then((res) => {
+              // 保存组卷缓存数据
+              this.$store.commit('updateBasicPaperInfo', {
+                courseId: _this.$route.params.courseId,
+                paperTitle: _this.paperTitle,
+                paperDesc: _this.paperDesc,
+                paperId: res.data.paperId,
+                timeLimit: _this.rangeValue,
+                share: _this.sharePaper,
+              })
+              this.$router.push('/questionBank4createPaper/' + _this.$route.params.courseId) // 带上课程信息              
             })
-          })
-          this.$router.push('/questionBank4createPaper/'+_this.$route.params.courseId) // 带上课程信息
+          } else {
+            this.$toast({
+              message: '请将信息填写完整',
+              duration: 2000,
+            });
+          }
         });
       }
     }

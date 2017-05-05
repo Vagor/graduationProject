@@ -64,7 +64,7 @@
     },
     mounted: function() {
       // 存储课程缓存
-      this.$store.commit('updatecreateQCache', {
+      this.$store.commit('updateQuestionBankCache', {
           courseId: this.$route.params.courseId,
         })
       // 初始化选择题列表

@@ -42,7 +42,7 @@ export default {
                   duration: 1000,
                 });
                 setTimeout(() => {
-                  this.$router.push('/questionBank')
+                  this.$router.push('/questionBank/'+this.$store.state.s_questionBankCache.courseId)
                 }, 1000);
               } else {
                 this.$toast({
@@ -90,7 +90,7 @@ export default {
           message: '操作成功',
           duration: 1000,
         });
-        _this.$router.push('/questionBank')
+        _this.$router.push('/questionBank/'+_this.$store.state.s_questionBankCache.courseId)
       })
     }
   },

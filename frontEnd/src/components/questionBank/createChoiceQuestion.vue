@@ -65,7 +65,7 @@ export default {
             stem: _this.stem, //题干
             options: [_this.choiceA, _this.choiceB, _this.choiceC, _this.choiceD], //选项
             answerOption: _this.answerOption, //正确选项
-            courseId: _this.$store.state.s_createQCache.courseId, //所属课程
+            courseId: _this.$store.state.s_questionBankCache.courseId, //所属课程
             chapter: _this.chapter, //所属章节
             teacherId: window._const.teacherId, //出题人
           }
@@ -75,7 +75,7 @@ export default {
               message: '操作成功',
               duration: 1000,
             })
-            _this.$router.push('/questionBank/'+_this.$store.state.s_createQCache.courseId)
+            _this.$router.push('/questionBank/'+_this.$store.state.s_questionBankCache.courseId)
           }
         })
       })

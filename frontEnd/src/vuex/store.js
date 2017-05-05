@@ -4,13 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 // 需要维护的状态
 const state = {
-  // 出题时的缓存信息
-  s_createQCache: {
+  // 进入题库时的缓存信息
+  s_questionBankCache: {
     courseId: '',
   },
-
-
-
 
   // 选择题
   s_choiceQuestionContent: {
@@ -73,8 +70,8 @@ const state = {
 
 const mutations = {
   // 出题时的缓存信息
-  updatecreateQCache(state, payload) {
-    state.s_createQCache = payload
+  updateQuestionBankCache(state, payload) {
+    state.s_questionBankCache = payload
   },
   // 选择题
   newChoiceQuestionContent(state, payload) {

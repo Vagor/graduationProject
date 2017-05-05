@@ -68,7 +68,7 @@
     },
     mounted: function() {
       // 默认课程
-      this.courseValue = this.$store.state.s_createQCache.courseId,
+      this.courseValue = this.$store.state.s_questionBankCache.courseId,
       // 初始化选择题列表
       this.$http.post('/getCListByTId', {
         teacherId: window._const.teacherId
