@@ -5,7 +5,7 @@
     <mt-cell title="我的卷库" value="" is-link class="left" :to="{name:'paperBank'}"></mt-cell>
     <mt-cell title="发布试卷" value="" is-link class="left" :to="{name:'chooseBasicInfo'}"></mt-cell>
     <mt-cell title="管理班级" value="" is-link class="left" :to="{name:'chooseClass'}"></mt-cell>
-    <mt-cell title="个人信息" value="" is-link class="left" :to="{name:'nothing'}"></mt-cell>
+    <mt-cell title="个人信息" value="" is-link class="left" :to="{name:'teacher_myInfo'}"></mt-cell>
   </div>
 </template>
 

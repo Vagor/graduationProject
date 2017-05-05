@@ -4,9 +4,6 @@
       <router-link v-on:click.native="goBack()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
-      <router-link to="/nothing" slot="right">
-        <mt-button>新增课程</mt-button>
-      </router-link>
     </mt-header>
     <mt-radio class="left" title="请选择课程" v-model="courseName" :options="courseOptions" align="right">
     </mt-radio>

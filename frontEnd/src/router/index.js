@@ -11,111 +11,114 @@ export default new Router({
       path: '/refresh4questionBank4selectedQuestion',
       name: 'refresh4questionBank4selectedQuestion',
       component: require('../components/tools/refresh4questionBank4selectedQuestion.vue')
-    }, 
-    // 首页
-    {
-      path: '/',
-      component: require('../components/home.vue')
-    },{
-      path: '/teacherHomePage',
-      name: 'teacherHomePage',
-      component: require('../components/teacherHomePage.vue')
     }, {
       path: '/nothing',
       name: 'nothing',
       component: require('../components/nothing.vue')
+    },{
+      path: '/',
+      component: require('../components/home.vue')
     },
+
+
+// 老师
+    // 首页
+    {
+      path: '/teacherHomePage',
+      name: 'teacherHomePage',
+      component: require('../components/teacher/teacherHomePage.vue')
+    }, 
     // 题库    
     {
       path: '/questionBank/:courseId',
       name: 'questionBank',
-      component: require('../components/questionBank/questionBank.vue')
+      component: require('../components/teacher/questionBank/questionBank.vue')
     }, {
       path: '/createQuestion',
-      component: require('../components/questionBank/createQuestion.vue')
+      component: require('../components/teacher/questionBank/createQuestion.vue')
     }, {
       path: '/createChoiceQuestion',
-      component: require('../components/questionBank/createChoiceQuestion.vue')
+      component: require('../components/teacher/questionBank/createChoiceQuestion.vue')
     }, {
       path: '/createFITBQuestion',
-      component: require('../components/questionBank/createFITBQuestion.vue')
+      component: require('../components/teacher/questionBank/createFITBQuestion.vue')
     }, {
       path: '/createSAQQuestion',
-      component: require('../components/questionBank/createSAQQuestion.vue')
+      component: require('../components/teacher/questionBank/createSAQQuestion.vue')
     }, {
       path: '/previewChoiceQuestion',
-      component: require('../components/questionBank/previewChoiceQuestion.vue')
+      component: require('../components/teacher/questionBank/previewChoiceQuestion.vue')
     }, {
       path: '/previewFITBQuestion',
-      component: require('../components/questionBank/previewFITBQuestion.vue')
+      component: require('../components/teacher/questionBank/previewFITBQuestion.vue')
     }, {
       path: '/previewSAQQuestion',
-      component: require('../components/questionBank/previewSAQQuestion.vue')
+      component: require('../components/teacher/questionBank/previewSAQQuestion.vue')
     }, {
       path: '/viewChoiceQuestion/:questionId',
       name: 'viewChoiceQuestion',
-      component: require('../components/questionBank/viewChoiceQuestion.vue')
+      component: require('../components/teacher/questionBank/viewChoiceQuestion.vue')
     }, {
       path: '/viewFITBQuestion/:questionId',
       name: 'viewFITBQuestion',
-      component: require('../components/questionBank/viewFITBQuestion.vue')
+      component: require('../components/teacher/questionBank/viewFITBQuestion.vue')
     }, {
       path: '/viewSAQQuestion/:questionId',
       name: 'viewSAQQuestion',
-      component: require('../components/questionBank/viewSAQQuestion.vue')
+      component: require('../components/teacher/questionBank/viewSAQQuestion.vue')
     }, {
       path: '/chooseCourse4question',
       name: 'chooseCourse4question',
-      component: require('../components/questionBank/chooseCourse4question.vue')
+      component: require('../components/teacher/questionBank/chooseCourse4question.vue')
     },
     // 卷库
     {
       path: '/paperBank',
       name: 'paperBank',
-      component: require('../components/paperBank/paperBank.vue')
+      component: require('../components/teacher/paperBank/paperBank.vue')
     }, {
       path: '/chooseCourse4paper',
       name: 'chooseCourse4paper',
-      component: require('../components/paperBank/chooseCourse4paper.vue')
+      component: require('../components/teacher/paperBank/chooseCourse4paper.vue')
     }, {
       path: '/createPaper',
       name: 'createPaper',
-      component: require('../components/paperBank/createPaper.vue')
+      component: require('../components/teacher/paperBank/createPaper.vue')
     }, {
       path: '/createPaper_paperInfo/:courseId',
       name: 'createPaper_paperInfo',
-      component: require('../components/paperBank/createPaper_paperInfo.vue')
+      component: require('../components/teacher/paperBank/createPaper_paperInfo.vue')
     }, {
       path: '/questionBank4createPaper/:courseId',
       name: 'questionBank4createPaper',
-      component: require('../components/paperBank/questionBank4createPaper.vue')
+      component: require('../components/teacher/paperBank/questionBank4createPaper.vue')
     }, {
       path: '/questionBank4selectedQuestion',
       name: 'questionBank4selectedQuestion',
-      component: require('../components/paperBank/questionBank4selectedQuestion.vue')
+      component: require('../components/teacher/paperBank/questionBank4selectedQuestion.vue')
     }, {
       path: '/viewPaperInfo/:paperId',
       name: 'viewPaperInfo',
-      component: require('../components/paperBank/viewPaperInfo.vue')
+      component: require('../components/teacher/paperBank/viewPaperInfo.vue')
     }, {
       path: '/viewPaper/:paperId',
       name: 'viewPaper',
-      component: require('../components/paperBank/viewPaper.vue')
+      component: require('../components/teacher/paperBank/viewPaper.vue')
     },
 
     // 发布
     {
       path: '/publish/chooseBasicInfo',
       name: 'chooseBasicInfo',
-      component: require('../components/publish/chooseBasicInfo.vue')
+      component: require('../components/teacher/publish/chooseBasicInfo.vue')
     }, {
       path: '/publish/paperBank4publish',
       name: 'paperBank4publish',
-      component: require('../components/publish/paperBank4publish.vue')
+      component: require('../components/teacher/publish/paperBank4publish.vue')
     }, {
       path: '/publish/paperInfo4publish/:paperId',
       name: 'paperInfo4publish',
-      component: require('../components/publish/paperInfo4publish.vue')
+      component: require('../components/teacher/publish/paperInfo4publish.vue')
     },
 
 
@@ -123,24 +126,34 @@ export default new Router({
     {
       path: '/class/chooseClass',
       name: 'chooseClass',
-      component: require('../components/class/chooseClass.vue')
+      component: require('../components/teacher/class/chooseClass.vue')
     },{
       path: '/class/addClass',
       name: 'addClass',
-      component: require('../components/class/addClass.vue')
+      component: require('../components/teacher/class/addClass.vue')
     },{
       path: '/viewLesson/:lessonId',
       name: 'viewLesson',
-      component: require('../components/class/viewLesson.vue'),
+      component: require('../components/teacher/class/viewLesson.vue'),
     }, {
       path: '/viewClass/:classId',
       name: 'viewClass',
-      component: require('../components/class/viewClass.vue'),
+      component: require('../components/teacher/class/viewClass.vue'),
+    }, 
+
+    // 个人信息
+    {
+      path: '/myInfo',
+      name: 'teacher_myInfo',
+      component: require('../components/teacher/myInfo/myInfo.vue'),
     }, 
 
 
 
-    // 学生
+
+
+
+// 学生
     {
       path: '/student',
       name: 's_home',
@@ -188,5 +201,12 @@ export default new Router({
         },
       ]
     },
+    
+    // 个人信息
+    {
+      path: '/student/myInfo',
+      name: 'student_myInfo',
+      component: require('../components/student/myInfo/myInfo.vue'),
+    }, 
   ]
 })
