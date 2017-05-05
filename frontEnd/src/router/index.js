@@ -128,7 +128,15 @@ export default new Router({
       path: '/class/addClass',
       name: 'addClass',
       component: require('../components/class/addClass.vue')
-    },
+    },{
+      path: '/viewLesson/:lessonId',
+      name: 'viewLesson',
+      component: require('../components/class/viewLesson.vue'),
+    }, {
+      path: '/viewClass/:classId',
+      name: 'viewClass',
+      component: require('../components/class/viewClass.vue'),
+    }, 
 
 
 
@@ -179,6 +187,6 @@ export default new Router({
           component: require('../components/student/myPaper/doSQ.vue'),
         },
       ]
-    }
+    },
   ]
 })

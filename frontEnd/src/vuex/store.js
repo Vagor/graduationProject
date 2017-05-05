@@ -94,6 +94,11 @@ const state = {
       questionScore: 0,
     }],
   },
+
+  // 管理课堂缓存
+  s_manageClassCache:{
+
+  }
 };
 
 const mutations = {
