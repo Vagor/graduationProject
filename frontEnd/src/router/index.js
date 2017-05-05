@@ -98,7 +98,7 @@ export default new Router({
       name: 'viewPaperInfo',
       component: require('../components/paperBank/viewPaperInfo.vue')
     }, {
-      path: '/viewPaper',
+      path: '/viewPaper/:paperId',
       name: 'viewPaper',
       component: require('../components/paperBank/viewPaper.vue')
     },
@@ -113,7 +113,7 @@ export default new Router({
       name: 'paperBank4publish',
       component: require('../components/publish/paperBank4publish.vue')
     }, {
-      path: '/publish/paperInfo4publish',
+      path: '/publish/paperInfo4publish/:paperId',
       name: 'paperInfo4publish',
       component: require('../components/publish/paperInfo4publish.vue')
     },

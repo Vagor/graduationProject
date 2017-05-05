@@ -78,7 +78,7 @@
     },
     methods: {
       goToLink() {
-        this.$router.push('/viewPaper')
+        this.$router.push('/viewPaper/'+this.$store.state.s_viewPaperCache.paperId)
       },
       exitEditMode() {
         this.isEditMode = false

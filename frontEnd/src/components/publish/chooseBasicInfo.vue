@@ -46,7 +46,6 @@
         }
         for (let index in this.courseOptions) {
           if (this.courseOptions.hasOwnProperty(index)) {
-            console.log(this.courseOptions)
             this.$http.post('/getLessonLByTIdAndCId', {
               teacherId: window._const.teacherId,
               courseId: this.courseOptions[index].courseId
@@ -72,19 +71,15 @@
     methods: {
       confirm() {
         this.$store.commit('updatePublishCache', {
+          courseName: this.courseOptions[this.courseChosed].label,
           courseId: this.courseOptions[this.courseChosed].courseId,
           lessonId: this.lessonSelected[this.courseChosed],
         })
         this.$messagebox.confirm('确定为所选班级出卷?').then(action => {
-          console.log(action);
           this.$router.push('/publish/paperBank4publish')
         }, action => {
-          console.log(action);
         });
       },
-      add() {
-        console.log('add')
-      }
     },
   }
 </script>

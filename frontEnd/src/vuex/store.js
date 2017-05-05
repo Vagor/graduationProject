@@ -63,8 +63,36 @@ const state = {
 
   // 发布时的缓存
   s_publishCache: {
-    courseId: '13123',
-    lessonId: ['123', '3124'],
+    lessonList: [
+      { lessonId: '', studentNumber: 0 }
+    ],
+    paperId: '',
+    paperTitle: '',
+    totalScore: 0,
+    courseId: '',
+    lessonId: [],
+    courseName: '',
+    choiceQList: [{
+      choiceQuestionId: '',
+      stem: '',
+      answerOptions: [],
+      options: [],
+      questionScore: 0,
+    }],
+    fillQList: [{
+      fillQuestionId: '',
+      stem: '',
+      chapter: 0,
+      answerOptions: [],
+      questionScore: 0,
+    }],
+    shortQList: [{
+      shortQuestionId: '',
+      stem: '',
+      chapter: 0,
+      answer: '',
+      questionScore: 0,
+    }],
   },
 };
 
@@ -117,7 +145,11 @@ const mutations = {
 
   // 发布时的缓存
   updatePublishCache(state, payload) {
-    state.s_publishCache = payload
+    for (let key in payload) {
+      if (state.s_publishCache.hasOwnProperty(key)) {
+        state.s_publishCache[key] = payload[key]
+      }
+    }
   },
 }
 

@@ -62,7 +62,7 @@
     mounted: function() {
       // 初始化选择题列表
       this.$http.post('/getCQLByPId', {
-        paperId: this.$store.state.s_viewPaperCache.paperId
+        paperId: this.$route.params.paperId
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.choiceQList.length; i++) {
@@ -76,7 +76,7 @@
       })
       // 初始化填空题列表
       this.$http.post('/getSQLByPId', {
-        paperId: this.$store.state.s_viewPaperCache.paperId
+        paperId: this.$route.params.paperId
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.fQList.length; i++) {
@@ -90,7 +90,7 @@
       })
       // 初始化问答题列表
       this.$http.post('/getFQLByPId', {
-        paperId: this.$store.state.s_viewPaperCache.paperId
+        paperId: this.$route.params.paperId
       }).then((res) => {
         var temp;
         for (var i = 0; i < res.data.sQList.length; i++) {
