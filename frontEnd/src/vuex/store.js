@@ -98,6 +98,15 @@ const state = {
   // 管理课堂缓存
   s_manageClassCache:{
 
+  },
+
+
+
+// 学生
+  // 做题时的缓存
+  s_doQuestionCache:{
+    paperId:'',
+    paperTitle:'',
   }
 };
 

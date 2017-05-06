@@ -180,27 +180,30 @@ export default new Router({
       name: 's_paperWaitingPage',
       component: require('../components/student/myPaper/paperWaitingPage.vue'),
     }, {
-      // 简答
-      path: '/student/paperCompletion',
+      path: '/student/paperCompletion/:paperId',
       name: 's_paperCompletion',
       component: require('../components/student/myPaper/paperCompletion.vue'),
-    }, {
+    },{
+      path: '/student/questionList4Paper/:paperId',
+      name: 's_questionList4Paper',
+      component: require('../components/student/myPaper/questionList4Paper.vue'),
+    },  {
       path: '/student/doQuestion',
       component: require('../components/student/myPaper/doQuestion.vue'),
       children: [
         {
           // 选择      
-          path: 'doCQ',
+          path: 'doCQ/:questionId',
           name: 's_doCQ',
           component: require('../components/student/myPaper/doCQ.vue'),
         }, {
           // 填空      
-          path: 'doFQ',
+          path: 'doFQ/:questionId',
           name: 's_doFQ',
           component: require('../components/student/myPaper/doFQ.vue'),
         }, {
           // 简答
-          path: 'doSQ',
+          path: 'doSQ/:questionId',
           name: 's_doSQ',
           component: require('../components/student/myPaper/doSQ.vue'),
         },
