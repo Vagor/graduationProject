@@ -26,6 +26,7 @@
       }
     },
     mounted: function() {
+      console.log(this.$route.params.teacherId)
       // 初始化lesson列表
       this.$http.post('/getStudentPaperLists', {
         studentId: window._const.studentId,
@@ -34,6 +35,10 @@
         this.AnswerCheckPaperList = res.data.AnswerCheckPaperList
         this.AnswerNoCheckPaperList = res.data.AnswerNoCheckPaperList
         this.NoAnswerPaperList = res.data.NoAnswerPaperList
+      })
+      this.$store.commit('updateDoQuestionCache',{
+        lessonId: this.$route.params.lessonId,
+        teacherId: this.$route.params.teacherId,
       })
     },
     methods: {},

@@ -96,7 +96,7 @@ const state = {
   },
 
   // 管理课堂缓存
-  s_manageClassCache:{
+  s_manageClassCache: {
 
   },
 
@@ -104,9 +104,16 @@ const state = {
 
 // 学生
   // 做题时的缓存
-  s_doQuestionCache:{
-    paperId:'',
-    paperTitle:'',
+  s_doQuestionCache: {
+    lessonId:'',  
+    paperId: '',
+    paperTitle: '',
+    SQCount: '',
+    sQList: [],
+    FQCount: '',
+    fQList: [],
+    CQCount: '',
+    choiceQList: [],
   }
 };
 
@@ -162,6 +169,18 @@ const mutations = {
     for (let key in payload) {
       if (state.s_publishCache.hasOwnProperty(key)) {
         state.s_publishCache[key] = payload[key]
+      }
+    }
+  },
+
+
+
+  // 学生
+  // 做题时的缓存
+  updateDoQuestionCache(state, payload) {
+    for (let key in payload) {
+      if (state.s_doQuestionCache.hasOwnProperty(key)) {
+        state.s_doQuestionCache[key] = payload[key]
       }
     }
   },

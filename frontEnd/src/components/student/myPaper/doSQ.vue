@@ -11,11 +11,20 @@
     name: 'previewSAQQuestion',
     data() {
       return {
-        title: '微积分A卷'
+        title: '',
       }
     },
-    methods: {
-    },
+    methods: {},
+    mounted: function() {
+      let _this = this;
+      this.$http.post('/getSAQQuestionContent', {
+        questionId: _this.$route.params.questionId
+      }).then((res) => {
+        this.stem = res.data.stem
+        this.answer = res.data.answer
+        this.chapter = res.data.chapter
+      })
+    }
   }
 </script>
 

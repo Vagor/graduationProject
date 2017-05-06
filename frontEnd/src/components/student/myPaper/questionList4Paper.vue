@@ -17,6 +17,7 @@
 
 <script>
   export default {
+    name: "questionList4Paper",
     data() {
       return {
         paperDesc: '',
@@ -24,10 +25,10 @@
         choiceQList: [],
         fQList: [],
         sQList: [],
-        CQCount:0,
-        FQCount:0,
-        SQCount:0,
-        totalQCount:0,
+        CQCount: 0,
+        FQCount: 0,
+        SQCount: 0,
+        totalQCount: 0,
       }
     },
     methods: {
@@ -80,22 +81,33 @@
         }
         this.choiceQList = res.data.choiceQList
         this.CQCount = this.choiceQList.length
+        this.$store.commit('updateDoQuestionCache', {
+          CQCount: _this.CQCount,
+          choiceQList: _this.choiceQList,
+        })
       })
       this.$http.post('/getFQLByPId', {
         paperId: this.$route.params.paperId,
       }).then((res) => {
         this.fQList = res.data.fQList
         this.FQCount = this.fQList.length
+        this.$store.commit('updateDoQuestionCache', {
+          FQCount: _this.FQCount,
+          fQList: _this.fQList,
+        })
       })
       this.$http.post('/getSQLByPId', {
         paperId: this.$route.params.paperId,
       }).then((res) => {
         this.sQList = res.data.sQList
         this.SQCount = this.sQList.length
+        this.$store.commit('updateDoQuestionCache', {
+          SQCount: _this.SQCount,
+          sQList: _this.sQList,
+        })
       })
     },
-    computed: {
-    }
+    computed: {}
   }
 </script>
 

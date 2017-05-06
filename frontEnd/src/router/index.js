@@ -172,7 +172,7 @@ export default new Router({
       name: 's_chooseCourse4PaperList',
       component: require('../components/student/myPaper/chooseCourse4PaperList.vue'),
     }, {
-      path: '/student/myPaperList/:lessonId',
+      path: '/student/myPaperList/:lessonId/:teacherId',
       name: 's_myPaperList',
       component: require('../components/student/myPaper/myPaperList.vue'),
     }, {
@@ -180,7 +180,7 @@ export default new Router({
       name: 's_paperWaitingPage',
       component: require('../components/student/myPaper/paperWaitingPage.vue'),
     }, {
-      path: '/student/paperCompletion/:paperId',
+      path: '/student/paperCompletion',
       name: 's_paperCompletion',
       component: require('../components/student/myPaper/paperCompletion.vue'),
     },{
