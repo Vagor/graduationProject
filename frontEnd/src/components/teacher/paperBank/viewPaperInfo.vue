@@ -119,8 +119,8 @@
       this.$http.post('/getPaperInfo', {
         paperId: _this.$route.params.paperId
       }).then((res) => {
-        this.paperTitle = res.data.paperTitle
-        this.paperDesc = res.data.paperDesc
+        this.paperTitle = res.data.paperInfo.paperTitle
+        this.paperDesc = res.data.paperInfo.paperDesc
       })
     }
   
