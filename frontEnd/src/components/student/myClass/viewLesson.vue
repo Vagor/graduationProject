@@ -6,7 +6,7 @@
       </router-link>
     </mt-header>
     <label class="block-title">参与课堂</label>
-    <mt-cell :title="'我的课堂 '+(index+1)" class="left" :value="item.studentName" v-for="(item,index) in studentList" is-link></mt-cell>
+    <mt-cell :title="'我的课堂 '+(index+1)" class="left" :value="item.courseName" v-for="(item,index) in courseList" is-link></mt-cell>
   
   </div>
 </template>
@@ -17,28 +17,41 @@
     data() {
       return {
         title: '我的课堂',
-        studentList: [{
-          studentName: "微积分",
-          studentId: '123',
+        courseList: [{
+          courseName: "微积分",
+          lessonId: '123',
         }, {
-          studentName: "电路理论",
-          studentId: '123',
+          courseName: "电路理论",
+          lessonId: '123',
         }, {
-          studentName: "大学物理",
-          studentId: '123',
+          courseName: "大学物理",
+          lessonId: '123',
         }, {
-          studentName: "大学语文",
-          studentId: '123',
+          courseName: "大学语文",
+          lessonId: '123',
         }, {
-          studentName: "大学英语",
-          studentId: '123',
+          courseName: "大学英语",
+          lessonId: '123',
         }, {
-          studentName: "数据结构",
-          studentId: '123',
+          courseName: "数据结构",
+          lessonId: '123',
         }, ]
       }
     },
-    mounted: function() {},
+    mounted: function() {
+      this.$http.post('/getStudentLList', {
+        studentId: window._const.studentId,
+      }).then((res) => {
+        for (let key in res.data.lessonList) {
+          if (res.data.lessonList.hasOwnProperty(key)) {
+            this.courseList.push({
+              courseName: res.data.lessonList[key].courseName,
+              lessonId: res.data.lessonList[key]._id,
+            })
+          }
+        }
+      })
+    },
     methods: {},
   }
 </script>
