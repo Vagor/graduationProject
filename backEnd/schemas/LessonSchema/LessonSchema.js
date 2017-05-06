@@ -24,7 +24,8 @@ courseId: {
     type: ObjectId,
     ref: 'course'//var CourseModel = mongoose.model('course', CourseSchema)中'course'
 },
-   
+   //课程名称
+   courseName:String,
   //课堂学生数
 studentNumber: Number,
   

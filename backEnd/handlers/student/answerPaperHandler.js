@@ -32,7 +32,7 @@ module.exports = {
                 .find({ 'classId': classId }, ["_id", "classId", "lessonId"])
                 .populate(
                 'lessonId',
-                '_id lessonName teacherId'
+                '_id lessonName teacherId courseName'
                 )
                 .sort({ 'meta.updateAt': -1 })
                 .exec(function (err, data) {
