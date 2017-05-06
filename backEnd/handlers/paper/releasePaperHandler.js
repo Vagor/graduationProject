@@ -24,42 +24,42 @@ module.exports = {
         //传入的数据
         var lessonList = req.body.lessonList
         //测试数据
-        // var lessonList = [{ "lessonId": '58c73c5879534a10c243fa11', "studentNumber": 28 },
+       // var lessonList = [{ "lessonId": '58c73c5879534a10c243fa11', "studentNumber": 28 },
         // { "lessonId": '58f9dd5b57f99a18d870e3cc', "studentNumber": 23 }]
         var paperId = req.body.paperId
         var TeacherId = req.body.teacherId
         var paperTitle = req.body.paperTitle
         var totalScore = req.body.totalScore
         var choiceQList = req.body.choiceQList
-        // var choiceQList = [
-        //     {
-        //         "choiceQuestionId": '58c73c5879534a10c243fa11',
-        //         "stem": "sssss",
-        //         "answerOptions": [0, 2],
-        //         "questionScore": 5,
-        //         "chapter": 2,
-        //         "options": [
-        //             "1answerOption",
-        //             "2answerOption",
-        //             "3answerOption",
-        //             "4answerOption"
-        //         ]
-        //     },
-        //     {
-        //         "choiceQuestionId": '58c73c5879534a10c243fa11',
-        //         "stem": "ddddd",
-        //         "answerOptions": [0, 1],
-        //         "questionScore": 6,
-        //         "chapter": 7,
-        //         "options": [
-        //             "7nswerOption",
-        //             "7nswerOption",
-        //             "7nswerOption",
-        //             "7nswerOption"
-        //         ]
-        //     }
+        var choiceQList = [
+            {
+                "choiceQuestionId": '58c73c5879534a10c243fa11',
+                "stem": "sssss",
+                "answerOptions": [0, 2],
+                "questionScore": 5,
+                "chapter": 2,
+                "options": [
+                    "1answerOption",
+                    "2answerOption",
+                    "3answerOption",
+                    "4answerOption"
+                ]
+            },
+            {
+                "choiceQuestionId": '58c73c5879534a10c243fa11',
+                "stem": "ddddd",
+                "answerOptions": [0, 1],
+                "questionScore": 6,
+                "chapter": 7,
+                "options": [
+                    "7nswerOption",
+                    "7nswerOption",
+                    "7nswerOption",
+                    "7nswerOption"
+                ]
+            }
 
-        // ]
+        ]
         var fillQList = req.body.fillQList
         // var fillQList = [
         //     {

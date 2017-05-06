@@ -74,7 +74,7 @@ module.exports = {
             )
             .sort({ 'meta.updateAt': -1 })
             .exec(function (err, data) {
-                var choiceQList = []
+                var choiceQList = []        
                 for (Index in data) {
                     choiceQList.push(data[Index].choiceQId)
                 }
