@@ -168,11 +168,11 @@ export default new Router({
 
     // 我的试卷
     {
-      path: '/student/myPaper',
-      name: 's_myPaper',
-      component: require('../components/student/myPaper/myPaper.vue'),
+      path: '/student/chooseCourse4PaperList',
+      name: 's_chooseCourse4PaperList',
+      component: require('../components/student/myPaper/chooseCourse4PaperList.vue'),
     }, {
-      path: '/student/myPaperList',
+      path: '/student/myPaperList/:lessonId',
       name: 's_myPaperList',
       component: require('../components/student/myPaper/myPaperList.vue'),
     }, {
