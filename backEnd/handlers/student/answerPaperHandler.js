@@ -46,6 +46,21 @@ module.exports = {
         }
         getClassId()
     },
+    //获取学生单个课堂的（待做试卷和已做试卷）的数据
+    getPaperToCheckCount: function (req, res) {
+        var studentId = req.body.studentId
+        var lessonId = req.body.lessonId
+        AnswerPaperCollectionModel
+                .find({
+                    'lessonId': lessonId
+                }, [
+                    "_id", 'paperTitle', "totalScore", "paperId", "studentNumber", "answerPaperNumber",
+                ], function (err, noCheckList) {
+                  var paperToCheckCount = noCheckList.length 
+                     console.log(paperToCheckCount)       
+                    res.send({ paperToCheckCount})
+                })
+    },
     //通过studentId和lessonId得到三种list，未做卷list和已做未批改卷list、已做已批改list。
     getStudentPaperLists: function (req, res) {
         var studentId = req.body.studentId
