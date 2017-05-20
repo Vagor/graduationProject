@@ -33,11 +33,10 @@
           this.$http.post('/createAnswerPaper', {
             answerpaperlist: {
               studentId: window._const.studentId,
-              lessonId: _this.$store.state.s_publishInfo.lessonId,
-              teacherId: _this.$store.state.s_publishInfo.teacherId,
-              classId: window._const.classId,
-              paperId: _this.$store.state.s_publishInfo.paperId,
-              paperTitle: _this.$store.state.s_publishInfo.paperTitle,
+              lessonId: _this.$store.state.s_doQuestionCache.lessonId,
+              teacherId: _this.$store.state.s_doQuestionCache.teacherId,
+              paperId: _this.$store.state.s_doQuestionCache.paperId,
+              paperTitle: _this.$store.state.s_doQuestionCache.paperTitle,
               totalScore: 0,
             }
           }).then((res) => {
@@ -66,6 +65,7 @@
         this.paperDesc = res.data.paperInfo.paperDesc
         this.$store.commit('updateDoQuestionCache', {
           paperId: _this.$route.params.paperId,
+          teacherId: _this.$route.params.teacherId,
           paperTitle: _this.paperTitle,
           paperDesc: _this.paperDesc,
         })

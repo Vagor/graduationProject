@@ -176,7 +176,7 @@ export default new Router({
       name: 's_myPaperList',
       component: require('../components/student/myPaper/myPaperList.vue'),
     }, {
-      path: '/student/paperWaitingPage',
+      path: '/student/paperWaitingPage/:paperId',
       name: 's_paperWaitingPage',
       component: require('../components/student/myPaper/paperWaitingPage.vue'),
     }, {

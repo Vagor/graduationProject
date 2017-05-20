@@ -110,7 +110,7 @@
               answerOption2: _this.answerOption2, //正确项
               answerOption3: _this.answerOption3, //正确项
               answerOption4: _this.answerOption4, //正确项
-              courseId: window._const.courseId, //所属课程
+              courseId: _this.$store.state.s_questionBankCache.courseId, //所属课程
               chapter: _this.chapter, //所属章节
               teacherId: window._const.teacherId, //出题人
             }

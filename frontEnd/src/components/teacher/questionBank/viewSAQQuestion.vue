@@ -81,7 +81,7 @@ export default {
             questionId: _this.$route.params.questionId,
             stem: _this.stem, //题干
             answer: _this.answer, //正确选项
-            courseId: window._const.courseId, //所属课程
+            courseId:_this.$store.state.s_questionBankCache.courseId, //所属课程
             chapter: _this.chapter, //所属章节
             teacherId: window._const.teacherId, //出题人
           }

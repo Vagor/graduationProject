@@ -106,7 +106,7 @@
           for (var index in this.choiceTabContent) {
             if (this.choiceTabContent.hasOwnProperty(index)) {
               choiceQList.push({
-                choiceQId: this.choiceTabContent[index],
+                choiceQId: this.choiceTabContent[index].questionId,
                 questionScore: 0
               })
             }
@@ -115,7 +115,7 @@
           for (var index in this.FITBTabContent) {
             if (this.FITBTabContent.hasOwnProperty(index)) {
               fQList.push({
-                fQId: this.FITBTabContent[index],
+                fQId: this.FITBTabContent[index].questionId,
                 questionScore: 0
               })
             }
@@ -124,7 +124,7 @@
           for (var index in this.SAQTabContent) {
             if (this.SAQTabContent.hasOwnProperty(index)) {
               sQList.push({
-                sQId: this.SAQTabContent[index],
+                sQId: this.SAQTabContent[index].questionId,
                 questionScore: 0
               })
             }

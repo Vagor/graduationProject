@@ -15,6 +15,7 @@
 
 <script>
   export default {
+    name: "chooseBasicInfo",
     data() {
       return {
         title: '发布试卷',
@@ -85,7 +86,7 @@
             courseName: this.courseOptions[this.courseChosed].label,
             courseId: this.courseOptions[this.courseChosed].courseId,
             lessonId: this.lessonSelected[this.courseChosed],
-            lessonList:lessonList,
+            lessonList: lessonList,
           })
           this.$router.push('/publish/paperBank4publish')
         }, action => {});

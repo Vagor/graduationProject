@@ -72,27 +72,9 @@ const state = {
     courseId: '',
     lessonId: [],
     courseName: '',
-    choiceQList: [{
-      choiceQuestionId: '',
-      stem: '',
-      answerOptions: [],
-      options: [],
-      questionScore: 0,
-    }],
-    fillQList: [{
-      fillQuestionId: '',
-      stem: '',
-      chapter: 0,
-      answerOptions: [],
-      questionScore: 0,
-    }],
-    shortQList: [{
-      shortQuestionId: '',
-      stem: '',
-      chapter: 0,
-      answer: '',
-      questionScore: 0,
-    }],
+    choiceQList: [],
+    fillQList: [],
+    shortQList: [],
   },
 
   // 管理课堂缓存
@@ -114,6 +96,7 @@ const state = {
     fQList: [],
     CQCount: '',
     choiceQList: [],
+    teacherId:'',
   }
 };
 

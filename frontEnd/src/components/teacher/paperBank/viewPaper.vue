@@ -75,7 +75,7 @@
         }
       })
       // 初始化填空题列表
-      this.$http.post('/getSQLByPId', {
+      this.$http.post('/getFQLByPId', {
         paperId: this.$route.params.paperId
       }).then((res) => {
         var temp;
@@ -89,7 +89,7 @@
         }
       })
       // 初始化问答题列表
-      this.$http.post('/getFQLByPId', {
+      this.$http.post('/getSQLByPId', {
         paperId: this.$route.params.paperId
       }).then((res) => {
         var temp;
