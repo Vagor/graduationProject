@@ -58,7 +58,7 @@ module.exports = {
                 ], function (err, noCheckList) {
                   var paperToCheckCount = noCheckList.length 
                      console.log(paperToCheckCount)       
-                    res.send({ paperToCheckCount})
+                    res.send({ paperToCheckCount})  
                 })
     },
     //通过studentId和lessonId得到三种list，未做卷list和已做未批改卷list、已做已批改list。

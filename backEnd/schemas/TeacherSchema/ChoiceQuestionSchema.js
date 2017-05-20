@@ -13,9 +13,9 @@ var ChoiceQuestionSchema = new Schema({
   }],
   
   //正确选项
-  answerOptions:[{
+  answerOptions:{
   	type: Number,
-  }],
+  },
    
    //是否共享
   share:{

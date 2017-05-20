@@ -24,7 +24,8 @@ paperRoute.post('/pullQuestionsToPaper', motherPaperHandler.pullQuestions);
 paperRoute.post('/getCQLByPId', motherPaperHandler.getCQList);
 paperRoute.post('/getFQLByPId', motherPaperHandler.getFQList);
 paperRoute.post('/getSQLByPId', motherPaperHandler.getSQList);
-
+//删除组卷和组卷题目
+paperRoute.post('/deletePaper', motherPaperHandler.deletePaper);
 //组卷发布
 paperRoute.post('/getLessonLByTIdAndCId', releasePaperHandler.getLessonList);
 paperRoute.post('/releasePaper', releasePaperHandler.releasePaper);
