@@ -219,4 +219,69 @@ module.exports = {
             })
         }
     },
+    //删除组卷和组卷题目
+    deletePaper: function (req, res) {
+        var paperId = req.body.paperId 
+        console.log("delete拿到ID：" + req.body.paperId )
+        //删除组卷信息表
+        var  deletePaperTable = function(){
+        var conditions = {
+            _id: paperId
+        };
+        MotherPaperModel.remove(conditions, function(error) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.json({"success": 1})
+                console.log('delete ok!');
+            }
+        });
+        }
+        //删除组卷和选择题关系表
+        var  deletePaperChoiceTable = function(){
+             var conditions = {
+            paperId: paperId
+        };
+        PaperChoiceQModel.remove(conditions, function(error) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.json({"success": 1})
+                console.log('delete ok!');
+            }
+        });
+    }
+    //删除组卷和填空题关系表
+        var  deletePaperFillTable = function(){
+             var conditions = {
+            paperId: paperId
+        };
+        PaperFQModel.remove(conditions, function(error) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.json({"success": 1})
+                console.log('delete ok!');
+            }
+        });
+        }
+        //删除组卷和简答题关系表
+        var  deletePaperShortTable = function(){
+             var conditions = {
+            paperId: paperId
+        };
+        PaperSQModel.remove(conditions, function(error) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.json({"success": 1})
+                console.log('delete ok!');
+            }
+        });
+    }
+       deletePaperTable()
+       deletePaperChoiceTable()
+       deletePaperFillTable()
+       deletePaperShortTable()
+    },
 }
