@@ -4,6 +4,8 @@ var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 //老师信息表
 var TeacherSchema = new Schema({
+  //账户id
+ accountId: ObjectId,
   //老师姓名
   teacherName:{  
   	type: String,
@@ -60,4 +62,5 @@ TeacherSchema.statics = {
   }
 }
 
-module.exports = TeacherSchema
+var TeacherModel = mongoose.model('teacher', TeacherSchema)
+module.exports = TeacherModel

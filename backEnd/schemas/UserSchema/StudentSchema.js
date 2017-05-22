@@ -4,6 +4,8 @@ var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 //学生信息表
 var StudentSchema = new Schema({
+ //账户id
+ accountId: ObjectId,
   //学生姓名
   studentName: {
     type: String,

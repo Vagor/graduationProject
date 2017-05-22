@@ -62,4 +62,5 @@ AccountSchema.statics = {
   }
 }
 
-module.exports = AccountSchema
+var AccountModel = mongoose.model('account', AccountSchema)
+module.exports = AccountModel

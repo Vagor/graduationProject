@@ -10,6 +10,7 @@ var studentAnswerRoute = require('./routes/studentAnswerRoute.js');
 var teacherCheckPaperRoute = require('./routes/teacherCheckPaperRoute.js');
 var studentLookResultRoute = require('./routes/studentLookResultRoute.js');
 var teacherLookResultRoute = require('./routes/teacherLookResultRoute.js');
+var userManageRoute = require('./routes/userManageRoute.js');
 // 配置文件
 var config = require('./config.js');
 
@@ -39,6 +40,7 @@ app.use('/',studentAnswerRoute)
 app.use('/',teacherCheckPaperRoute)
 app.use('/',studentLookResultRoute)
 app.use('/',teacherLookResultRoute)
+app.use('/',userManageRoute)
 
 app.listen(port, function() {
     console.log("listening"+port);
