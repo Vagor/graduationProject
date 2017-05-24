@@ -31,7 +31,7 @@
       </mt-tab-container-item>
     </mt-tab-container>
     <mt-button type="primary" size="large" class="bottomBtn" @click.native="updateSelectedQuestion">已选题目
-      <mt-badge type="error">{{questionCount}}</mt-badge>
+      <mt-badge type="error" v-if="questionCount > 0">{{questionCount}}</mt-badge>
     </mt-button>
   </div>
 </template>
@@ -112,8 +112,12 @@
     },
     filters: {
       characterLimit: (value) => {
-        return value
-      }
+        if(value.length > 15){
+          return value.slice(0,14)+"..."
+        }else {
+          return value          
+        }
+      },
     },
     mounted: function() {
       // 初始化选择题列表

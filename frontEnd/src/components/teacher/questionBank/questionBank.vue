@@ -59,8 +59,12 @@
     },
     filters: {
       characterLimit: (value) => {
-        return value
-      }
+        if(value.length > 15){
+          return value.slice(0,14)+"..."
+        }else {
+          return value          
+        }
+      },
     },
     mounted: function() {
       // 存储课程缓存

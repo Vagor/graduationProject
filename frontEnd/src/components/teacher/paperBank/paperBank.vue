@@ -14,7 +14,7 @@
     </mt-navbar>
     <mt-tab-container v-model="activeTab" swipeable class="little-gap">
       <mt-tab-container-item :id="index" v-for="(paperListWithId,index) in paperLists">
-        <mt-cell v-for="item in paperListWithId.paperList" is-link :to="{ name: 'viewPaperInfo', params: { paperId: item._id }}" :title="item.paperTitle" class="left">{{item.paperDesc}}</mt-cell>
+        <mt-cell v-for="item in paperListWithId.paperList" is-link :to="{ name: 'viewPaperInfo', params: { paperId: item._id }}" :title="item.paperTitle | characterLimit4title" class="left">{{item.paperDesc | characterLimit4desc}}</mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -33,9 +33,20 @@
     },
     methods: {},
     filters: {
-      characterLimit: (value) => {
-        return value
-      }
+      characterLimit4desc: (value) => {
+        if(value.length > 4){
+          return value.slice(0,5)+"..."
+        }else {
+          return value          
+        }
+      },
+      characterLimit4title: (value) => {
+        if(value.length > 15){
+          return value.slice(0,14)+"..."
+        }else {
+          return value          
+        }
+      },
     },
     mounted: function() {
       // 初始化tab信息

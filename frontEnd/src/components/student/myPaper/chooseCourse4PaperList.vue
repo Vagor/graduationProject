@@ -6,11 +6,8 @@
       </router-link>
     </mt-header>
     <label class="block-title">请选择课程</label>
-    <mt-cell title="微积分" value="" is-link class="left" :to="{name:'s_myPaperList'}">
-      <mt-badge type="primary">1</mt-badge>
-    </mt-cell>
-    <mt-cell :title="item.courseName" class="left" v-for="(item,index) in courseList" is-link   :to="{ name: 's_myPaperList', params: { lessonId: item.lessonId ,teacherId:item.teacherId}} " >
-      <mt-badge type="primary" v-if="item.paperToCheckCount>0">{{item.paperToCheckCount}}</mt-badge>
+    <mt-cell :title="item.courseName" class="left" v-for="(item,index) in courseList" is-link :to="{ name: 's_myPaperList', params: { lessonId: item.lessonId ,teacherId:item.teacherId}} ">
+      <mt-badge type="primary" v-if="item.paperToCheckCount > 0">{{item.paperToCheckCount}}</mt-badge>
     </mt-cell>
   </div>
 </template>
@@ -35,6 +32,7 @@
               courseName: res.data.lessonList[key].courseName,
               lessonId: res.data.lessonList[key]._id,
               teacherId: res.data.lessonList[key].teacherId,
+              paperToCheckCount: 0
             })
             this.$http.post('/getPaperToCheckCount', {
               lessonId: res.data.lessonList[key]._id,
@@ -47,7 +45,8 @@
       })
       // 初始化是否有待做试卷列表
     },
-    methods: {},
+    methods: {
+    },
   }
 </script>
 
