@@ -138,7 +138,7 @@
           }).then((res) => {
             if (res.data.success == 1) {
               this.$toast({
-                message: '删除成功',
+                message: '出卷成功',
                 duration: 1000,
               })
               setTimeout(() => {

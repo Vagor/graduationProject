@@ -41,14 +41,7 @@
             }
           }).then((res) => {
             if (res.data.success == 1) {
-              _this.$toast({
-                message: '操作成功',
-                iconClass: 'mintui-success mintui',
-                duration: 1000,
-              });
-              setTimeout(() => {
-                this.$router.push('/student/paperCompletion/' + this.$route.params.paperId)
-              }, 1000);
+              this.$router.push('/student/paperCompletion/' + this.$route.params.paperId)
             }
           })
         }, action => {

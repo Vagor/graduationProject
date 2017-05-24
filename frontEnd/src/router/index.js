@@ -180,7 +180,7 @@ export default new Router({
       name: 's_paperWaitingPage',
       component: require('../components/student/myPaper/paperWaitingPage.vue'),
     }, {
-      path: '/student/paperCompletion',
+      path: '/student/paperCompletion/:paperId',
       name: 's_paperCompletion',
       component: require('../components/student/myPaper/paperCompletion.vue'),
     },{

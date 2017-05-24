@@ -25,8 +25,7 @@
     },
     mounted: function() {
       this.$http.post('/getChoiceQuestionContent', {
-        // questionId: _this.$route.params.questionId
-        questionId: "590ac99a98bf0540bfb4c460"
+        questionId: _this.$route.params.questionId
       }).then((res) => {
         this.stem = res.data.stem
         this.answerOption = res.data.answerOption

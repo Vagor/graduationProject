@@ -27,6 +27,9 @@ module.exports = {
             }
         })
     },
+    deletePaper: function (req, res) {
+        res.send('1');
+    },
     //通过选择题Id数组，获取一组题目信息
     getCQListByQIdArr: function (req, res) {
         var choiceQIds = req.body.choiceQIds
