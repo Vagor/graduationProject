@@ -16,6 +16,7 @@
     data() {
       return {
         title: '微积分A卷',
+        stem: '',
         blankCounter: 0,
         answerOption1: '',
         answerOption2: '',
@@ -31,21 +32,28 @@
         }, action => {
           console.log(action);
         });
+      },
+      initPage() {
+        this.$http.post('/getFITBQuestionContent', {
+          questionId: this.$route.params.questionId
+        }).then((res) => {
+          this.stem = res.data.stem
+          this.blankCounter = res.data.blankCounter
+          this.chapter = res.data.chapter
+          this.answerOption1 = res.data.answerOption1
+          this.answerOption2 = res.data.answerOption2
+          this.answerOption3 = res.data.answerOption3
+          this.answerOption4 = res.data.answerOption4
+        })
       }
+  
     },
     mounted: function() {
-      let _this = this;
-      this.$http.post('/getFITBQuestionContent', {
-        questionId: _this.$route.params.questionId
-      }).then((res) => {
-        this.stem = res.data.stem
-        this.blankCounter = res.data.blankCounter
-        this.chapter = res.data.chapter
-        this.answerOption1 = res.data.answerOption1
-        this.answerOption2 = res.data.answerOption2
-        this.answerOption3 = res.data.answerOption3
-        this.answerOption4 = res.data.answerOption4
-      })
+      this.initPage()
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      "$route": "initPage"
     }
   }
 </script>

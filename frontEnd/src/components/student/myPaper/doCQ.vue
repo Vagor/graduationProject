@@ -22,27 +22,34 @@
       goToLink() {
         this.$router.push('/student/paperCompletion')
       },
+      initPage() {
+        this.$http.post('/getChoiceQuestionContent', {
+          questionId: this.$route.params.questionId
+        }).then((res) => {
+          this.stem = res.data.stem
+          this.answerOption = res.data.answerOption
+          this.choiceOptions = [{
+            label: 'A. ' + res.data.options[0],
+            value: '1'
+          }, {
+            label: 'B. ' + res.data.options[1],
+            value: '2'
+          }, {
+            label: 'C. ' + res.data.options[2],
+            value: '3'
+          }, {
+            label: 'D. ' + res.data.options[3],
+            value: '4'
+          }]
+        })
+      }
     },
     mounted: function() {
-      this.$http.post('/getChoiceQuestionContent', {
-        questionId: _this.$route.params.questionId
-      }).then((res) => {
-        this.stem = res.data.stem
-        this.answerOption = res.data.answerOption
-        this.choiceOptions = [{
-          label: 'A. '+res.data.options[0],
-          value: '1'
-        }, {
-          label: 'B. '+res.data.options[1],
-          value: '2'
-        }, {
-          label: 'C. '+res.data.options[2],
-          value: '3'
-        }, {
-          label: 'D. '+res.data.options[3],
-          value: '4'
-        }]
-      })
+      this.initPage()
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      "$route": "initPage"
     }
   }
 </script>

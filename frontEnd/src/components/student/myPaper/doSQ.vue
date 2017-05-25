@@ -12,19 +12,26 @@
     data() {
       return {
         title: '',
-        stem:'在如下数组A中链接存储了一个线性表，表头指针为A [0].next，试写出该线性表。'
+        stem: '在如下数组A中链接存储了一个线性表，表头指针为A [0].next，试写出该线性表。'
       }
     },
-    methods: {},
+    methods: {
+      initPage() {
+        this.$http.post('/getSAQQuestionContent', {
+          questionId: this.$route.params.questionId
+        }).then((res) => {
+          // this.stem = res.data.stem
+          this.answer = res.data.answer
+          this.chapter = res.data.chapter
+        })
+      }
+    },
     mounted: function() {
-      let _this = this;
-      this.$http.post('/getSAQQuestionContent', {
-        questionId: _this.$route.params.questionId
-      }).then((res) => {
-        // this.stem = res.data.stem
-        this.answer = res.data.answer
-        this.chapter = res.data.chapter
-      })
+      this.initPage()
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      "$route": "initPage"
     }
   }
 </script>

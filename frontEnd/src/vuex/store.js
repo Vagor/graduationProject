@@ -97,6 +97,9 @@ const state = {
     CQCount: 0,
     choiceQList: [],
     teacherId:'',
+    QCondition:{},
+    QOrderList:{},
+    currentQIndex:0,
   }
 };
 

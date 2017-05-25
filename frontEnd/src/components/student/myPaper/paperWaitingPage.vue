@@ -24,6 +24,14 @@
         title: '试卷信息',
         paperTitle: '',
         paperDesc: '',
+        teacherId: '',
+        choiceQList: [],
+        fQList: [],
+        sQList: [],
+        SQCount: 0,
+        FQCount: 0,
+        CQCount: 0,
+        QCondition: {},
       }
     },
     methods: {
@@ -48,6 +56,79 @@
           console.log(action);
         });
       },
+      setDoQuestionCache() {
+        let QCondition = {}
+        // 初始化选择题列表
+        this.$http.post('/getCQLByPId', {
+          paperId: this.$route.params.paperId
+        }).then((res) => {
+          var temp;
+          for (var i = 0; i < res.data.choiceQList.length; i++) {
+            temp = {
+              questionId: res.data.choiceQList[i]._id,
+              stem: res.data.choiceQList[i].stem,
+              chapter: '第' + res.data.choiceQList[i].chapter + '章',
+              index: i
+            }
+            this.choiceQList.push(temp)
+            QCondition['question_' + res.data.choiceQList[i]._id] = {
+              type: 0, //0=>选择题，1=>填空题，2=>简单题
+              done: 0, //0=>未完成，1=>完成
+            }
+          }
+          this.CQCount = this.choiceQList.length
+        })
+        // 初始化填空题列表
+        this.$http.post('/getFQLByPId', {
+          paperId: this.$route.params.paperId
+        }).then((res) => {
+          var temp;
+          for (var i = 0; i < res.data.fQList.length; i++) {
+            temp = {
+              questionId: res.data.fQList[i]._id,
+              stem: res.data.fQList[i].stem,
+              chapter: '第' + res.data.fQList[i].chapter + '章',
+              index: i
+            }
+            this.fQList.push(temp)
+            QCondition['question_' + res.data.fQList[i]._id] = {
+              type: 1, //0=>选择题，1=>填空题，2=>简单题
+              done: 0, //0=>未完成，1=>完成
+            }
+          }
+          this.FQCount = this.fQList.length
+        })
+        // 初始化问答题列表
+        this.$http.post('/getSQLByPId', {
+          paperId: this.$route.params.paperId
+        }).then((res) => {
+          var temp;
+          for (var i = 0; i < res.data.sQList.length; i++) {
+            temp = {
+              questionId: res.data.sQList[i]._id,
+              stem: res.data.sQList[i].stem,
+              chapter: '第' + res.data.sQList[i].chapter + '章',
+              index: i
+            }
+            this.sQList.push(temp)
+            QCondition['question_' + res.data.sQList[i]._id] = {
+              type: 2, //0=>选择题，1=>填空题，2=>简单题
+              done: 0, //0=>未完成，1=>完成
+            }
+          }
+          this.SQCount = this.sQList.length
+          // updateDoQuestionCache
+          this.$store.commit('updateDoQuestionCache', {
+            sQList: this.sQList,
+            SQCount: this.SQCount,
+            fQList: this.fQList,
+            FQCount: this.FQCount,
+            choiceQList: this.choiceQList,
+            CQCount: this.CQCount,
+            QCondition: QCondition,
+          })
+        })
+      }
     },
     mounted: function() {
       let _this = this
@@ -56,13 +137,15 @@
       }).then((res) => {
         this.paperTitle = res.data.paperInfo.paperTitle
         this.paperDesc = res.data.paperInfo.paperDesc
+        this.teacherId = res.data.paperInfo.teacherId
         this.$store.commit('updateDoQuestionCache', {
           paperId: _this.$route.params.paperId,
-          teacherId: _this.$route.params.teacherId,
+          teacherId: _this.teacherId,
           paperTitle: _this.paperTitle,
           paperDesc: _this.paperDesc,
         })
       })
+      this.setDoQuestionCache()
     }
   }
 </script>

@@ -7,15 +7,18 @@
     </mt-header>
     <label class="block-title">选择题（{{CQCount}}/{{CQCount+FQCount+SQCount}}）</label>
     <mt-cell v-for="item in choiceQList " is-link :to="{ name: 's_doCQ', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">
-      <mt-badge type="error">未完成</mt-badge>
+      <mt-badge type="error" v-if="QCondition['question_'+item.questionId].done == 0">未完成</mt-badge>
+      <mt-badge type="success" v-if="QCondition['question_'+item.questionId].done == 1">已完成</mt-badge>
     </mt-cell>
     <label class="block-title">填空题（{{FQCount}}/{{CQCount+FQCount+SQCount}}）</label>
-    <mt-cell v-for="item in fQList " is-link :to="{ name: 's_doCQ', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">
-      <mt-badge type="error">未完成</mt-badge>
+    <mt-cell v-for="item in fQList " is-link :to="{ name: 's_doFQ', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">
+      <mt-badge type="error" v-if="QCondition['question_'+item.questionId].done == 0">未完成</mt-badge>
+      <mt-badge type="success" v-if="QCondition['question_'+item.questionId].done == 1">已完成</mt-badge>
     </mt-cell>
     <label class="block-title">简答题（{{SQCount}}/{{CQCount+FQCount+SQCount}}）</label>
-    <mt-cell v-for="item in sQList " is-link :to="{ name: 's_doCQ', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">
-      <mt-badge type="error">未完成</mt-badge>
+    <mt-cell v-for="item in sQList " is-link :to="{ name: 's_doSQ', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">
+      <mt-badge type="error" v-if="QCondition['question_'+item.questionId].done == 0">未完成</mt-badge>
+      <mt-badge type="success" v-if="QCondition['question_'+item.questionId].done == 1">已完成</mt-badge>
     </mt-cell>
     <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认交卷</mt-button>
   </div>
@@ -33,69 +36,45 @@
         SQCount: 0,
         FQCount: 0,
         CQCount: 0,
+        QCondition: {},
       }
     },
     methods: {
       initPage() {
-        // 初始化选择题列表
-        this.$http.post('/getCQLByPId', {
-          paperId: this.$route.params.paperId
-        }).then((res) => {
-          var temp;
-          for (var i = 0; i < res.data.choiceQList.length; i++) {
-            temp = {
-              questionId: res.data.choiceQList[i]._id,
-              stem: res.data.choiceQList[i].stem,
-              chapter: '第' + res.data.choiceQList[i].chapter + '章'
-            }
-            this.choiceQList.push(temp)
-          }
-        })
-        // 初始化填空题列表
-        this.$http.post('/getFQLByPId', {
-          paperId: this.$route.params.paperId
-        }).then((res) => {
-          var temp;
-          for (var i = 0; i < res.data.fQList.length; i++) {
-            temp = {
-              questionId: res.data.fQList[i]._id,
-              stem: res.data.fQList[i].stem,
-              chapter: '第' + res.data.fQList[i].chapter + '章'
-            }
-            this.fQList.push(temp)
-          }
-        })
-        // 初始化问答题列表
-        this.$http.post('/getSQLByPId', {
-          paperId: this.$route.params.paperId
-        }).then((res) => {
-          var temp;
-          for (var i = 0; i < res.data.sQList.length; i++) {
-            temp = {
-              questionId: res.data.sQList[i]._id,
-              stem: res.data.sQList[i].stem,
-              chapter: '第' + res.data.sQList[i].chapter + '章'
-            }
-            this.sQList.push(temp)
-          }
-          this.SQCount = this.sQList.length
-          this.FQCount = this.fQList.length
-          this.CQCount = this.choiceQList.length
-          // updateDoQuestionCache
-          this.$store.commit('updateDoQuestionCache', {
-            sQList: this.sQList,
-            choiceQList: this.choiceQList,
-            fQList: this.fQList,
-            SQCount: this.SQCount,
-            FQCount: this.FQCount,
-            CQCount: this.CQCount,
-          })
+        this.QCondition = this.$store.state.s_doQuestionCache.QCondition
+        this.sQList = this.$store.state.s_doQuestionCache.sQList
+        this.SQCount = this.$store.state.s_doQuestionCache.SQCount
+        this.fQList = this.$store.state.s_doQuestionCache.fQList
+        this.FQCount = this.$store.state.s_doQuestionCache.FQCount
+        this.choiceQList = this.$store.state.s_doQuestionCache.choiceQList
+        this.CQCount = this.$store.state.s_doQuestionCache.CQCount
+        let QOrderList = []
+        for (var i = 0; i < this.choiceQList.length; i++) {
+          QOrderList.push(this.choiceQList[i].questionId)
+        }
+        for (var i = 0; i < this.fQList.length; i++) {
+          QOrderList.push(this.fQList[i].questionId)
+        }
+        for (var i = 0; i < this.sQList.length; i++) {
+          QOrderList.push(this.sQList[i].questionId)
+        }
+        this.$store.commit('updateDoQuestionCache', {
+          QOrderList: QOrderList,
         })
       }
     },
     mounted: function() {
       this.initPage()
-    }
+    },
+    filters: {
+      characterLimit: (value) => {
+        if (value.length > 15) {
+          return value.slice(0, 14) + "..."
+        } else {
+          return value
+        }
+      },
+    },
   }
 </script>
 

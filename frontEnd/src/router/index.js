@@ -188,22 +188,22 @@ export default new Router({
       name: 's_questionList4Paper',
       component: require('../components/student/myPaper/questionList4Paper.vue'),
     },  {
-      path: '/student/doQuestion',
+      path: '/student/doQuestion/:questionId',
       component: require('../components/student/myPaper/doQuestion.vue'),
       children: [
         {
           // 选择      
-          path: 'doCQ/:questionId',
+          path: 'doCQ',
           name: 's_doCQ',
           component: require('../components/student/myPaper/doCQ.vue'),
         }, {
           // 填空      
-          path: 'doFQ/:questionId',
+          path: 'doFQ',
           name: 's_doFQ',
           component: require('../components/student/myPaper/doFQ.vue'),
         }, {
           // 简答
-          path: 'doSQ/:questionId',
+          path: 'doSQ',
           name: 's_doSQ',
           component: require('../components/student/myPaper/doSQ.vue'),
         },
