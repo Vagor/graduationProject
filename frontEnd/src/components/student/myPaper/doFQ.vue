@@ -18,10 +18,6 @@
         title: '微积分A卷',
         stem: '',
         blankCounter: 0,
-        answerOption1: '',
-        answerOption2: '',
-        answerOption3: '',
-        answerOption4: '',
       }
     },
     methods: {
@@ -40,10 +36,6 @@
           this.stem = res.data.stem
           this.blankCounter = res.data.blankCounter
           this.chapter = res.data.chapter
-          this.answerOption1 = res.data.answerOption1
-          this.answerOption2 = res.data.answerOption2
-          this.answerOption3 = res.data.answerOption3
-          this.answerOption4 = res.data.answerOption4
         })
       }
   
@@ -54,6 +46,76 @@
     watch: {
       // 如果路由有变化，会再次执行该方法
       "$route": "initPage"
+    },
+    computed: {
+      answerOption1: {
+        get() {
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          return this.$store.state.s_doQuestionCache.QCondition[key].answerOption1
+        },
+        set(value) {
+          let QCondition = this.$store.state.s_doQuestionCache.QCondition
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          this.$store.state.s_doQuestionCache.QCondition[key].answerOption1 = value
+          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          this.$store.commit('updateDoQuestionCache', {
+            QCondition: QCondition
+          })
+        }
+      },
+      answerOption2: {
+        get() {
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          return this.$store.state.s_doQuestionCache.QCondition[key].answerOption2
+        },
+        set(value) {
+          let QCondition = this.$store.state.s_doQuestionCache.QCondition
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          this.$store.state.s_doQuestionCache.QCondition[key].answerOption2 = value
+          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          this.$store.commit('updateDoQuestionCache', {
+            QCondition: QCondition
+          })
+        }
+      },
+      answerOption3: {
+        get() {
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          return this.$store.state.s_doQuestionCache.QCondition[key].answerOption3
+        },
+        set(value) {
+          let QCondition = this.$store.state.s_doQuestionCache.QCondition
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          this.$store.state.s_doQuestionCache.QCondition[key].answerOption3 = value
+          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          this.$store.commit('updateDoQuestionCache', {
+            QCondition: QCondition
+          })
+        }
+      },
+      answerOption4: {
+        get() {
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          return this.$store.state.s_doQuestionCache.QCondition[key].answerOption4
+        },
+        set(value) {
+          let QCondition = this.$store.state.s_doQuestionCache.QCondition
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          this.$store.state.s_doQuestionCache.QCondition[key].answerOption4 = value
+          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          this.$store.commit('updateDoQuestionCache', {
+            QCondition: QCondition
+          })
+        }
+      },
     }
   }
 </script>

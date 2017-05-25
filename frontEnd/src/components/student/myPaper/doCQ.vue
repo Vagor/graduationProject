@@ -13,7 +13,6 @@
       return {
         title: '',
         stem: '',
-        choice: '',
         answerOption: [],
         choiceOptions: [],
       }
@@ -50,6 +49,26 @@
     watch: {
       // 如果路由有变化，会再次执行该方法
       "$route": "initPage"
+    },
+    computed: {
+      choice: {
+        get() {
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          return this.$store.state.s_doQuestionCache.QCondition[key].choice
+        },
+        set(value) {
+          let QCondition = this.$store.state.s_doQuestionCache.QCondition
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          this.$store.state.s_doQuestionCache.QCondition[key].choice = value
+          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          this.$store.commit('updateDoQuestionCache', {
+            QCondition: QCondition
+          })
+
+        }
+      }
     }
   }
 </script>

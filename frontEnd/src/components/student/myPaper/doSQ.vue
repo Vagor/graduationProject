@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label class="block-title">完成情况（3/10）</label>
+    <label class="block-title">问答题</label>
     <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
-    <mt-field class="left gap" label="回答" type="textarea" rows="4" placeholder="请输入答案"></mt-field>
+    <mt-field class="left gap" label="回答" type="textarea" rows="4" placeholder="请输入答案" v-model="answer"></mt-field>
   </div>
 </template>
 
@@ -12,7 +12,7 @@
     data() {
       return {
         title: '',
-        stem: '在如下数组A中链接存储了一个线性表，表头指针为A [0].next，试写出该线性表。'
+        stem: '',
       }
     },
     methods: {
@@ -20,8 +20,7 @@
         this.$http.post('/getSAQQuestionContent', {
           questionId: this.$route.params.questionId
         }).then((res) => {
-          // this.stem = res.data.stem
-          this.answer = res.data.answer
+          this.stem = res.data.stem
           this.chapter = res.data.chapter
         })
       }
@@ -32,6 +31,26 @@
     watch: {
       // 如果路由有变化，会再次执行该方法
       "$route": "initPage"
+    },
+    computed: {
+      answer: {
+        get() {
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          return this.$store.state.s_doQuestionCache.QCondition[key].answer
+        },
+        set(value) {
+          let QCondition = this.$store.state.s_doQuestionCache.QCondition
+          let _quesitonId = this.$route.params.questionId
+          let key = "question_" + _quesitonId
+          this.$store.state.s_doQuestionCache.QCondition[key].answer = value
+          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          this.$store.commit('updateDoQuestionCache', {
+            QCondition: QCondition
+          })
+  
+        }
+      }
     }
   }
 </script>
