@@ -74,6 +74,7 @@
             QCondition['question_' + res.data.choiceQList[i]._id] = {
               type: 0, //0=>选择题，1=>填空题，2=>简单题
               done: 0, //0=>未完成，1=>完成
+              choice:'',
             }
           }
           this.CQCount = this.choiceQList.length
@@ -94,6 +95,10 @@
             QCondition['question_' + res.data.fQList[i]._id] = {
               type: 1, //0=>选择题，1=>填空题，2=>简单题
               done: 0, //0=>未完成，1=>完成
+              answerOption1:'',
+              answerOption2:'',
+              answerOption3:'',
+              answerOption4:'',
             }
           }
           this.FQCount = this.fQList.length
@@ -114,6 +119,7 @@
             QCondition['question_' + res.data.sQList[i]._id] = {
               type: 2, //0=>选择题，1=>填空题，2=>简单题
               done: 0, //0=>未完成，1=>完成
+              answer:'',
             }
           }
           this.SQCount = this.sQList.length

@@ -62,11 +62,13 @@
           let _quesitonId = this.$route.params.questionId
           let key = "question_" + _quesitonId
           this.$store.state.s_doQuestionCache.QCondition[key].choice = value
-          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          if (value.length > 0) {
+            this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          }
           this.$store.commit('updateDoQuestionCache', {
             QCondition: QCondition
           })
-
+  
         }
       }
     }

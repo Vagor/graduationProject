@@ -59,7 +59,9 @@
           let _quesitonId = this.$route.params.questionId
           let key = "question_" + _quesitonId
           this.$store.state.s_doQuestionCache.QCondition[key].answerOption1 = value
-          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          if (value.length > 0) {
+            this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          }
           this.$store.commit('updateDoQuestionCache', {
             QCondition: QCondition
           })
@@ -76,7 +78,9 @@
           let _quesitonId = this.$route.params.questionId
           let key = "question_" + _quesitonId
           this.$store.state.s_doQuestionCache.QCondition[key].answerOption2 = value
-          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          if (value.length > 0) {
+            this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          }
           this.$store.commit('updateDoQuestionCache', {
             QCondition: QCondition
           })
@@ -93,7 +97,9 @@
           let _quesitonId = this.$route.params.questionId
           let key = "question_" + _quesitonId
           this.$store.state.s_doQuestionCache.QCondition[key].answerOption3 = value
-          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          if (value.length > 0) {
+            this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          }
           this.$store.commit('updateDoQuestionCache', {
             QCondition: QCondition
           })
@@ -110,7 +116,9 @@
           let _quesitonId = this.$route.params.questionId
           let key = "question_" + _quesitonId
           this.$store.state.s_doQuestionCache.QCondition[key].answerOption4 = value
-          this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          if (value.length > 0) {
+            this.$store.state.s_doQuestionCache.QCondition[key].done = 1
+          }
           this.$store.commit('updateDoQuestionCache', {
             QCondition: QCondition
           })

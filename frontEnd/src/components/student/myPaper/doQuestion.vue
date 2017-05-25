@@ -2,7 +2,7 @@
   <div>
     <mt-header :title="title">
       <router-link to="/student/paperCompletion" v-on:click.native="goToPaperCompletion()" slot="left">
-        <mt-button>整体情况（1/10）</mt-button>
+        <mt-button>整体情况（{{index+1}}/{{QCount}}）</mt-button>
       </router-link>
       <router-link v-on:click.native="lastQ()" to="" slot="right" v-if="index > 0">
         <mt-button>上一题</mt-button>
