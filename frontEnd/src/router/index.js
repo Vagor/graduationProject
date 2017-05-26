@@ -232,6 +232,33 @@ export default new Router({
         },
       ]
     },
+    // 查看批改过的试卷
+    {
+      path: '/student/paperChecked/:paperId',
+      name: 's_paperChecked',
+      component: require('../components/student/myPaper/paperChecked.vue'),
+    },  {
+      path: '/student/viewCorrectQuestion/:questionId',
+      component: require('../components/student/myPaper/viewCorrectQuestion.vue'),
+      children: [
+        {
+          // 选择      
+          path: 'viewCorrectCQ',
+          name: 's_viewCorrectCQ',
+          component: require('../components/student/myPaper/viewCorrectCQ.vue'),
+        }, {
+          // 填空      
+          path: 'viewCorrectFQ',
+          name: 's_viewCorrectFQ',
+          component: require('../components/student/myPaper/viewCorrectFQ.vue'),
+        }, {
+          // 简答
+          path: 'viewCorrectSQ',
+          name: 's_viewCorrectSQ',
+          component: require('../components/student/myPaper/viewCorrectSQ.vue'),
+        },
+      ]
+    },
 
     // 个人信息
     {

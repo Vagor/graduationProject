@@ -105,6 +105,19 @@ const state = {
     QCondition:{},
     QOrderList:{},
     currentQIndex:0,
+  },
+  // 查看已经批改试卷cache
+  s_viewChechedQuestionCache: {
+    lessonId:'',  
+    paperId: '',
+    paperTitle: '',
+    SQCount: 0,
+    sQList: [],
+    FQCount: 0,
+    fQList: [],
+    CQCount: 0,
+    choiceQList: [],
+    teacherId:'',
   }
 };
 
@@ -180,6 +193,14 @@ const mutations = {
     for (let key in payload) {
       if (state.s_doQuestionCache.hasOwnProperty(key)) {
         state.s_doQuestionCache[key] = payload[key]
+      }
+    }
+  },
+  // 查看已批改试卷
+  updateViewChechedQuestionCache(state, payload) {
+    for (let key in payload) {
+      if (state.s_viewChechedQuestionCache.hasOwnProperty(key)) {
+        state.s_viewChechedQuestionCache[key] = payload[key]
       }
     }
   },
