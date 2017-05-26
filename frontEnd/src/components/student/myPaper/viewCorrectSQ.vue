@@ -2,7 +2,7 @@
   <div>
     <label class="block-title">问答题</label>
     <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
-    <mt-field class="left gap" label="回答" type="textarea" rows="4" placeholder="请输入答案" v-model="answer"></mt-field>
+    <mt-field class="left gap" label="回答" type="textarea" rows="4" placeholder="" v-model="answer"></mt-field>
   </div>
 </template>
 
@@ -12,6 +12,7 @@
     data() {
       return {
         stem: '',
+        answer:'',
       }
     },
     methods: {
@@ -21,6 +22,7 @@
         }).then((res) => {
           this.stem = res.data.stem
           this.chapter = res.data.chapter
+          this.answer = res.data.answer
         })
       }
     },

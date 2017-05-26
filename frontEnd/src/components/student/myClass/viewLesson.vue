@@ -17,25 +17,7 @@
     data() {
       return {
         title: '我的课堂',
-        courseList: [{
-          courseName: "微积分",
-          lessonId: '123',
-        }, {
-          courseName: "电路理论",
-          lessonId: '123',
-        }, {
-          courseName: "大学物理",
-          lessonId: '123',
-        }, {
-          courseName: "大学语文",
-          lessonId: '123',
-        }, {
-          courseName: "大学英语",
-          lessonId: '123',
-        }, {
-          courseName: "数据结构",
-          lessonId: '123',
-        }, ]
+        courseList: []
       }
     },
     mounted: function() {
