@@ -1,9 +1,6 @@
 <template>
   <div>
     <mt-header title="整体情况">
-      <router-link v-on:click.native="goBack()" to="" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
     </mt-header>
     <label class="block-title">选择题（{{CQCount}}/{{CQCount+FQCount+SQCount}}）</label>
     <mt-cell v-for="item in choiceQList " is-link :to="{ name: 's_doCQ', params: { questionId: item.questionId }} " v-bind:title="item.stem | characterLimit " class="left ">

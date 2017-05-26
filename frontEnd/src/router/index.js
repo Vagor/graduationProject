@@ -140,7 +140,30 @@ export default new Router({
       name: 'viewClass',
       component: require('../components/teacher/class/viewClass.vue'),
     },
-
+    // 批改试卷课堂列表页
+    {
+      path: '/homeworkCorrecting',
+      name: 'homeworkCorrecting',
+      component: require('../components/teacher/correct/homeworkCorrecting.vue')
+    },
+    // 课堂对应试卷列表页
+    {
+      path: '/viewCorrectLesson/:lessonId',
+      name: 'viewCorrectLesson',
+      component: require('../components/teacher/correct/viewCorrectLesson.vue')
+    },
+    // 试卷题目详情
+    {
+      path: '/viewCorrectPaper/:paperId',
+      name: 'viewCorrectPaper',
+      component: require('../components/teacher/correct/viewCorrectPaper.vue')
+    },
+    // 简答题学生答案列表
+    {
+      path: '/correctAnswerLists/:answerSQuestionCollectionId/:shortQuestionId',
+      name: 'correctAnswerLists',
+      component: require('../components/teacher/correct/correctAnswerLists.vue')
+    },
     // 个人信息
     {
       path: '/myInfo',

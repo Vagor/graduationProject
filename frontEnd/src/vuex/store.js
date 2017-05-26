@@ -82,7 +82,12 @@ const state = {
 
   },
 
-
+  // 批改简单题时，保存简答题本身信息。
+  s_SQDeatil: {
+    answer: '',
+    score: -1,
+    stem: ''
+  },
 
 // 学生
   // 做题时的缓存
@@ -159,6 +164,14 @@ const mutations = {
     }
   },
 
+  // 批改时更新简答题基本信息
+  updateSQDetail(state, payload) {
+    for (let key in payload) {
+      if (payload.hasOwnProperty(key)) {
+        state.s_SQDeatil[key] = payload[key]
+      }
+    }
+  },
 
 
   // 学生
