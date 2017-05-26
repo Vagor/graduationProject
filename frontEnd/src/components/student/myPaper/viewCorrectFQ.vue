@@ -3,10 +3,7 @@
     <label class="block-title">填空题</label>
     <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
     <div class="gap"></div>
-    <mt-field class="left" label="正确答案1" placeholder="请输入答案" v-model="answerOption1"></mt-field>
-    <mt-field class="left" label="正确答案2" placeholder="请输入答案" v-model="answerOption2"></mt-field>
-    <mt-field class="left" label="正确答案3" placeholder="请输入答案" v-model="answerOption3"></mt-field>
-    <mt-field class="left" label="正确答案4" placeholder="请输入答案" v-model="answerOption4"></mt-field>
+    <mt-field class="left" :label="'正确答案'+(index+1)" placeholder="无答案" v-for="(item,index) in answerOptions" :value="item.content"></mt-field>
   </div>
 </template>
 
@@ -17,6 +14,7 @@
       return {
         stem: '',
         blankCounter: 0,
+        answerOptions: [],
       }
     },
     methods: {
@@ -32,9 +30,18 @@
         this.$http.post('/getFITBQuestionContent', {
           questionId: this.$route.params.questionId
         }).then((res) => {
+  // 待完善填空题正确答案的保存
+          res.data.answerOptions = [{
+            content: '答案'
+          }, {
+            content: '答案'
+          }, {
+            content: '答案'
+          }, ]
           this.stem = res.data.stem
           this.blankCounter = res.data.blankCounter
           this.chapter = res.data.chapter
+          this.answerOptions = res.data.answerOptions
         })
       }
   
@@ -42,88 +49,6 @@
     mounted: function() {
       this.initPage()
     },
-    watch: {
-      // 如果路由有变化，会再次执行该方法
-      "$route": "initPage"
-    },
-    computed: {
-      answerOption1: {
-        get() {
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          return this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption1
-        },
-        set(value) {
-          let QCondition = this.$store.state.s_viewChechedQuestionCache.QCondition
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption1 = value
-          if (value.length > 0) {
-            this.$store.state.s_viewChechedQuestionCache.QCondition[key].done = 1
-          }
-          this.$store.commit('updateDoQuestionCache', {
-            QCondition: QCondition
-          })
-        }
-      },
-      answerOption2: {
-        get() {
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          return this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption2
-        },
-        set(value) {
-          let QCondition = this.$store.state.s_viewChechedQuestionCache.QCondition
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption2 = value
-          if (value.length > 0) {
-            this.$store.state.s_viewChechedQuestionCache.QCondition[key].done = 1
-          }
-          this.$store.commit('updateDoQuestionCache', {
-            QCondition: QCondition
-          })
-        }
-      },
-      answerOption3: {
-        get() {
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          return this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption3
-        },
-        set(value) {
-          let QCondition = this.$store.state.s_doQuestionCache.QCondition
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          this.$store.state.s_doQuestionCache.QCondition[key].answerOption3 = value
-          if (value.length > 0) {
-            this.$store.state.s_doQuestionCache.QCondition[key].done = 1
-          }
-          this.$store.commit('updateDoQuestionCache', {
-            QCondition: QCondition
-          })
-        }
-      },
-      answerOption4: {
-        get() {
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          return this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption4
-        },
-        set(value) {
-          let QCondition = this.$store.state.s_viewChechedQuestionCache.QCondition
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          this.$store.state.s_viewChechedQuestionCache.QCondition[key].answerOption4 = value
-          if (value.length > 0) {
-            this.$store.state.s_viewChechedQuestionCache.QCondition[key].done = 1
-          }
-          this.$store.commit('updateDoQuestionCache', {
-            QCondition: QCondition
-          })
-        }
-      },
-    }
   }
 </script>
 

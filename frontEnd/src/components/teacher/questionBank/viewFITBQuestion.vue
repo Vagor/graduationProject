@@ -46,7 +46,7 @@
                       duration: 1000,
                     });
                     setTimeout(() => {
-                      this.$router.push('/questionBank/'+this.$store.state.s_questionBankCache.courseId)
+                      this.$router.push('/questionBank/' + this.$store.state.s_questionBankCache.courseId)
                     }, 1000);
                   } else {
                     this.$toast({
@@ -68,6 +68,7 @@
         answerOption2: '',
         answerOption3: '',
         answerOption4: '',
+        answerOptions: [],
         title: '查看题目',
       }
     },
@@ -101,15 +102,32 @@
       updateFITBQuestion() {
         let _this = this;
         this.$messagebox.confirm('确定修改?').then(action => {
+          if (this.answerOption1.length > 0) {
+            this.answerOptions.push({
+              content: this.answerOption1
+            })
+          }
+          if (this.answerOption2.length > 0) {
+            this.answerOptions.push({
+              content: this.answerOption2
+            })
+          }
+          if (this.answerOption3.length > 0) {
+            this.answerOptions.push({
+              content: this.answerOption3
+            })
+          }
+          if (this.answerOption4.length > 0) {
+            this.answerOptions.push({
+              content: this.answerOption4
+            })
+          }
           _this.$http.post('/updateFITBQuestion', {
             type: 1, // type=0 ===>新建；type=1 ===>更新；
             FITBQuestion: {
               questionId: _this.$route.params.questionId,
               stem: _this.stem, //题干
-              answerOption1: _this.answerOption1, //正确项
-              answerOption2: _this.answerOption2, //正确项
-              answerOption3: _this.answerOption3, //正确项
-              answerOption4: _this.answerOption4, //正确项
+              answerOptions: _this.answerOptions,
               courseId: _this.$store.state.s_questionBankCache.courseId, //所属课程
               chapter: _this.chapter, //所属章节
               teacherId: window._const.teacherId, //出题人
@@ -119,7 +137,7 @@
             message: '操作成功',
             duration: 1000,
           });
-          _this.$router.push('/questionBank/'+_this.$store.state.s_questionBankCache.courseId)
+          _this.$router.push('/questionBank/' + _this.$store.state.s_questionBankCache.courseId)
         })
       }
     },
@@ -132,10 +150,19 @@
         this.stem = res.data.stem
         this.blankCounter = res.data.blankCounter
         this.chapter = res.data.chapter
-        this.answerOption1 = res.data.answerOption1
-        this.answerOption2 = res.data.answerOption2
-        this.answerOption3 = res.data.answerOption3
-        this.answerOption4 = res.data.answerOption4
+        this.answerOptions = res.data.answerOptions
+        if (this.answerOptions.hasOwnProperty(0)) {
+          answerOption1 = this.answerOptions[0].content
+        }
+        if (this.answerOptions.hasOwnProperty(1)) {
+          answerOption2 = this.answerOptions[0].content
+        }
+        if (this.answerOptions.hasOwnProperty(2)) {
+          answerOption3 = this.answerOptions[0].content
+        }
+        if (this.answerOptions.hasOwnProperty(3)) {
+          answerOption4 = this.answerOptions[0].content
+        }
       })
     },
   }

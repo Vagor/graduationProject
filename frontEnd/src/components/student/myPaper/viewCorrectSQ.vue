@@ -27,31 +27,6 @@
     mounted: function() {
       this.initPage()
     },
-    watch: {
-      // 如果路由有变化，会再次执行该方法
-      "$route": "initPage"
-    },
-    computed: {
-      answer: {
-        get() {
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          return this.$store.state.s_viewChechedQuestionCache.QCondition[key].answer
-        },
-        set(value) {
-          let QCondition = this.$store.state.s_viewChechedQuestionCache.QCondition
-          let _quesitonId = this.$route.params.questionId
-          let key = "question_" + _quesitonId
-          this.$store.state.s_viewChechedQuestionCache.QCondition[key].answer = value
-          if (value.length > 0) {
-            this.$store.state.s_viewChechedQuestionCache.QCondition[key].done = 1
-          }
-          this.$store.commit('updateDoQuestionCache', {
-            QCondition: QCondition
-          })
-        }
-      }
-    }
   }
 </script>
 
