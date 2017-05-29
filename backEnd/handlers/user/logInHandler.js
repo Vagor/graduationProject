@@ -10,7 +10,7 @@ module.exports = {
         userName = req.body.userName
         password = req.body.password
        // accountId = req.body.accountId
-        
+        //查询用户信息表
         var findAccount = function () {
             AccountModel.findOne({
                 'userName': userName,
@@ -28,6 +28,7 @@ module.exports = {
                 })
 
         }
+        //查询学生信息表
         var findStudent = function (accountId) {
             StudentModel.findOne({
                 'accountId':accountId
@@ -37,6 +38,7 @@ module.exports = {
                     res.send(student)
                 })
         }
+        //查询老师信息表
          var findTeacher = function (accountId) {
             TeacherModel.findOne({
                 'accountId':accountId

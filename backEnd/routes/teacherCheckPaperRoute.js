@@ -2,7 +2,7 @@ var express = require('express');
 var teacherCheckPaperRoute = express.Router();
 var checkPaperHandler = require('../handlers/teacher/checkPaperHandler.js');
 
-//通过学生Id得到学生课堂列表
+ //获取老师选中课堂下待批改试卷列表
 teacherCheckPaperRoute.post('/getWaitCheckPaperList', checkPaperHandler.getWaitCheckPaperList);
 //获取选中的待批改试卷中简答题试题集合列表
 teacherCheckPaperRoute.post('/getWCPaperSQCollectionList', checkPaperHandler.getWCPaperSQCollectionList);

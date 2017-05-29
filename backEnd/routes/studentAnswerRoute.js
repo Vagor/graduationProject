@@ -18,5 +18,6 @@ studentAnswerRoute.post('/createAnswerFillQ', answerPaperHandler.createAnswerFil
 studentAnswerRoute.post('/createAnswerShortQ', answerPaperHandler.createAnswerShortQ);
 //确认提交试卷
 studentAnswerRoute.post('/submitPaper', answerPaperHandler.submitPaper);
-
+//提交试卷(学生做完所有的题目，提交整个试卷信息)
+studentAnswerRoute.post('/studentSubmitPaper', answerPaperHandler.studentSubmitPaper);
 module.exports = studentAnswerRoute;

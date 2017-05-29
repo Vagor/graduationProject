@@ -47,14 +47,14 @@ var AnswerChoiceQSchema = new Schema({
   }],
   
   //正确选项
-  answerOptions:[{
-  	type: Number,
-  }],
+  answerOption:{
+  	type: String,
+  },
    
   //学生选项
-  studentOptions:[{
-  	type: Number,
-  }],
+  studentOption:{
+  	type: String,
+  },
   //是否正确
   rightOrError:{
     type: Boolean,　

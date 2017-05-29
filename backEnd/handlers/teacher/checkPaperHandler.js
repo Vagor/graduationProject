@@ -34,7 +34,8 @@ module.exports = {
     getAnswerShortQCollection: function (req, res) {
         var answerSQuestionCollectionId = req.body.answerSQuestionCollectionId
         AnswerShortQModel
-            .find({ "answerSQuestionCollectionId": answerSQuestionCollectionId },
+            .find({ "answerSQuestionCollectionId": answerSQuestionCollectionId,
+         "checkOrNot":1},
             ["_id", "answerPaperId", "studentName", "studentAnswer"],
             function (err, answerSQuestionList) {
                 res.send({ answerSQuestionList })

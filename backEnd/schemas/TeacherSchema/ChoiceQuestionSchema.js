@@ -13,8 +13,8 @@ var ChoiceQuestionSchema = new Schema({
   }],
   
   //正确选项
-  answerOptions:{
-  	type: Number,
+  answerOption:{
+  	type: String,
   },
    
    //是否共享
