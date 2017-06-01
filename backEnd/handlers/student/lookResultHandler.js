@@ -3,7 +3,7 @@ mongoose.Promise = require('bluebird')
 var StudentModel = require('../../schemas/UserSchema/StudentSchema')
 var AnswerPaperModel = require('../../schemas/StudentSchema/AnswerPaperSchema')
 module.exports = {
-    //获取已批改题目成绩
+    //获取已批改试卷成绩
     getCheckAnswerPaperScore: function (req, res) {
         var studentId = req.body.studentId
         var lessonId = req.body.lessonId

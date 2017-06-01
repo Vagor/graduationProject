@@ -317,56 +317,59 @@ module.exports = {
                 } else {
                     console.log("create AnswerPaper ok")
                     //  res.send({ success: 1 })
-                    var fillQList = [{
-                        stem: "大家好",
-                        answerOptions: ["nihao", "wohao"],
-                        studentOptions: ["nihao", "eohao"],
-                        questionScore: 4,
-                        fillQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    {
-                        stem: "hello all",
-                        answerOptions: ["nihao", "wohao"],
-                        studentOptions: ["nihao", "wohao"],
-                        questionScore: 4,
-                        fillQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    ]
-                    var shortQList = [{
-                        stem: "大家好",
-                        answer: "nihaowohao",
-                        studentAnswer: "nihaoeohao",
-                        answerOptions: ["nihao", "wohao"],
-                        questionScore: 4,
-                        shortQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    {
-                        stem: "hello all",
-                        answer: "nihaowohao",
-                        studentAnswer: "wihaoeohao",
-                        answerOptions: ["nihao", "wohao"],
-                        questionScore: 4,
-                        shortQuestionId: "58c73c5879534a10c243fa11"
-
-                    },
-                    ]
-                    var choiceQList = [{
-                        stem: "大家好",
-                        options: ["a", "b"],
-                        answerOption: "A",
-                        studentOption: "A",
-                        questionScore: 4,
-                        choiceQuestionId: "58c66fcb07f87ba944015a24"
-                    },
-                    {
-                        stem: "HELLO all",
-                        options: ["a", "S"],
-                        answerOption: "B",
-                        studentOption: "A",
-                        questionScore: 3,
-                        choiceQuestionId: "58c66fcb07f87ba944015a24"
-                    },
-                    ]
+                    var fillQList =req.body.fillQList
+                    var shortQList =req.body.shortQList
+                    var choiceQList =req.body.choiceQList
+                    //测试
+                    // var fillQList = [{
+                    //     stem: "大家好",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     studentOptions: ["nihao", "eohao"],
+                    //     questionScore: 4,
+                    //     fillQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // {
+                    //     stem: "hello all",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     studentOptions: ["nihao", "wohao"],
+                    //     questionScore: 4,
+                    //     fillQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // ]
+                    // var shortQList = [{
+                    //     stem: "大家好",
+                    //     answer: "nihaowohao",
+                    //     studentAnswer: "nihaoeohao",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     questionScore: 4,
+                    //     shortQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // {
+                    //     stem: "hello all",
+                    //     answer: "nihaowohao",
+                    //     studentAnswer: "wihaoeohao",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     questionScore: 4,
+                    //     shortQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // ]
+                    // var choiceQList = [{
+                    //     stem: "大家好",
+                    //     options: ["a", "b"],
+                    //     answerOption: "A",
+                    //     studentOption: "A",
+                    //     questionScore: 4,
+                    //     choiceQuestionId: "58c66fcb07f87ba944015a24"
+                    // },
+                    // {
+                    //     stem: "HELLO all",
+                    //     options: ["a", "S"],
+                    //     answerOption: "B",
+                    //     studentOption: "A",
+                    //     questionScore: 3,
+                    //     choiceQuestionId: "58c66fcb07f87ba944015a24"
+                    // },
+                    // ]
                     for (Index in fillQList) {
                         createAnswerFillQ(fillQList[Index], answerpaper._id)
                     }

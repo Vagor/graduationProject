@@ -10,6 +10,12 @@ var SAQQuestionSchema = new Schema({
     answer: {
         type: String
     },
+    //关键答题点
+  answerOptions:[
+    {
+  	type: String,
+  }
+  ], 
     //是否共享
     share: {
         type: Boolean,

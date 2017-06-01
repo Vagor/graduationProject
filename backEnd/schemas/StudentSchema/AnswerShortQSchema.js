@@ -47,7 +47,12 @@ var AnswerShortQSchema = new Schema({
   answer:{
   	type: String,
   },
-   
+  //关键答题点
+  answerOptions:[
+    {
+  	type: String,
+  }
+  ],  
   //学生答案
   studentAnswer:{
   	type: String,
