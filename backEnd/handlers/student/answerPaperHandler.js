@@ -438,6 +438,7 @@ module.exports = {
                 var getScore = fillQList.questionScore * rightNumber / fillQList.answerOptions.length
                 answerFillQList.answerFillQCollectionId = List[0]._id
                 answerFillQList.getScore = getScore
+                answerFillQList.checkOrNot = 2                
                 answerFillQList.answerPaperId = answerPaperId
                 answerFillQList.studentId = req.body.studentId
                 //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
@@ -467,6 +468,7 @@ module.exports = {
                 var answerChoiceQList = choiceQList
                 answerChoiceQList.answerChoiceQCollectionId = List[0]._id
                 answerChoiceQList.getScore = getScore
+                answerChoiceQList.checkOrNot = 2                
                 answerChoiceQList.answerPaperId = answerPaperId
                 answerChoiceQList.studentId = req.body.studentId
                 //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
@@ -498,6 +500,7 @@ module.exports = {
                 var answerShortQList = shortQList
                 var getScore = shortQList.questionScore * rightNumber / shortQList.answerOptions.length
                 answerShortQList.getScore = getScore
+                answerShortQList.checkOrNot = 2                
                 answerShortQList.answerShortQCollectionId = List[0]._id
                 answerShortQList.answerPaperId = answerPaperId
                 answerShortQList.studentId = req.body.studentId
