@@ -317,91 +317,69 @@ module.exports = {
                 } else {
                     console.log("create AnswerPaper ok")
                     //  res.send({ success: 1 })
-                    //使用
-                    // var fillQList = req.body.fillQList
-                    // var shortQList = req.body.shortQList
-                    // var choiceQList = req.body.choiceQList
+                    var fillQList =req.body.fillQList
+                    var shortQList =req.body.shortQList
+                    var choiceQList =req.body.choiceQList
                     //测试
-                    var fillQList = [{
-                        stem: "大家好",
-                        answerOptions: ["nihao", "wohao"],
-                        studentOptions: ["nihao", "eohao"],
-                        questionScore: 4,
-                        fillQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    {
-                        stem: "hello all",
-                        answerOptions: ["nihao", "wohao"],
-                        studentOptions: ["nihao", "wohao"],
-                        questionScore: 4,
-                        fillQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    ]
-                    var shortQList = [{
-                        stem: "大家好",
-                        answer: "nihaowohao",
-                        studentAnswer: "nihaoeohao",
-                        answerOptions: ["nihao", "wohao"],
-                        questionScore: 4,
-                        shortQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    {
-                        stem: "hello all",
-                        answer: "nihaowohao",
-                        studentAnswer: "wihaoeohao",
-                        answerOptions: ["nihao", "wohao"],
-                        questionScore: 4,
-                        shortQuestionId: "58c73c5879534a10c243fa11"
-                    },
-                    ]
-                    var choiceQList = [{
-                        stem: "大家好",
-                        options: ["a", "b"],
-                        answerOption: "A",
-                        studentOption: "A",
-                        questionScore: 4,
-                        choiceQuestionId: "58c66fcb07f87ba944015a24"
-                    },
-                    {
-                        stem: "HELLO all",
-                        options: ["a", "S"],
-                        answerOption: "B",
-                        studentOption: "A",
-                        questionScore: 3,
-                        choiceQuestionId: "58c66fcb07f87ba944015a24"
-                    },
-                    ]
-                    
-                    
-                    const countFlag = 0
-                    var countNum = fillQList.length + shortQList.length + choiceQList.length
-                   // console.log("countNum:"+countNum)
+                    // var fillQList = [{
+                    //     stem: "大家好",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     studentOptions: ["nihao", "eohao"],
+                    //     questionScore: 4,
+                    //     fillQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // {
+                    //     stem: "hello all",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     studentOptions: ["nihao", "wohao"],
+                    //     questionScore: 4,
+                    //     fillQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // ]
+                    // var shortQList = [{
+                    //     stem: "大家好",
+                    //     answer: "nihaowohao",
+                    //     studentAnswer: "nihaoeohao",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     questionScore: 4,
+                    //     shortQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // {
+                    //     stem: "hello all",
+                    //     answer: "nihaowohao",
+                    //     studentAnswer: "wihaoeohao",
+                    //     answerOptions: ["nihao", "wohao"],
+                    //     questionScore: 4,
+                    //     shortQuestionId: "58c73c5879534a10c243fa11"
+                    // },
+                    // ]
+                    // var choiceQList = [{
+                    //     stem: "大家好",
+                    //     options: ["a", "b"],
+                    //     answerOption: "A",
+                    //     studentOption: "A",
+                    //     questionScore: 4,
+                    //     choiceQuestionId: "58c66fcb07f87ba944015a24"
+                    // },
+                    // {
+                    //     stem: "HELLO all",
+                    //     options: ["a", "S"],
+                    //     answerOption: "B",
+                    //     studentOption: "A",
+                    //     questionScore: 3,
+                    //     choiceQuestionId: "58c66fcb07f87ba944015a24"
+                    // },
+                    // ]
                     for (Index in fillQList) {
-                        createAnswerFillQ(countFlag,fillQList[Index], answerpaper._id)
-                        
-                        if (countFlag == countNum) {
-                            console.log("countFlag:"+countFlag)
-                            findAnswerShortQ(answerpaper._id, req.body.studentId)
-                        }
+                        createAnswerFillQ(fillQList[Index], answerpaper._id)
                     }
                     for (Index in shortQList) {
-                        createAnswerShortQ(countFlag,shortQList[Index], answerpaper._id)
-                        
-                        if (countFlag == countNum) {
-                            console.log("countFlag:"+countFlag)                            
-                            findAnswerShortQ(answerpaper._id, req.body.studentId)
-                        }
+                        createAnswerShortQ(shortQList[Index], answerpaper._id)
                     }
                     for (Index in choiceQList) {
-                     countFlag =   createAnswerChoiceQ(countFlag,choiceQList[Index], answerpaper._id)
-                        
-                        if (countFlag == countNum) {
-                            console.log("countFlag:"+countFlag)                            
-                            findAnswerShortQ(answerpaper._id, req.body.studentId)
-                        }
+                        createAnswerChoiceQ(choiceQList[Index], answerpaper._id)
                     }
-
-                    // res.send({ answerPaperId })
+                    res.send({ success: 1 })
                 }
             })
         }
@@ -444,7 +422,7 @@ module.exports = {
 
         }
         //2, 生成完成的填空题答题信息表(批改)（完成）
-        var createAnswerFillQ = function (countFlag,fillQList, answerPaperId) {
+        var createAnswerFillQ = function (fillQList, answerPaperId) {
             //批改(完成)
             var rightNumber = 0
             for (AIndex in fillQList.answerOptions) {
@@ -460,7 +438,7 @@ module.exports = {
                 var getScore = fillQList.questionScore * rightNumber / fillQList.answerOptions.length
                 answerFillQList.answerFillQCollectionId = List[0]._id
                 answerFillQList.getScore = getScore
-                answerFillQList.checkOrNot = 2
+                answerFillQList.checkOrNot = 2                
                 answerFillQList.answerPaperId = answerPaperId
                 answerFillQList.studentId = req.body.studentId
                 //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
@@ -470,7 +448,6 @@ module.exports = {
                         console.log(err)
                     } else {
                         console.log("ok")
-                        countFlag++
                         // console.log(answerchoiceq)
                         //    res.send({ success: 1 })
                     }
@@ -479,7 +456,7 @@ module.exports = {
             )
         }
         //3, 生成完成的选择题答题信息表（批改）（完成）
-        var createAnswerChoiceQ = function (countFlag,choiceQList, answerPaperId) {
+        var createAnswerChoiceQ = function (choiceQList, answerPaperId) {
             var getScore = 0
             if (choiceQList.answerOption == choiceQList.studentOption)
             { getScore = choiceQList.questionScore }
@@ -491,7 +468,7 @@ module.exports = {
                 var answerChoiceQList = choiceQList
                 answerChoiceQList.answerChoiceQCollectionId = List[0]._id
                 answerChoiceQList.getScore = getScore
-                answerChoiceQList.checkOrNot = 2
+                answerChoiceQList.checkOrNot = 2                
                 answerChoiceQList.answerPaperId = answerPaperId
                 answerChoiceQList.studentId = req.body.studentId
                 //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据
@@ -501,21 +478,15 @@ module.exports = {
                         console.log(err)
                     } else {
                         console.log("ok")
-                        
-                        return countFlag++
-                       
                         // console.log(answerchoiceq)
                         //  res.send({ success: 1 })
                     }
                 })
             }
             )
-            
-
-
         }
         //4, 生成完成的简答题答题信息表（批改）（完成）
-        var createAnswerShortQ = function (countFlag,shortQList, answerPaperId) {
+        var createAnswerShortQ = function (shortQList, answerPaperId) {
             var rightNumber = 0
             for (SIndex in shortQList.answerOptions) {
                 if (shortQList.studentAnswer.match(shortQList.answerOptions[SIndex]))
@@ -529,7 +500,7 @@ module.exports = {
                 var answerShortQList = shortQList
                 var getScore = shortQList.questionScore * rightNumber / shortQList.answerOptions.length
                 answerShortQList.getScore = getScore
-                answerShortQList.checkOrNot = 2
+                answerShortQList.checkOrNot = 2                
                 answerShortQList.answerShortQCollectionId = List[0]._id
                 answerShortQList.answerPaperId = answerPaperId
                 answerShortQList.studentId = req.body.studentId
@@ -540,7 +511,6 @@ module.exports = {
                         console.log(err)
                     } else {
                         console.log("ok")
-                        countFlag++
                         // console.log(answerchoiceq)
                         //   res.send({ success: 1 })
                     }
@@ -548,80 +518,6 @@ module.exports = {
             }
             )
         }
-        /*-------------------------统计成绩函数模块-----------------------------------*/
-        var findAnswerShortQ = function (answerPaperId, studentId) {
-            var shortQScore = 0
-            AnswerShortQModel
-                .find({ "studentId": studentId, "answerPaperId": answerPaperId },
-                ["_id", "getScore"],
-                function (err, answerSQuestionList) {
-                    for (SIndex in answerSQuestionList) {
-                        shortQScore = shortQScore + answerSQuestionList[SIndex].getScore
-                    }
-                    console.log("shortQScore: " + shortQScore)
-                    findAnswerChoiceQ(shortQScore)
-                }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
-        }
-        var findAnswerChoiceQ = function (answerPaperId, studentId, shortQScore) {
-            var choiceQScore = 0
-            AnswerChoiceQModel
-                .find({ "studentId": studentId, "answerPaperId": answerPaperId },
-                ["_id", "getScore"],
-                function (err, answerCQuestionList) {
-                    for (CIndex in answerCQuestionList) {
-                        choiceQScore = choiceQScore + answerCQuestionList[CIndex].getScore
-                    }
-                    console.log("choiceQScore: " + choiceQScore)
-                    findAnswerFillQ(choiceQScore, shortQScore)
-                }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
-        }
-        var findAnswerFillQ = function (answerPaperId, studentId, choiceQScore, shortQScore) {
-            var fillQScore = 0
-            AnswerFillQModel
-                .find({ "studentId": studentId, "answerPaperId": answerPaperId },
-                ["_id", "getScore"],
-                function (err, answerFQuestionList) {
-                    for (FIndex in answerFQuestionList) {
-                        fillQScore = fillQScore + answerFQuestionList[FIndex].getScore
-                    }
-                    console.log("fillQScore: " + fillQScore)
-                    var totalGetScore = choiceQScore + fillQScore + shortQScore
-                    updateanswerPaper(totalGetScore)
-                }).sort({ 'meta.updateAt': -1 }) //按更新时间排序  
-        }
-        var updateanswerPaper = function (answerPaperId, studentId, totalGetScore) {
-            console.log("totalGetScore: " + totalGetScore)
-            var Pconditions =
-                { "_id": answerPaperId }
-            var Pupdate = {
-                $set: {
-                    getScore: totalGetScore,
-                    checkOrNot: 2
-                }
-            }
-            var Poptions = {
-                upsert: true
-            }
-            AnswerPaperModel.update(Pconditions, Pupdate, Poptions, function (error) {
-                if (error) {
-                    console.log(error)
-                } else {
-                    console.log('update Answerpaper ok!')
-                    // res.send({ "success": 1 })
-                    findAnswerPaper()
-                }
-            })
-        }
-        var findAnswerPaper = function (answerPaperId, studentId) {
-            AnswerPaperModel
-                .find({ "_id": answerPaperId },
-                ["getScore", "totalScore"],
-                function (err, data) {
-                    var answerPaper = data[0]
-                    res.send({ answerPaper })
-                })
-        }
-        /*-----------------End------------------------------------------------*/
         createAnswerPaper()
         updateAnswerPaperCollection()
     },
