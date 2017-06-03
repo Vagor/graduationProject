@@ -63,10 +63,14 @@ var AnswerFillQSchema = new Schema({
   },
   
   //满分分值
-  questionScore: Number,
+ questionScore: {
+        type: Number,
+        default: 4//默认是4分
+    },
   
   //得分
   getScore: Number,
+   
   
   meta: {
     createAt: {

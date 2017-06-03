@@ -7,7 +7,7 @@ var StudentModel = require('../../schemas/UserSchema/StudentSchema')
 module.exports = {
     //登录返回用户信息
     logInAndGetInf: function (req, res) {
-        userName = req.body.userName
+        userName = req.body.username
         password = req.body.password
        // accountId = req.body.accountId
         //查询用户信息表
@@ -35,7 +35,7 @@ module.exports = {
             },
                 ['_id', 'studentName','school','yuanXi','learnNumber'],
                 function (err, student) {
-                    res.send(student)
+                    res.send({student})
                 })
         }
         //查询老师信息表
@@ -45,7 +45,7 @@ module.exports = {
             },
                 ['_id', 'teacherName','school','yuanXi','learnNumber'],
                 function (err, teacher) {
-                    res.send(teacher)
+                    res.send({teacher})
                 })
         }
         findAccount()

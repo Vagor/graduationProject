@@ -33,7 +33,7 @@ var AnswerFillQCollectionSchema = new Schema({
 
     questionScore: {
         type: Number,
-        default: 3//默认是3分
+        default: 4//默认是4分
     },
 
     //应答学生人数

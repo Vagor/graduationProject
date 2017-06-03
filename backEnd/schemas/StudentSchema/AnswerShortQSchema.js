@@ -69,7 +69,10 @@ var AnswerShortQSchema = new Schema({
   },
   
   //满分分值
-  questionScore: Number,
+  questionScore: {
+    type:Number,
+    default: 5//默认是5分
+  },
   
   //得分
   getScore: Number,

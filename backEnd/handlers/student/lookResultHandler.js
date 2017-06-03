@@ -70,8 +70,8 @@ module.exports = {
                     console.log(error)
                 } else {
                     console.log('update Answerpaper ok!')
-                   // res.send({ "success": 1 })
-                   findAnswerPaper()
+                    // res.send({ "success": 1 })
+                    findAnswerPaper()
                 }
             })
         }
@@ -85,5 +85,36 @@ module.exports = {
                 })
         }
         findAnswerShortQ()
+    },
+    //获取学生选择题的答题信息
+    getACQList: function (req, res) {
+        var answerPaperId = req.body.answerPaperId
+        AnswerChoiceQModel
+            .find({ "answerPaperId": answerPaperId },
+            ["_id", "stem", "options", "answerOption", "getScore", "questionScore"],
+            function (err, answerCQuestionList) {
+                res.send(answerCQuestionList)
+            }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
+
+    },
+    //获取学生填空题的答题信息
+    getAFQList: function (req, res) {
+        var answerPaperId = req.body.answerPaperId
+        AnswerFillQModel
+            .find({ "answerPaperId": answerPaperId },
+            ["_id", "stem",  "answerOptions", "getScore", "questionScore"],
+            function (err, answerFQuestionList) {
+                res.send(answerFQuestionList)
+            }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
+    },
+    //获取学生简答题的答题信息
+    getASQList: function (req, res) {
+        var answerPaperId = req.body.answerPaperId
+        AnswerShortQModel
+            .find({ "answerPaperId": answerPaperId },
+            ["_id", "stem",  "answer", "getScore", "questionScore"],
+            function (err, answerSQuestionList) {
+                res.send(answerSQuestionList)
+            }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
     },
 }

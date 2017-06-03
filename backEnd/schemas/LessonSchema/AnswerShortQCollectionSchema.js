@@ -34,7 +34,7 @@ var AnswerShortQCollectionSchema = new Schema({
 
     questionScore: {
         type: Number,
-        default: 3//默认是3分
+        default: 5//默认是5分
     },
 
     //应答学生人数
