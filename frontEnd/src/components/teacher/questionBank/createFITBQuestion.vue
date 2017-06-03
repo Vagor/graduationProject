@@ -43,24 +43,24 @@
         let _this = this;
         this.$messagebox.confirm('确定出题?').then(action => {
           if (this.answerOption1.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption1
-            })
+            this.answerOptions.push(this.answerOption1)
+          } else {
+            this.answerOptions.push("无答案")
           }
           if (this.answerOption2.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption2
-            })
+            this.answerOptions.push(this.answerOption2)
+          } else {
+            this.answerOptions.push("无答案")
           }
           if (this.answerOption3.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption3
-            })
+            this.answerOptions.push(this.answerOption3)
+          } else {
+            this.answerOptions.push("无答案")
           }
           if (this.answerOption4.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption4
-            })
+            this.answerOptions.push(this.answerOption4)
+          } else {
+            this.answerOptions.push("无答案")
           }
           _this.$http.post('/updateFITBQuestion', {
             type: 0, // type=0 ===>新建；type=1 ===>更新；

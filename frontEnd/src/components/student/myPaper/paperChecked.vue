@@ -40,17 +40,20 @@
     name: "paperChecked",
     methods: {
       goBackToMyPaperList() {
-        this.$router.push('/student/myPaperList/'+this.$store.state.s_viewChechedQuestionCache.lessonId+'/'+this.$store.state.s_viewChechedQuestionCache.teacherId)
+        this.$router.push('/student/myPaperList/' + this.$store.state.s_viewChechedQuestionCache.lessonId + '/' + this.$store.state.s_viewChechedQuestionCache.teacherId)
       },
       initPage() {
         // 获取试卷总分
-        this.$http.post('/getTotalScore', {
-          studentId: window._const.studentId,
-          paperId: this.$route.params.paperId
+        this.$http.post('/getCheckAnswerPaperScore', {
+          // studentId: window._const.studentId,
+          // paperId: this.$route.params.paperId
+          studentId: '5905df11a3846e0e9c8c49e4',
+          lessonId: '58f45630b2199cf365f3d74c',
+          answerPaperId: '59060aeea3846e0e9c8c49e7',
         }).then((res) => {
           this.totalScore = res.data.totalScore
         })
-        
+  
         // 初始化选择题列表
         this.$http.post('/getCQLByPId', {
           paperId: this.$route.params.paperId

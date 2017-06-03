@@ -103,24 +103,24 @@
         let _this = this;
         this.$messagebox.confirm('确定修改?').then(action => {
           if (this.answerOption1.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption1
-            })
+            this.answerOptions.push(this.answerOption1)
+          } else {
+            this.answerOptions.push("无答案")
           }
           if (this.answerOption2.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption2
-            })
+            this.answerOptions.push(this.answerOption2)
+          } else {
+            this.answerOptions.push("无答案")
           }
           if (this.answerOption3.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption3
-            })
+            this.answerOptions.push(this.answerOption3)
+          } else {
+            this.answerOptions.push("无答案")
           }
           if (this.answerOption4.length > 0) {
-            this.answerOptions.push({
-              content: this.answerOption4
-            })
+            this.answerOptions.push(this.answerOption4)
+          } else {
+            this.answerOptions.push("无答案")
           }
           _this.$http.post('/updateFITBQuestion', {
             type: 1, // type=0 ===>新建；type=1 ===>更新；
@@ -151,18 +151,10 @@
         this.blankCounter = res.data.blankCounter
         this.chapter = res.data.chapter
         this.answerOptions = res.data.answerOptions
-        if (this.answerOptions.hasOwnProperty(0)) {
-          answerOption1 = this.answerOptions[0].content
-        }
-        if (this.answerOptions.hasOwnProperty(1)) {
-          answerOption2 = this.answerOptions[0].content
-        }
-        if (this.answerOptions.hasOwnProperty(2)) {
-          answerOption3 = this.answerOptions[0].content
-        }
-        if (this.answerOptions.hasOwnProperty(3)) {
-          answerOption4 = this.answerOptions[0].content
-        }
+        this.answerOption1 = this.answerOptions[0]
+        this.answerOption2 = this.answerOptions[1]
+        this.answerOption3 = this.answerOptions[2]
+        this.answerOption4 = this.answerOptions[3]
       })
     },
   }

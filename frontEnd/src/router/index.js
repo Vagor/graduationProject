@@ -17,8 +17,12 @@ export default new Router({
       component: require('../components/nothing.vue')
     }, {
       path: '/',
-      component: require('../components/home.vue')
+      component: require('../components/login.vue')
     },
+    // {
+    //   path: '/',
+    //   component: require('../components/home.vue')
+    // },
 
 
     // 老师
