@@ -92,8 +92,8 @@ module.exports = {
         AnswerChoiceQModel
             .find({ "answerPaperId": answerPaperId },
             ["_id", "stem", "options", "answerOption", "getScore", "questionScore"],
-            function (err, answerCQuestionList) {
-                res.send(answerCQuestionList)
+            function (err, choiceQList) {
+                res.send({choiceQList})
             }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
 
     },
@@ -103,8 +103,8 @@ module.exports = {
         AnswerFillQModel
             .find({ "answerPaperId": answerPaperId },
             ["_id", "stem",  "answerOptions", "getScore", "questionScore"],
-            function (err, answerFQuestionList) {
-                res.send(answerFQuestionList)
+            function (err, FQList) {
+                res.send({FQList})
             }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
     },
     //获取学生简答题的答题信息
@@ -113,8 +113,8 @@ module.exports = {
         AnswerShortQModel
             .find({ "answerPaperId": answerPaperId },
             ["_id", "stem",  "answer", "getScore", "questionScore"],
-            function (err, answerSQuestionList) {
-                res.send(answerSQuestionList)
+            function (err, sQList) {
+                res.send({sQList})
             }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
     },
 }
