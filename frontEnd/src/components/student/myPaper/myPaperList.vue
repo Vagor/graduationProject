@@ -12,7 +12,7 @@
     <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 's_paperWaiti4Check', params: { paperId: item.paperId }}" v-for="item in AnswerNoCheckPaperList"></mt-cell>
     <mt-cell v-if="AnswerNoCheckPaperList.length == 0" title="暂无已完成未批改试卷"></mt-cell>
     <label class="block-title">已完成已批改试卷</label>
-    <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 's_paperChecked', params: { paperId: item.paperId }}" v-for="item in AnswerCheckPaperList"></mt-cell>
+    <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 's_paperChecked', params: { paperId: item.answerPaperId }}" v-for="item in AnswerCheckPaperList"></mt-cell>
     <mt-cell v-if="AnswerCheckPaperList.length == 0" title="暂无已完成已批改试卷"></mt-cell>
   </div>
 </template>
