@@ -67,7 +67,7 @@
         for (var key in fillQList) {
           if (fillQList.hasOwnProperty(key)) {
             let _questionId = fillQList[key].questionId
-            let key4QCondition = "question_" + _quesitonId
+            let key4QCondition = "question_" + _questionId
             let studentOptions = []
             studentOptions.push(QCondition[key4QCondition].answerOption1)
             studentOptions.push(QCondition[key4QCondition].answerOption2)
@@ -81,7 +81,7 @@
         for (var key in choiceQList) {
           if (choiceQList.hasOwnProperty(key)) {
             let _questionId = choiceQList[key].questionId
-            let key4QCondition = "question_" + _quesitonId
+            let key4QCondition = "question_" + _questionId
             let studentOption = QCondition[key4QCondition].choice
             choiceQList[key].studentOption = studentOption
           }
@@ -91,7 +91,7 @@
         for (var key in shortQList) {
           if (shortQList.hasOwnProperty(key)) {
             let _questionId = shortQList[key].questionId
-            let key4QCondition = "question_" + _quesitonId
+            let key4QCondition = "question_" + _questionId
             let studentAnswer = QCondition[key4QCondition].answer
             shortQList[key].studentAnswer = studentAnswer
           }
