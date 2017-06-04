@@ -3,10 +3,10 @@
     <label class="block-title">填空题</label>
     <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
     <div class="gap"></div>
-    <mt-field class="left" label="正确答案1" placeholder="请输入答案" v-model="answerOption1"></mt-field>
-    <mt-field class="left" label="正确答案2" placeholder="请输入答案" v-model="answerOption2"></mt-field>
-    <mt-field class="left" label="正确答案3" placeholder="请输入答案" v-model="answerOption3"></mt-field>
-    <mt-field class="left" label="正确答案4" placeholder="请输入答案" v-model="answerOption4"></mt-field>
+    <mt-field class="left" label="答案1" placeholder="根据题目输入对应项答案" v-model="answerOption1"></mt-field>
+    <mt-field class="left" label="答案2" placeholder="根据题目输入对应项答案" v-model="answerOption2"></mt-field>
+    <mt-field class="left" label="答案3" placeholder="根据题目输入对应项答案" v-model="answerOption3"></mt-field>
+    <mt-field class="left" label="答案4" placeholder="根据题目输入对应项答案" v-model="answerOption4"></mt-field>
   </div>
 </template>
 

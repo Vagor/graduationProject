@@ -207,14 +207,18 @@ export default new Router({
       name: 's_paperWaitingPage',
       component: require('../components/student/myPaper/paperWaitingPage.vue'),
     }, {
+      path: '/student/paperWaiti4Check/:paperId',
+      name: 's_paperWaiti4Check',
+      component: require('../components/student/myPaper/paperWaiti4Check.vue'),
+    }, {
       path: '/student/paperCompletion/:paperId',
       name: 's_paperCompletion',
       component: require('../components/student/myPaper/paperCompletion.vue'),
-    },{
+    }, {
       path: '/student/questionList4Paper/:paperId',
       name: 's_questionList4Paper',
       component: require('../components/student/myPaper/questionList4Paper.vue'),
-    },  {
+    }, {
       path: '/student/doQuestion/:questionId',
       component: require('../components/student/myPaper/doQuestion.vue'),
       children: [
@@ -241,7 +245,7 @@ export default new Router({
       path: '/student/paperChecked/:paperId',
       name: 's_paperChecked',
       component: require('../components/student/myPaper/paperChecked.vue'),
-    },  {
+    }, {
       path: '/student/viewCorrectQuestion/:questionId',
       component: require('../components/student/myPaper/viewCorrectQuestion.vue'),
       children: [

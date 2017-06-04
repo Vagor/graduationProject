@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBackPage()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <router-link to="/previewFITBQuestion" slot="right">
@@ -35,10 +35,13 @@
         answerOption3: '',
         answerOption4: '',
         chapter: '',
-        answerOptions:[],
+        answerOptions: [],
       }
     },
     methods: {
+      goBackPage() {
+        this.$router.push('/createQuestion/')
+      },
       confirmCreation() {
         let _this = this;
         this.$messagebox.confirm('确定出题?').then(action => {

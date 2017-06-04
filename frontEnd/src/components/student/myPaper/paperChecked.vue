@@ -51,12 +51,12 @@
           lessonId: '58f45630b2199cf365f3d74c',
           answerPaperId: '59060aeea3846e0e9c8c49e7',
         }).then((res) => {
-          this.totalScore = res.data.totalScore
+          this.totalScore = res.data.answerPaper.getScore
         })
   
         // 初始化选择题列表
-        this.$http.post('/getCQLByPId', {
-          paperId: this.$route.params.paperId
+        this.$http.post('/getACQList', {
+          answerPaperId: '59060aeea3846e0e9c8c49e7'
         }).then((res) => {
           var temp;
           for (var i = 0; i < res.data.choiceQList.length; i++) {
@@ -72,8 +72,8 @@
           this.CQCount = this.choiceQList.length
         })
         // 初始化填空题列表
-        this.$http.post('/getFQLByPId', {
-          paperId: this.$route.params.paperId
+        this.$http.post('/getAFQList', {
+          answerPaperId: '59060aeea3846e0e9c8c49e7'
         }).then((res) => {
           var temp;
           for (var i = 0; i < res.data.fQList.length; i++) {
@@ -89,8 +89,8 @@
           this.FQCount = this.fQList.length
         })
         // 初始化问答题列表
-        this.$http.post('/getSQLByPId', {
-          paperId: this.$route.params.paperId
+        this.$http.post('/getASQList', {
+          answerPaperId: '59060aeea3846e0e9c8c49e7'
         }).then((res) => {
           var temp;
           for (var i = 0; i < res.data.sQList.length; i++) {

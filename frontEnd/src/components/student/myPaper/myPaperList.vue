@@ -9,7 +9,7 @@
     <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 's_paperWaitingPage', params: { paperId: item.paperId }}" v-for="item in NoAnswerPaperList"></mt-cell>
     <mt-cell v-if="NoAnswerPaperList.length == 0" title="暂无待做试卷"></mt-cell>
     <label class="block-title">已完成未批改试卷</label>
-    <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 'paperWaiti4Check', params: { paperId: item.paperId }}" v-for="item in AnswerNoCheckPaperList"></mt-cell>
+    <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 's_paperWaiti4Check', params: { paperId: item.paperId }}" v-for="item in AnswerNoCheckPaperList"></mt-cell>
     <mt-cell v-if="AnswerNoCheckPaperList.length == 0" title="暂无已完成未批改试卷"></mt-cell>
     <label class="block-title">已完成已批改试卷</label>
     <mt-cell :title="item.paperTitle | characterLimit" value="" is-link class="left" :to="{ name: 's_paperChecked', params: { paperId: item.paperId }}" v-for="item in AnswerCheckPaperList"></mt-cell>
@@ -35,20 +35,6 @@
         lessonId: this.$route.params.lessonId,
       }).then((res) => {
         this.AnswerCheckPaperList = res.data.AnswerCheckPaperList
-        // AnswerCheckPaperList 测试数据
-        this.AnswerCheckPaperList = [{
-          _id: "59254b5ec0ad3695fd8d581e",
-          studentNumber: 46,
-          paperId: "59254aa8c0ad3695fd8d5810",
-          paperTitle: "批改完成的试卷1",
-          totalScore: 0
-        }, {
-          _id: "59217f6cc0ad3695fd8d57f9",
-          studentNumber: 46,
-          paperId: "59217ecfc0ad3695fd8d57f3",
-          paperTitle: "批改完成的试卷2",
-          totalScore: 0
-        }]
         this.AnswerNoCheckPaperList = res.data.AnswerNoCheckPaperList
         this.NoAnswerPaperList = res.data.NoAnswerPaperList
       })

@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBackPage()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <router-link to="/previewSAQQuestion" slot="right">
@@ -12,6 +12,7 @@
     <mt-field class="left" label="题干" placeholder="请输入题干" type="textarea" rows="4" v-model="stem" :value="this.stem"></mt-field>
     <label class="block-title">正确答案</label>
     <mt-field class="left" label="正确答案" placeholder="请输入答案" type="textarea" rows="4" v-model="answer"></mt-field>
+    <mt-field class="left" label="关键词" placeholder="用于自动化批改，用“、”隔开" v-model="answerOptions"></mt-field>
     <label class="block-title">其他信息</label>
     <mt-field class="left" label="题目所属章节" placeholder="请输入章节数" type="number" v-model="chapter" :value="this.chapter"></mt-field>
     <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认出题</mt-button>
@@ -27,9 +28,13 @@
         stem: '',
         answer: '',
         chapter: '',
+        answerOptions: '',
       }
     },
     methods: {
+      goBackPage() {
+        this.$router.push('/createQuestion/')
+      },
       confirmCreation() {
         let _this = this;
         this.$messagebox.confirm('确定出题?').then(action => {
@@ -41,6 +46,7 @@
               answer: _this.answer,
               courseId: _this.$store.state.s_questionBankCache.courseId, //所属课程
               chapter: _this.chapter, //所属章节
+              answerOptions: _this.answerOptions, //关键词
               teacherId: window._const.teacherId, //出题人
             }
           }).then((res) => {

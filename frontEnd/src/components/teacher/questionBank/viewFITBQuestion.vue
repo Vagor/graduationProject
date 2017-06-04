@@ -2,7 +2,7 @@
   <div>
     <mt-header :title="title">
       <router-link to="" slot="left">
-        <mt-button icon="back" @click.native="goBack()">返回</mt-button>
+        <mt-button icon="back" @click.native="goBackPage()">返回</mt-button>
         <mt-button v-show="isEditMode" @click.native="exitEditMode()">取消修改</mt-button>
       </router-link>
       <mt-button icon="more" slot="right" @click.native="showActionSheet()"></mt-button>
@@ -92,6 +92,9 @@
       }
     },
     methods: {
+      goBackPage() {
+        this.$router.go(-1)
+      },
       exitEditMode() {
         console.log('??')
         this.isEditMode = false

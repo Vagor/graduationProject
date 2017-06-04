@@ -19,15 +19,13 @@ window._const = {
   count: 1,
   teacherId: '58c73c5879534a10c243fa11',
   studentId: '5905df11a3846e0e9c8c49e4',
-  classId: '5905df11a3846e0e9c8c49e4',
-  lessonId:''
 }
 
 
 // Axios
 Vue.prototype.$http = axios
-axios.defaults.baseURL = 'http://127.0.0.1:3000/'; // 设置服务端地址
-// axios.defaults.baseURL = 'http://192.168.1.152:3000/'; // 设置服务端地址
+// axios.defaults.baseURL = 'http://127.0.0.1:3000/'; // 设置服务端地址
+axios.defaults.baseURL = 'http://10.11.173.157:3000/'; // 设置服务端地址
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // 通用方法
 Vue.prototype.goBack = function () {
