@@ -67,8 +67,10 @@
             temp = {
               questionId: res.data.choiceQList[i]._id,
               stem: res.data.choiceQList[i].stem,
+              answerOption: res.data.choiceQList[i].answerOption,
               chapter: '第' + res.data.choiceQList[i].chapter + '章',
-              index: i
+              index: i,
+              questionScore:3,              
             }
             this.choiceQList.push(temp)
             QCondition['question_' + res.data.choiceQList[i]._id] = {
@@ -88,8 +90,10 @@
             temp = {
               questionId: res.data.fQList[i]._id,
               stem: res.data.fQList[i].stem,
+              answerOptions: res.data.fQList[i].answerOptions,
               chapter: '第' + res.data.fQList[i].chapter + '章',
-              index: i
+              index: i,
+              questionScore:4,
             }
             this.fQList.push(temp)
             QCondition['question_' + res.data.fQList[i]._id] = {
@@ -112,8 +116,11 @@
             temp = {
               questionId: res.data.sQList[i]._id,
               stem: res.data.sQList[i].stem,
+              answerOptions: res.data.sQList[i].answerOptions,
+              answer: res.data.sQList[i].answer,
               chapter: '第' + res.data.sQList[i].chapter + '章',
-              index: i
+              index: i,
+              questionScore:5,              
             }
             this.sQList.push(temp)
             QCondition['question_' + res.data.sQList[i]._id] = {

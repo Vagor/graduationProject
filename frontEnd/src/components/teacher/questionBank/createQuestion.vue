@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="title">
-      <router-link v-on:click.native="goBack()" to="" slot="left">
+      <router-link v-on:click.native="goBackPage()" to="" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -40,6 +40,9 @@
       }
     },
     methods: {
+      goBackPage() {
+        this.$router.push('/questionBank/'+this.$store.state.s_questionBankCache.courseId)
+      },
       creationBegin() {
         if (this.courseValue && this.questionType) {
           switch (this.questionType) {
@@ -66,19 +69,19 @@
     mounted: function() {
       // 默认课程
       this.courseValue = this.$store.state.s_questionBankCache.courseId,
-      // 初始化选择题列表
-      this.$http.post('/getCListByTId', {
-        teacherId: window._const.teacherId
-      }).then((res) => {
-        for (var key in res.data.courseList) {
-          if (res.data.courseList.hasOwnProperty(key)) {
-            this.courseOptions.push({
-              label: res.data.courseList[key].courseName,
-              value: res.data.courseList[key].courseId
-            })
+        // 初始化选择题列表
+        this.$http.post('/getCListByTId', {
+          teacherId: window._const.teacherId
+        }).then((res) => {
+          for (var key in res.data.courseList) {
+            if (res.data.courseList.hasOwnProperty(key)) {
+              this.courseOptions.push({
+                label: res.data.courseList[key].courseName,
+                value: res.data.courseList[key].courseId
+              })
+            }
           }
-        }
-      })
+        })
     }
   }
 </script>

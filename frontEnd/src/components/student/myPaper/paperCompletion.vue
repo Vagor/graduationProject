@@ -17,7 +17,7 @@
       <mt-badge type="error" v-if="QCondition['question_'+item.questionId].done == 0">未完成</mt-badge>
       <mt-badge type="success" v-if="QCondition['question_'+item.questionId].done == 1">已完成</mt-badge>
     </mt-cell>
-    <mt-button type="primary" size="large" class="bottomBtn" @click.native="confirmCreation()">确认交卷</mt-button>
+    <mt-button type="primary" size="large" class="bottomBtn" @click.native="handUpPaper()">确认交卷</mt-button>
   </div>
 </template>
 
@@ -57,6 +57,66 @@
         }
         this.$store.commit('updateDoQuestionCache', {
           QOrderList: QOrderList,
+        })
+      },
+      handUpPaper() {
+        // 处理即将提交的数据
+        let QCondition = this.$store.state.s_doQuestionCache.QCondition
+        // 处理fillQList
+        let fillQList = this.$store.state.s_doQuestionCache.fQList
+        for (var key in fillQList) {
+          if (fillQList.hasOwnProperty(key)) {
+            let _questionId = fillQList[key].questionId
+            let key4QCondition = "question_" + _questionId
+            let studentOptions = []
+            studentOptions.push(QCondition[key4QCondition].answerOption1)
+            studentOptions.push(QCondition[key4QCondition].answerOption2)
+            studentOptions.push(QCondition[key4QCondition].answerOption3)
+            studentOptions.push(QCondition[key4QCondition].answerOption4)
+            fillQList[key].studentOptions = studentOptions
+          }
+        }
+        // 处理choiceQList
+        let choiceQList = this.$store.state.s_doQuestionCache.choiceQList
+        for (var key in choiceQList) {
+          if (choiceQList.hasOwnProperty(key)) {
+            let _questionId = choiceQList[key].questionId
+            let key4QCondition = "question_" + _questionId
+            let studentOption = QCondition[key4QCondition].choice
+            choiceQList[key].studentOption = studentOption
+          }
+        }
+        // 处理shortQList
+        let shortQList = this.$store.state.s_doQuestionCache.sQList
+        for (var key in shortQList) {
+          if (shortQList.hasOwnProperty(key)) {
+            let _questionId = shortQList[key].questionId
+            let key4QCondition = "question_" + _questionId
+            let studentAnswer = QCondition[key4QCondition].answer
+            shortQList[key].studentAnswer = studentAnswer
+          }
+        }
+        this.$http.post('/studentSubmitPaper', {
+          studentId: window._const.studentId,
+          lessonId: this.$store.state.s_doQuestionCache.lessonId,
+          paperId: this.$store.state.s_doQuestionCache.paperId,
+          paperTitle: this.$store.state.s_doQuestionCache.paperTitle,
+          totalScore: this.$store.state.s_doQuestionCache.SQCount * 5 + this.$store.state.s_doQuestionCache.FQCount * 4 + this.$store.state.s_doQuestionCache.CQCount * 3,
+          // 以下是用于数据统计课堂考试情况的字段
+          // answerPaperNumber
+          // studentNumber
+          // answerPaperCollectionId
+          fillQList: fillQList,
+          choiceQList: choiceQList,
+          shortQList: shortQList,
+        }).then((res) => {
+          if (res.data.success == 1) {
+            this.$toast({
+              message: '操作成功',
+              duration: 1000,
+            })
+            this.$router.push('/student')
+          }
         })
       }
     },

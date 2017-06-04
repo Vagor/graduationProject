@@ -49,19 +49,19 @@
           // paperId: this.$route.params.paperId
           studentId: '5905df11a3846e0e9c8c49e4',
           lessonId: '58f45630b2199cf365f3d74c',
-          answerPaperId: '59060aeea3846e0e9c8c49e7',
+          answerPaperId: this.$route.params.paperId,
         }).then((res) => {
-          this.totalScore = res.data.totalScore
+          this.totalScore = res.data.answerPaper.getScore
         })
   
         // 初始化选择题列表
-        this.$http.post('/getCQLByPId', {
-          paperId: this.$route.params.paperId
+        this.$http.post('/getACQList', {
+          answerPaperId: this.$route.params.paperId
         }).then((res) => {
           var temp;
           for (var i = 0; i < res.data.choiceQList.length; i++) {
             temp = {
-              questionId: res.data.choiceQList[i]._id,
+              questionId: res.data.choiceQList[i].questionId,
               stem: res.data.choiceQList[i].stem,
               chapter: '第' + res.data.choiceQList[i].chapter + '章',
               index: i,
@@ -72,30 +72,30 @@
           this.CQCount = this.choiceQList.length
         })
         // 初始化填空题列表
-        this.$http.post('/getFQLByPId', {
-          paperId: this.$route.params.paperId
+        this.$http.post('/getAFQList', {
+          answerPaperId: this.$route.params.paperId
         }).then((res) => {
           var temp;
-          for (var i = 0; i < res.data.fQList.length; i++) {
+          for (var i = 0; i < res.data.FQList.length; i++) {
             temp = {
-              questionId: res.data.fQList[i]._id,
-              stem: res.data.fQList[i].stem,
-              chapter: '第' + res.data.fQList[i].chapter + '章',
+              questionId: res.data.FQList[i].questionId,
+              stem: res.data.FQList[i].stem,
+              chapter: '第' + res.data.FQList[i].chapter + '章',
               index: i,
-              getScore: res.data.fQList[i].getScore,
+              getScore: res.data.FQList[i].getScore,
             }
             this.fQList.push(temp)
           }
-          this.FQCount = this.fQList.length
+          this.FQCount = this.FQList.length
         })
         // 初始化问答题列表
-        this.$http.post('/getSQLByPId', {
-          paperId: this.$route.params.paperId
+        this.$http.post('/getASQList', {
+          answerPaperId: this.$route.params.paperId
         }).then((res) => {
           var temp;
           for (var i = 0; i < res.data.sQList.length; i++) {
             temp = {
-              questionId: res.data.sQList[i]._id,
+              questionId: res.data.sQList[i].questionId,
               stem: res.data.sQList[i].stem,
               chapter: '第' + res.data.sQList[i].chapter + '章',
               index: i,
