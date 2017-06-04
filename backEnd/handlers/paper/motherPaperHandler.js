@@ -109,7 +109,7 @@ module.exports = {
             .find({ 'paperId': paperId }, ["_id", "sQId"])
             .populate(
             'sQId',//表id [path]
-            ' stem teacherId chapter courseId answer'//[select] 
+            ' stem teacherId chapter courseId answer answerOptions'//[select] 
             )
             .sort({ 'meta.updateAt': -1 })
             .exec(function (err, data) {
@@ -249,8 +249,8 @@ module.exports = {
             if (error) {
                 console.log(error);
             } else {
-                res.json({"success": 1})
-                console.log('delete ok!');
+               // res.json({"success": 1})
+                console.log('delete Choice ok!');
             }
         });
     }
@@ -263,8 +263,8 @@ module.exports = {
             if (error) {
                 console.log(error);
             } else {
-                res.json({"success": 1})
-                console.log('delete ok!');
+              //  res.json({"success": 1})
+                console.log('delete Fill ok!');
             }
         });
         }
@@ -277,8 +277,8 @@ module.exports = {
             if (error) {
                 console.log(error);
             } else {
-                res.json({"success": 1})
-                console.log('delete ok!');
+               // res.json({"success": 1})
+                console.log('delete Short ok!');
             }
         });
     }

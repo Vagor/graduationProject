@@ -78,15 +78,13 @@ module.exports = {
                     var AnswerNoCheckPaperList = []
                     var AnswerCheckPaperList = []
                     for (Index in paperList) {
+                        var answerPaperId = paperList[Index]._id
                         var paperId = paperList[Index].paperId
                         var paperTitle = paperList[Index].paperTitle
                         var totalScore = paperList[Index].totalScore
-
-                        if (paperList[Index].checkOrNot == 1) {
-                            AnswerNoCheckPaperList.push({ paperId, paperTitle, totalScore })
-                        }
-                        else {
-                            AnswerCheckPaperList.push({ paperId, paperTitle, totalScore })
+//xiugai
+                        if (paperList[Index].checkOrNot ) {
+                           AnswerCheckPaperList.push({answerPaperId, paperId, paperTitle, totalScore })
                         }
                     }
                     getNoAnswerPaperList(AnswerNoCheckPaperList, AnswerCheckPaperList, paperList)
@@ -340,7 +338,7 @@ module.exports = {
                     //     stem: "大家好",
                     //     answer: "nihaowohao",
                     //     studentAnswer: "nihaoeohao",
-                    //     answerOptions: ["nihao", "wohao"],
+                    //     answerOptions: "nihao,wohao",
                     //     questionScore: 4,
                     //     shortQuestionId: "58c73c5879534a10c243fa11"
                     // },
@@ -348,7 +346,7 @@ module.exports = {
                     //     stem: "hello all",
                     //     answer: "nihaowohao",
                     //     studentAnswer: "wihaoeohao",
-                    //     answerOptions: ["nihao", "wohao"],
+                    //     answerOptions: "nihao,wohao",
                     //     questionScore: 4,
                     //     shortQuestionId: "58c73c5879534a10c243fa11"
                     // },
@@ -385,8 +383,8 @@ module.exports = {
         }
         //1,关联学生答卷信息表和答卷集合表方便后续老师批改工作
 
-        var studentNumber = req.body.studentNumber
-        var answerPaperNumber = req.body.answerPaperNumber
+     //   var studentNumber = req.body.studentNumber
+    //    var answerPaperNumber = req.body.answerPaperNumber
         var lessonId = req.body.lessonId
         var paperId = req.body.paperId
 
@@ -436,7 +434,7 @@ module.exports = {
                 // console.log(List)
                 var answerFillQList = fillQList
                 var getScore = fillQList.questionScore * rightNumber / fillQList.answerOptions.length
-                answerFillQList.answerFillQCollectionId = List[0]._id
+             //   answerFillQList.answerFillQCollectionId = List[0]._id
                 answerFillQList.getScore = getScore
                 answerFillQList.checkOrNot = 2                
                 answerFillQList.answerPaperId = answerPaperId
@@ -466,7 +464,7 @@ module.exports = {
             }, ["_id"], function (err, List) {
                 // console.log(List)
                 var answerChoiceQList = choiceQList
-                answerChoiceQList.answerChoiceQCollectionId = List[0]._id
+               // answerChoiceQList.answerChoiceQCollectionId = List[0]._id
                 answerChoiceQList.getScore = getScore
                 answerChoiceQList.checkOrNot = 2                
                 answerChoiceQList.answerPaperId = answerPaperId
@@ -488,8 +486,10 @@ module.exports = {
         //4, 生成完成的简答题答题信息表（批改）（完成）
         var createAnswerShortQ = function (shortQList, answerPaperId) {
             var rightNumber = 0
-            for (SIndex in shortQList.answerOptions) {
-                if (shortQList.studentAnswer.match(shortQList.answerOptions[SIndex]))
+            //answerOptions change
+            var answerOptions = shortQList.answerOptions.split("、")
+            for (SIndex in answerOptions) {
+                if (shortQList.studentAnswer.match(answerOptions[SIndex]))
                 { rightNumber++ }
             }
             AnswerShortQuestionCollectionModel.find({
@@ -498,10 +498,10 @@ module.exports = {
             }, ["_id"], function (err, List) {
                 //  console.log(List)
                 var answerShortQList = shortQList
-                var getScore = shortQList.questionScore * rightNumber / shortQList.answerOptions.length
+                var getScore = shortQList.questionScore * rightNumber / answerOptions.length
                 answerShortQList.getScore = getScore
                 answerShortQList.checkOrNot = 2                
-                answerShortQList.answerShortQCollectionId = List[0]._id
+              //  answerShortQList.answerShortQCollectionId = List[0]._id
                 answerShortQList.answerPaperId = answerPaperId
                 answerShortQList.studentId = req.body.studentId
                 //新建选择题Entity,将前端数据存入Entity,使用Entity来增加一条数据

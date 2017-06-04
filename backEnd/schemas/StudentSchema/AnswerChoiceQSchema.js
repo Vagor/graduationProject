@@ -8,7 +8,7 @@ var AnswerChoiceQSchema = new Schema({
     type: ObjectId,
   },
   //母题id
-  choiceQuestionId:{
+  questionId:{
     type: ObjectId,
   },
   //已做题集合id

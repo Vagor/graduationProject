@@ -4,79 +4,75 @@ var ObjectId = Schema.Types.ObjectId
 //已做题信息表
 var AnswerShortQSchema = new Schema({
   //已做卷id
-  answerPaperId:{
+  answerPaperId: {
     type: ObjectId,
   },
   //母题id
-  shortQuestionId:{
+  questionId: {
     type: ObjectId,
   },
   //已做题集合id
-  answerShortQCollectionId:{
+  answerShortQCollectionId: {
     type: ObjectId,
   },
-  
+
   //做题学生id
-  studentId:{
-     type: ObjectId,
+  studentId: {
+    type: ObjectId,
   },
   //学生姓名
-  studentName:{
+  studentName: {
     type: String,
   },
-  
+
   //出题老师id
-  teacherId:{
-   type: ObjectId,
+  teacherId: {
+    type: ObjectId,
   },
 
   //课堂id
-  lessonId:{
-   type: ObjectId,
+  lessonId: {
+    type: ObjectId,
   },
-//classid
-  classId:{
-   type: ObjectId,
+  //classid
+  classId: {
+    type: ObjectId,
   },
   //题干
   stem: String,
-  
-  
-  
+
+
+
   //正确答案
-  answer:{
-  	type: String,
+  answer: {
+    type: String,
   },
   //关键答题点
-  answerOptions:[
-    {
-  	type: String,
-  }
-  ],  
+  answerOptions: String,
   //学生答案
-  studentAnswer:{
-  	type: String,
+  studentAnswer: {
+    type: String,
   },
   //是否正确
-  rightOrError:{
-    type: Boolean,　
+  rightOrError: {
+    type: Boolean,
   },
-  
+
   //是否已批改 (1：完成收卷待批改，2：完成批改)
-  checkOrNot:{
-    type:Number,
+  checkOrNot: {
+    type: Number,
     default: 1//默认是1
   },
-  
+
   //满分分值
   questionScore: {
-    type:Number,
+    type: Number,
     default: 5//默认是5分
   },
-  
+
   //得分
   getScore: Number,
-  
+
   meta: {
     createAt: {
       type: Date,

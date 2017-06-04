@@ -91,7 +91,7 @@ module.exports = {
         var answerPaperId = req.body.answerPaperId
         AnswerChoiceQModel
             .find({ "answerPaperId": answerPaperId },
-            ["_id", "stem", "options", "answerOption", "getScore", "questionScore"],
+            ["_id", "stem", "options", "answerOption", "getScore", "questionScore","questionId"],
             function (err, choiceQList) {
                 res.send({choiceQList})
             }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
@@ -102,7 +102,7 @@ module.exports = {
         var answerPaperId = req.body.answerPaperId
         AnswerFillQModel
             .find({ "answerPaperId": answerPaperId },
-            ["_id", "stem",  "answerOptions", "getScore", "questionScore"],
+            ["_id", "stem",  "answerOptions", "getScore", "questionScore","questionId"],
             function (err, FQList) {
                 res.send({FQList})
             }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
@@ -112,7 +112,7 @@ module.exports = {
         var answerPaperId = req.body.answerPaperId
         AnswerShortQModel
             .find({ "answerPaperId": answerPaperId },
-            ["_id", "stem",  "answer", "getScore", "questionScore"],
+            ["_id", "stem",  "answer", "getScore", "questionScore","questionId"],
             function (err, sQList) {
                 res.send({sQList})
             }).sort({ 'meta.updateAt': -1 }) //按更新时间排序
