@@ -3,7 +3,7 @@
     <label class="block-title">填空题</label>
     <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
     <div class="gap"></div>
-    <mt-field class="left" :label="'正确答案'+(index+1)" placeholder="无答案" v-for="(item,index) in answerOptions" :value="item.content"></mt-field>
+    <mt-field class="left" :label="'正确答案'+(index+1)" placeholder="无答案" v-for="(item,index) in answerOptions" :value="item.content" readonly></mt-field>
   </div>
 </template>
 

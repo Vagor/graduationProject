@@ -2,7 +2,7 @@
   <div>
     <label class="block-title">选择题</label>
     <mt-field class="left" label="问题" type="textarea" rows="4" readonly v-model="stem"></mt-field>
-    <mt-field class="left" :label="'选项'+item.label" :value="item.content" v-for="item in choiceOptions"></mt-field>
+    <mt-field class="left" :label="'选项'+item.label" :value="item.content" v-for="item in choiceOptions" readonly></mt-field>
     <label class="block-title">正确选项</label>
     <mt-cell class="left" title="正确选项">{{answerOption}}</mt-cell>
     </mt-radio>
